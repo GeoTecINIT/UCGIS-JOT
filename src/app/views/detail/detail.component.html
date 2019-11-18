@@ -19,14 +19,14 @@
                 <div class="cols-xs-2 col-md-3"
                   tooltip="{{isAnonymous? 'Login to be able to duplicate' : 'Duplicate'}}">
                   <button type="button" class="btn btn-block btn-link" tooltip="Duplicate"
-                    routerLink="/newop/duplicate/{{ selectedProfile._id }}" [disabled]="isAnonymous">
+                    routerLink="/newjo/duplicate/{{ selectedProfile._id }}" [disabled]="isAnonymous">
                     <i class="fa fa-copy fa-lg"></i>
                   </button>
                 </div>
                 <div class="cols-xs-2 col-md-3"
                   tooltip="{{isAnonymous? 'Login to be able to edit' : selectedProfile.userId==afAuth.auth.currentUser?.uid?  'Edit' : 'You can edit only your own profiles'}}">
                   <button type="button" class="btn btn-block btn-link"
-                    routerLink="/newop/copy/{{ selectedProfile._id }}"
+                    routerLink="/newjo/copy/{{ selectedProfile._id }}"
                     [disabled]="isAnonymous || selectedProfile.userId!=afAuth.auth.currentUser?.uid">
                     <i class="fa fa-edit fa-lg"></i>
                   </button>
@@ -65,7 +65,7 @@
               <div class="col-md-4">
                 <label>Knowledge</label>
                 <span
-                  tooltip="The occupational profile knowledge represent the comprehensive awareness in certain areas/domains, which complete the list of theoretical capacity learning."
+                  tooltip="The job offer knowledge represent the comprehensive awareness in certain areas/domains, which complete the list of theoretical capacity learning."
                   class="badge badge-primary badge-pill">i</span>
               </div>
             </div>
@@ -147,7 +147,7 @@
   <div class="modal-dialog modal-danger" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Are you sure you want to delete this Occupational Profile?</h4>
+        <h4 class="modal-title">Are you sure you want to delete this Job Offer?</h4>
         <button type="button" class="close" (click)="dangerModal.hide()" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>

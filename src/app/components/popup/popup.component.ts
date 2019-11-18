@@ -128,7 +128,7 @@ export class PopupComponent implements OnInit {
     }
 
     // doc.textWithLink('asdfasdf', 20, 260, { url: 'https://' });
-    doc.save('OccupationalProfile.pdf');
+    doc.save('Job Offer.pdf');
   }
 
 

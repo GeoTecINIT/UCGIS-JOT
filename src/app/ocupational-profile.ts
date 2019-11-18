@@ -1,4 +1,5 @@
 import { Field } from './services/fields.service';
+import { Language } from './services/language.service';
 
 export interface Competence {
   uri?: String;
@@ -22,6 +23,24 @@ export class OcupationalProfile extends Object {
     public customSkills: string[],
     public customCompetences: string[],
     public competences: Competence[]
+  ) {
+    super();
+  }
+}
+
+export class JobOffer extends Object {
+  constructor(
+    public _id: string,
+    public userId: string,
+    public occuProf: OcupationalProfile,
+    public languages: Language[],
+    public location: string,
+    public dedication: string,
+    public typeContract: string,
+    public salaryMin: number,
+    public salaryMax: number,
+    public additionalQuestions: string[],
+    public motivationLetter: boolean
   ) {
     super();
   }

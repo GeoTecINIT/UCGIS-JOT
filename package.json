@@ -1,7 +1,7 @@
 {
-  "name": "@eo4geo/opt",
-  "version": "1.0.0",
-  "description": "Occupational Profile Tool",
+  "name": "@eo4geo/jot",
+  "version": "0.1.0",
+  "description": "Job Offer Tool",
   "author": {
     "name": "UJI",
     "url": "http://geotec.uji.es",
@@ -9,7 +9,7 @@
     "twitter": "https://twitter.com/geotecUJI"
   },
   "contributors": [],
-  "homepage": "http://eo4geo.uji.es/opt",
+  "homepage": "http://eo4geo.uji.es/jot",
   "copyright": "Copyright 2019",
   "license": "MIT",
   "scripts": {
