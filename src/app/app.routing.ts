@@ -10,7 +10,7 @@ import { LoginComponent } from './views/login/login.component';
 
 import { ListComponent } from './views/list/list.component';
 import { DetailComponent } from './views/detail/detail.component';
-import { NewopComponent } from './views/newop/newop.component';
+import { NewjoComponent } from './views/newjo/newjo.component';
 
 import { AngularFireAuthGuard } from '@angular/fire/auth-guard';
 
@@ -63,20 +63,20 @@ export const routes: Routes = [
         component: DetailComponent
       },
       {
-        path: 'newop/:mode',
+        path: 'newjo/:mode',
         data: {
           title: 'New'
         },
         canActivate: [AngularFireAuthGuard],
-        component: NewopComponent
+        component: NewjoComponent
       },
       {
-        path: 'newop/:mode/:name',
+        path: 'newjo/:mode/:name',
         data: {
           title: 'Edit'
         },
         canActivate: [AngularFireAuthGuard],
-        component: NewopComponent
+        component: NewjoComponent
       }
     ]
   },

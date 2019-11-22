@@ -1,29 +1,35 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { OcupationalProfile, Competence } from '../../ocupational-profile';
+import { OcupationalProfile, Competence, JobOffer } from '../../ocupational-profile';
 import * as bok from '@eo4geo/bok-dataviz';
 import { OcuprofilesService } from '../../services/ocuprofiles.service';
+import { JobofferService } from '../../services/joboffer.service';
 import { FieldsService } from '../../services/fields.service';
+import { LanguageService } from '../../services/language.service';
 import { EscoCompetenceService } from '../../services/esco-competence.service';
 import { ActivatedRoute } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
-  selector: 'app-newop',
-  templateUrl: './newop.component.html',
-  styleUrls: ['./newop.component.scss']
+  selector: 'app-newjo',
+  templateUrl: './newjo.component.html',
+  styleUrls: ['./newjo.component.scss']
 })
-export class NewopComponent implements OnInit {
+export class NewjoComponent implements OnInit {
 
   competences = [];
   filteredCompetences = [];
   fullcompetences = [];
 
-  model = new OcupationalProfile('', '', '', '', null, 1, [], [], [], [], []);
+  // model = new OcupationalProfile('', '', '', '', null, 1, [], [], [], [], []);
+  model = new JobOffer('', '', new OcupationalProfile('', '', '', '', null, 1, [], [], [], [], []), [], '', '', '', 0, 0, [], false);
 
   public value: string[];
   public current: string;
 
   selectedProfile: OcupationalProfile;
+
+  allProfiles: OcupationalProfile[];
+
   _id: string;
   mode: string;
   title: string;
@@ -74,11 +80,26 @@ export class NewopComponent implements OnInit {
     searchOnKey: 'preferredLabel' // key on which search should be performed. if undefined this will be extensive search on all keys
   };
 
+  configLanguage = {
+    displayKey: 'name', // if objects array passed which key to be displayed defaults to description
+    search: true, // true/false for the search functionlity defaults to false,
+    height: '200px', // height of the list so that if there are more no of items it can show a scroll defaults to auto.
+    placeholder: 'Select Language', // text to be displayed when no item is selected defaults to Select,
+    customComparator: () => { }, // a custom function to sort the items. default is undefined and Array.sort() will be used
+    noResultsFound: 'No results found!', // text to be displayed when no items are found while searching
+    searchPlaceholder: 'Search Language', // label thats displayed in search input,
+    searchOnKey: 'name' // key on which search should be performed. if undefined this will be extensive search on all keys
+  };
+
   @ViewChild('textBoK') textBoK: ElementRef;
 
+  typeOfContract = ['Internship', 'Scholarship', 'Temporal', 'Fixed'];
+
   constructor(
-    private occuprofilesService: OcuprofilesService,
+    public occuprofilesService: OcuprofilesService,
+    private jobOfferService: JobofferService,
     public fieldsService: FieldsService,
+    public languageService: LanguageService,
     public escoService: EscoCompetenceService,
     private route: ActivatedRoute,
     private afAuth: AngularFireAuth
@@ -90,6 +111,11 @@ export class NewopComponent implements OnInit {
   ngOnInit() {
     bok.visualizeBOKData('#bubbles', 'assets/saved-bok.xml', '#textBoK');
     this.getMode();
+    this.occuprofilesService
+      .subscribeToOccupationalProfiles()
+      .subscribe(op => {
+        this.allProfiles = op;
+      });
   }
 
   addBokKnowledge() {
@@ -99,16 +125,16 @@ export class NewopComponent implements OnInit {
       const shortCode = this.textBoK.nativeElement.getElementsByTagName('h4')[0].innerText.split(' ')[0];
       const as = divs['bokskills'].getElementsByTagName('a');
       for (const skill of as) {
-        if (!this.model.skills.includes(shortCode + ' ' + skill.innerText)) {
-          this.model.skills.push(shortCode + ' ' + skill.innerText);
+        if (!this.model.occuProf.skills.includes(shortCode + ' ' + skill.innerText)) {
+          this.model.occuProf.skills.push(shortCode + ' ' + skill.innerText);
           this.associatedSkillsToDelete++;
         }
       }
     }
     const concept = this.textBoK.nativeElement.getElementsByTagName('h4')[0]
       .textContent;
-    if (!this.model.knowledge.includes(concept)) {
-      this.model.knowledge.push(concept);
+    if (!this.model.occuProf.knowledge.includes(concept)) {
+      this.model.occuProf.knowledge.push(concept);
     }
     console.log('added knowledge');
     this.isShowingSkillsTip = true;
@@ -125,7 +151,7 @@ export class NewopComponent implements OnInit {
     });
 
     const skillsFiltered = [];
-    this.model.skills.forEach((sk, i) => {
+    this.model.occuProf.skills.forEach((sk, i) => {
       //  console.log('code skill' + sk.split(']')[0] + '=' + this.nameCodeToDelete);
       if (sk.split(']')[0] === this.nameCodeToDelete) { // There is a knowledge that starts with same code, don't include it
         skillsFiltered.push(sk);
@@ -136,21 +162,21 @@ export class NewopComponent implements OnInit {
 
   removeSkillsAssociated() {
     const skillsFiltered = [];
-    this.model.skills.forEach((sk, i) => {
+    this.model.occuProf.skills.forEach((sk, i) => {
       // console.log('code skill' + sk.split(']')[0] + '=' + this.nameCodeToDelete);
       if (sk.split(']')[0] !== this.nameCodeToDelete) { // There is a knowledge that starts with same code, don't include it
         skillsFiltered.push(sk);
       }
     });
-    this.model.skills = skillsFiltered;
+    this.model.occuProf.skills = skillsFiltered;
   }
 
   saveOccuProfile() {
     if (this.mode === 'copy') {
-      this.occuprofilesService.updateOccuProfile(this._id, this.model);
+      this.jobOfferService.updateJobOffer(this._id, this.model);
     } else {
       this.model.userId = this.afAuth.auth.currentUser.uid;
-      this.occuprofilesService.addNewOccuProfile(this.model);
+      this.jobOfferService.addNewJobOffer(this.model);
     }
   }
 
@@ -158,29 +184,33 @@ export class NewopComponent implements OnInit {
     this.mode = this.route.snapshot.paramMap.get('mode');
     if (this.mode === 'duplicate' || this.mode === 'copy') {
       if (this.mode === 'copy') {
-        this.title = 'Copy Occupational Profile';
+        this.title = 'Copy Job Offer';
       } else {
-        this.title = 'Duplicate Occupational Profile';
+        this.title = 'Duplicate Job Offer';
 
       }
-      this.getOccuProfileId();
+      this.getJobOfferId();
       this.fillForm();
     } else {
-      this.title = 'Add New Occupational Profile';
+      this.title = 'Add New Job Offer';
     }
   }
 
-  getOccuProfileId(): void {
+  getJobOfferId(): void {
     this._id = this.route.snapshot.paramMap.get('name');
-    this.occuprofilesService
-      .getOccuProfileById(this._id)
-      .subscribe(profile => (this.selectedProfile = profile));
+    this.jobOfferService
+      .getJobOfferById(this._id)
+      .subscribe(job => (this.model = job));
   }
 
   fillForm(): void {
-    this.occuprofilesService
-      .getOccuProfileById(this._id)
-      .subscribe(profile => (this.model = profile));
+    this.jobOfferService
+      .getJobOfferById(this._id)
+      .subscribe(job => (this.model = job));
+  }
+
+  fillFormWithOP() {
+    this.model.occuProf = this.selectedProfile;
   }
 
   searchInBok(text: string) {
@@ -206,14 +236,14 @@ export class NewopComponent implements OnInit {
   }
 
   addExtraSkill(skill) {
-    this.model.skills.push(skill);
-    this.model.customSkills.push(skill);
+    this.model.occuProf.skills.push(skill);
+    this.model.occuProf.customSkills.push(skill);
   }
 
   // Add custom competence to model to force updating component, and to competences lists to find it again if removed
   addExtraCompetence(comp) {
-    this.model.competences = [...this.model.competences, { preferredLabel: comp }];
-    this.model.customCompetences.push(comp);
+    this.model.occuProf.competences = [...this.model.occuProf.competences, { preferredLabel: comp }];
+    this.model.occuProf.customCompetences.push(comp);
     this.escoService.allcompetences = [...this.escoService.allcompetences, { preferredLabel: comp }];
     this.escoService.basicCompetences = [...this.escoService.basicCompetences, { preferredLabel: comp }];
     // console.log('add compr:' + comp);

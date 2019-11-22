@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy, Input, ViewChild } from '@angular/core';
 import { NgForOf } from '@angular/common';
 import { Observable, Subscription } from 'rxjs';
-import { OcupationalProfile } from '../../ocupational-profile';
-import { OcuprofilesService } from '../../services/ocuprofiles.service';
+import { JobOffer } from '../../ocupational-profile';
+import { JobofferService } from '../../services/joboffer.service';
 import { FormControl } from '@angular/forms';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { AngularFireAuth } from '@angular/fire/auth';
@@ -13,9 +13,9 @@ import { AngularFireAuth } from '@angular/fire/auth';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent implements OnInit {
-  occupationalProfiles: OcupationalProfile[];
+  jobOffers: JobOffer[];
   advancedSearch = false;
-  filteredOccuProfiles: any[];
+  filteredJobOffers: any[];
   searchText: string;
   knowledgeFilter: Boolean = true;
   skillFilter: Boolean = true;
@@ -23,7 +23,7 @@ export class ListComponent implements OnInit {
   isAnonymous = null;
   @ViewChild('dangerModal') public dangerModal: ModalDirective;
 
-  constructor(private occuprofilesService: OcuprofilesService, public afAuth: AngularFireAuth) {
+  constructor(private jobOfferService: JobofferService, public afAuth: AngularFireAuth) {
     this.afAuth.auth.onAuthStateChanged(user => {
       if (user) {
         this.isAnonymous = user.isAnonymous;
@@ -34,25 +34,25 @@ export class ListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.occuprofilesService
-      .subscribeToOccupationalProfiles()
-      .subscribe(occuProfiles => {
-        this.occupationalProfiles = occuProfiles;
-        this.filteredOccuProfiles = occuProfiles;
+    this.jobOfferService
+      .subscribeToJobOffers()
+      .subscribe(jobOffers => {
+        this.jobOffers = jobOffers;
+        this.filteredJobOffers = jobOffers;
       });
   }
 
-  removeOccuProfile(id: string) {
-    this.occuprofilesService.removeOccuProfile(id);
+  removeJobOffer(id: string) {
+    this.jobOfferService.removeJobOffer(id);
   }
 
   filter() {
     const search = this.searchText.toLowerCase();
-    this.filteredOccuProfiles = [];
-    this.filteredOccuProfiles = this.occupationalProfiles.filter(
+    this.filteredJobOffers = [];
+    this.filteredJobOffers = this.jobOffers.filter(
       it =>
-        it.title.toLowerCase().includes(search) ||
-        it.description.toLowerCase().includes(search)
+        it.occuProf.title.toLowerCase().includes(search) ||
+        it.occuProf.description.toLowerCase().includes(search)
     );
     if (this.advancedSearch) {
       this.applyFilters();
@@ -60,30 +60,30 @@ export class ListComponent implements OnInit {
   }
 
   applyFilters() {
-    this.occupationalProfiles.forEach(occ => {
+    this.jobOffers.forEach(jo => {
       if (this.knowledgeFilter) {
-        occ.knowledge.forEach(know => {
+        jo.occuProf.knowledge.forEach(know => {
           if (know.toLowerCase().includes(this.searchText.toLowerCase())) {
-            if (this.filteredOccuProfiles.indexOf(occ) === -1) {
-              this.filteredOccuProfiles.push(occ);
+            if (this.filteredJobOffers.indexOf(jo) === -1) {
+              this.filteredJobOffers.push(jo);
             }
           }
         });
       }
       if (this.skillFilter) {
-        occ.skills.forEach(ski => {
+        jo.occuProf.skills.forEach(ski => {
           if (ski.toLowerCase().includes(this.searchText.toLowerCase())) {
-            if (this.filteredOccuProfiles.indexOf(occ) === -1) {
-              this.filteredOccuProfiles.push(occ);
+            if (this.filteredJobOffers.indexOf(jo) === -1) {
+              this.filteredJobOffers.push(jo);
             }
           }
         });
       }
       if (this.competencesFilter) {
-        occ.competences.forEach(comp => {
+        jo.occuProf.competences.forEach(comp => {
           if (comp.preferredLabel.toLowerCase().includes(this.searchText.toLowerCase())) {
-            if (this.filteredOccuProfiles.indexOf(occ) === -1) {
-              this.filteredOccuProfiles.push(occ);
+            if (this.filteredJobOffers.indexOf(jo) === -1) {
+              this.filteredJobOffers.push(jo);
             }
           }
         });

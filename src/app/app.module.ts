@@ -50,7 +50,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { DetailComponent } from './views/detail/detail.component';
-import { NewopComponent } from './views/newop/newop.component';
+import { NewjoComponent } from './views/newjo/newjo.component';
 import { LoadingIndicatorComponent } from './components/loading-indicator/loading-indicator.component';
 import { PopoverModule } from 'ngx-bootstrap/popover';
 
@@ -97,7 +97,7 @@ import { Eo4geoHeaderComponent } from './components/eo4geo-header/eo4geo-header.
     LoginComponent,
     ListComponent,
     DetailComponent,
-    NewopComponent,
+    NewjoComponent,
     LoadingIndicatorComponent,
     TruncatePipe,
     HighlightPipe,
