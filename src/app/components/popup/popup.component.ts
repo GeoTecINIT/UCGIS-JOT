@@ -148,7 +148,7 @@ export class PopupComponent implements OnInit {
       currentLinePoint = currentLinePoint + 5;
       doc.setTextColor('#000').setFontType('normal').setFontSize(8); // normal text
       currentLinePoint = this.checkEndOfPage(currentLinePoint, doc);
-      const coLines = doc.setFontSize(8).splitTextToSize('· ' + this.selectedJobOffer.location, 150);
+      const coLines = doc.setFontSize(8).splitTextToSize( this.selectedJobOffer.location, 150);
       doc.text(30, currentLinePoint, coLines);
       currentLinePoint = currentLinePoint + 4 * coLines.length;
     }
@@ -160,7 +160,7 @@ export class PopupComponent implements OnInit {
       currentLinePoint = currentLinePoint + 5;
       doc.setTextColor('#000').setFontType('normal').setFontSize(8); // normal text
       currentLinePoint = this.checkEndOfPage(currentLinePoint, doc);
-      const coLines = doc.setFontSize(8).splitTextToSize('· ' + this.selectedJobOffer.dedication, 150);
+      const coLines = doc.setFontSize(8).splitTextToSize(this.selectedJobOffer.dedication, 150);
       doc.text(30, currentLinePoint, coLines);
       currentLinePoint = currentLinePoint + 4 * coLines.length;
     }
@@ -172,7 +172,7 @@ export class PopupComponent implements OnInit {
       currentLinePoint = currentLinePoint + 5;
       doc.setTextColor('#000').setFontType('normal').setFontSize(8); // normal text
       currentLinePoint = this.checkEndOfPage(currentLinePoint, doc);
-      const coLines = doc.setFontSize(8).splitTextToSize('· ' + this.selectedJobOffer.typeContract, 150);
+      const coLines = doc.setFontSize(8).splitTextToSize( this.selectedJobOffer.typeContract, 150);
       doc.text(30, currentLinePoint, coLines);
       currentLinePoint = currentLinePoint + 4 * coLines.length;
     }
