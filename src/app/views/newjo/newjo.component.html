@@ -6,7 +6,7 @@
         <div class="card-header">
           <div class="row">
             <div class="col-md-10">
-              <div class="row">
+              <div class="row" *ngIf="mode!='copy' || mode!='duplicate'">
                 <div class="col-md-3 text-right">
                   Fill your job offer based on
                 </div>
