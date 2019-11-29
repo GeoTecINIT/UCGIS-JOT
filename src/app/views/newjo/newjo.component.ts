@@ -184,7 +184,7 @@ export class NewjoComponent implements OnInit {
     this.mode = this.route.snapshot.paramMap.get('mode');
     if (this.mode === 'duplicate' || this.mode === 'copy') {
       if (this.mode === 'copy') {
-        this.title = 'Copy Job Offer';
+        this.title = 'Edit Job Offer';
       } else {
         this.title = 'Duplicate Job Offer';
 
