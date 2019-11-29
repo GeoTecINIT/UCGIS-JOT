@@ -8,7 +8,7 @@
               Detail
             </div>
             <div class="col-sm-4 offset-md-4 col-md-4"></div>
-            <div class="col-sm-4 col-md-2">
+            <div class="col-sm-4 col-md-2  no-padding">
               <div *ngIf="selectedOffer; else loading" class="row">
                 <div class="cols-xs-2 col-md-3">
                   <button type="button" class="btn btn-block btn-link" [popover]="popTemplate" tooltip="Share"
@@ -16,21 +16,21 @@
                     <i class="fa fa-share-alt fa-lg"></i>
                   </button>
                 </div>
-                <div class="cols-xs-2 col-md-3"
+                <div class="cols-xs-2 col-md-3 no-padding"
                   tooltip="{{isAnonymous? 'Login to be able to duplicate' : 'Duplicate'}}">
                   <button type="button" class="btn btn-block btn-link" tooltip="Duplicate"
                     routerLink="/newjo/duplicate/{{ selectedOffer._id }}" [disabled]="isAnonymous">
                     <i class="fa fa-copy fa-lg"></i>
                   </button>
                 </div>
-                <div class="cols-xs-2 col-md-3"
+                <div class="cols-xs-2 col-md-3 no-padding"
                   tooltip="{{isAnonymous? 'Login to be able to edit' : selectedOffer.userId==afAuth.auth.currentUser?.uid?  'Edit' : 'You can edit only your own job offers'}}">
                   <button type="button" class="btn btn-block btn-link" routerLink="/newjo/copy/{{ selectedOffer._id }}"
                     [disabled]="isAnonymous || selectedOffer.userId!=afAuth.auth.currentUser?.uid">
                     <i class="fa fa-edit fa-lg"></i>
                   </button>
                 </div>
-                <div class="cols-xs-2 col-md-3"
+                <div class="cols-xs-2 col-md-3 no-padding"
                   tooltip="{{isAnonymous? 'Login to be able to remove' : selectedOffer.userId==afAuth.auth.currentUser?.uid?  'Remove' : 'You can remove only your own job offers'}}">
                   <button type="button" class="btn btn-block btn-link" data-toggle="modal" (click)="dangerModal.show()"
                     [disabled]="isAnonymous || selectedOffer.userId!=afAuth.auth.currentUser?.uid">

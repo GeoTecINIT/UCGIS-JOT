@@ -6,7 +6,7 @@
         <div class="card-header">
           <div class="row">
             <div class="col-md-10">
-              <div class="row" *ngIf="mode!='copy' || mode!='duplicate'">
+              <div class="row" *ngIf="mode!='copy' && mode!='duplicate'">
                 <div class="col-md-3 text-right">
                   Fill your job offer based on
                 </div>
@@ -23,8 +23,13 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-2 text-right">
-              <button type="submit" class="btn btn-pill btn-primary" (click)="saveOccuProfile()" routerLink="/list">
+            <div class="col-md-2 text-right" *ngIf="model.occuProf.title != '' && model.occuProf.description != '' ">
+              <button type="submit" class="btn btn-pill btn-primary" (click)="saveOccuProfile()" routerLink="/list" >
+                Save
+              </button>
+            </div>
+            <div class="col-md-2 text-right" *ngIf="model.occuProf.title == '' || model.occuProf.description == '' ">
+              <button type="submit" class="btn btn-pill btn-primary" tooltip="Add a title and a description to save your Job Offer." >
                 Save
               </button>
             </div>
