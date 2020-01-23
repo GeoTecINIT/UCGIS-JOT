@@ -218,7 +218,9 @@ export class NewjoComponent implements OnInit {
   }
 
   fillFormWithOP() {
-    this.model.occuProf = this.selectedProfile;
+    // allow merging multiple occupational profiles
+    this.model.occuProf = this.occuprofilesService.mergeOccuProfiles(this.model.occuProf, this.selectedProfile);
+   // this.model.occuProf = this.selectedProfile;
   }
 
   searchInBok(text: string) {

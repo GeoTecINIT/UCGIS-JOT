@@ -10,7 +10,7 @@
                 <div class="col-md-3 text-right">
                   Fill your job offer based on
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-5">
                   <ng-select [items]="allProfiles" name="field" bindLabel="title" [multiple]="false"
                     [(ngModel)]="selectedProfile" (change)="fillFormWithOP()">
                     <ng-template ng-optgroup-tmp let-item="item">
@@ -19,7 +19,10 @@
                   </ng-select>
                 </div>
                 <div class="col-md-4">
-                  occupational profile.
+                  occupational profile(s).
+                  <span
+                  tooltip="The job offer can be based on more than one Occupational Profile, if you select more than one, values will be concatenated"
+                  class="badge badge-primary badge-pill">i</span>
                 </div>
               </div>
             </div>
