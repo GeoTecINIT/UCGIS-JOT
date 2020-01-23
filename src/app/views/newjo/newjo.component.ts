@@ -3,7 +3,7 @@ import { OcupationalProfile, Competence, JobOffer } from '../../ocupational-prof
 import * as bok from '@eo4geo/bok-dataviz';
 import { OcuprofilesService } from '../../services/ocuprofiles.service';
 import { JobofferService } from '../../services/joboffer.service';
-import { FieldsService } from '../../services/fields.service';
+import { FieldsService, Field } from '../../services/fields.service';
 import { LanguageService } from '../../services/language.service';
 import { EscoCompetenceService } from '../../services/esco-competence.service';
 import { ActivatedRoute } from '@angular/router';
@@ -158,6 +158,14 @@ export class NewjoComponent implements OnInit {
       }
     });
     this.associatedSkillsToDelete = skillsFiltered.length;
+  }
+
+  removeField(f: Field) {
+    this.model.occuProf.fields.forEach((item, index) => {
+      if (item === f) {
+        this.model.occuProf.fields.splice(index, 1);
+      }
+    });
   }
 
   removeSkillsAssociated() {

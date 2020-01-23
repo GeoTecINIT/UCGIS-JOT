@@ -16,7 +16,7 @@ export class OcupationalProfile extends Object {
     public userId: string,
     public title: string,
     public description: string,
-    public field: Field,
+    public fields: Field[],
     public eqf: number,
     public knowledge: string[],
     public skills: string[],
