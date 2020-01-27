@@ -30,6 +30,8 @@ import { DefaultLayoutComponent } from './containers';
 import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
 import { LoginComponent } from './views/login/login.component';
+import { UserComponent } from './views/user/user.component';
+import { OrganizationComponent } from './views/organization/organization.component';
 import { ListComponent } from './views/list/list.component';
 
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
@@ -99,6 +101,8 @@ import { Eo4geoHeaderComponent } from './components/eo4geo-header/eo4geo-header.
     P404Component,
     P500Component,
     LoginComponent,
+    UserComponent,
+    OrganizationComponent,
     ListComponent,
     DetailComponent,
     NewjoComponent,
