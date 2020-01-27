@@ -5,37 +5,50 @@
       <div class="card card-accent-primary">
         <div class="card-header">
           <div class="row">
-            <div class="col-md-10">
-              <div class="row" *ngIf="mode!='copy' && mode!='duplicate'">
-                <div class="col-md-3 text-right">
-                  Fill your job offer based on
-                </div>
-                <div class="col-md-5">
-                  <ng-select [items]="allProfiles" name="field" bindLabel="title" [multiple]="false"
-                    [(ngModel)]="selectedProfile" (change)="fillFormWithOP()">
-                    <ng-template ng-optgroup-tmp let-item="item">
-                      {{item.title}}
-                    </ng-template>
-                  </ng-select>
-                </div>
-                <div class="col-md-4">
-                  occupational profile(s).
-                  <span
-                    tooltip="The job offer can be based on more than one Occupational Profile, if you select more than one, values will be concatenated"
-                    class="badge badge-primary badge-pill">i</span>
-                </div>
-              </div>
+            <div class="col-sm-4 col-md-4">
+              <p *ngIf="userOrgs.length > 0" class="text-right">Save under organization </p>
             </div>
-            <div class="col-md-2 text-right" *ngIf="model.occuProf.title != '' && model.occuProf.description != '' ">
-              <button type="submit" class="btn btn-pill btn-primary" (click)="saveOccuProfile()" routerLink="/list">
-                Save
+            <div class="col-sm-4 col-md-4">
+              <ng-select *ngIf="userOrgs.length > 0 && userOrgs.length == currentUser.organizations.length"
+                [items]="userOrgs" name="userOrgs" bindLabel="name" [multiple]="false" [(ngModel)]="saveOrg">
+                <ng-template ng-optgroup-tmp let-item="item">
+                  {{item.name}}
+                </ng-template>
+              </ng-select>
+              <button *ngIf="userOrgs.length == 0" type="button" class="btn btn-block btn-link text-secondary"
+                routerLink="/organization">
+                &nbsp;Create an organization to start
               </button>
             </div>
-            <div class="col-md-2 text-right" *ngIf="model.occuProf.title == '' || model.occuProf.description == '' ">
+            <div class="col-sm-4 offset-md-2 col-md-2 text-right">
+              <button type="submit" class="btn btn-pill btn-primary" (click)="saveOccuProfile()" routerLink="/list"
+                *ngIf="model.occuProf.title != '' && model.occuProf.description != '' ">
+                Save
+              </button>
               <button type="submit" class="btn btn-pill btn-primary"
-                tooltip="Add a title and a description to save your Job Offer.">
+                *ngIf="model.occuProf.title == '' || model.occuProf.description == '' "
+                tooltip="Add a title and a description to save your Job Offer." [disabled]="!saveOrg">
                 Save
               </button>
+            </div>
+          </div>
+          <div class="row" *ngIf="mode!='copy' && mode!='duplicate' && allProfiles && allProfiles.length> 0">
+            <div class="col-md-4 text-right">
+              Fill your job offer based on
+            </div>
+            <div class="col-md-4">
+              <ng-select [items]="allProfiles" name="field" bindLabel="title" [multiple]="false"
+                [(ngModel)]="selectedProfile" (change)="fillFormWithOP()">
+                <ng-template ng-optgroup-tmp let-item="item">
+                  {{item.title}}
+                </ng-template>
+              </ng-select>
+            </div>
+            <div class="col-md-4">
+              occupational profile(s).
+              <span
+                tooltip="The job offer can be based on more than one Occupational Profile, if you select more than one, values will be concatenated"
+                class="badge badge-primary badge-pill">i</span>
             </div>
           </div>
           <div class="row" *ngIf="selectedProfiles.length > 0">
@@ -43,11 +56,14 @@
               Job Offer based on
             </div>
             <div class="col-md-10 mt-2">
-              <button *ngFor="let op of selectedProfiles" type="button" class="btn btn-pill btn-outline-primary" disabled>
+              <button *ngFor="let op of selectedProfiles" type="button" class="btn btn-pill btn-outline-primary"
+                disabled>
                 {{ op }}
               </button>
             </div>
           </div>
+
+
         </div>
         <!-- card body -->
         <div class="card-body">
@@ -69,6 +85,18 @@
                         [(ngModel)]="model.occuProf.title" name="title" required />
                     </div>
                   </div>
+                  <div class="col-md-4 mt-4" style="display: inline-flex">
+                    <span class="input-group-prepend">
+                      <div class="pr-1"> Visibility: Draft </div>
+                      <label class="switch switch-label switch-pill switch-outline-primary-alt">
+                        <input class="switch-input" type="checkbox" value="knowledges" name="isPublic"
+                          [(ngModel)]="model.isPublic" />
+                        <span class="switch-slider" data-checked="✓" data-unchecked="X"></span>
+                      </label>
+                      <div class="pl-1">Publish </div>
+                    </span>
+                  </div>
+
                 </div>
                 <div class="row">
                   <div class="col-md-6">
@@ -371,14 +399,14 @@
               <div class="row">
                 <div class="col-md-8">
                   <div class="form-group">
-                    <label for="title">Location</label>
-                    <input type="text" class="form-control" id="title" placeholder="Location"
-                      [(ngModel)]="model.location" name="title" required />
+                    <label for="location">Location</label>
+                    <input type="text" class="form-control" id="location" placeholder="Location"
+                      [(ngModel)]="model.location" name="location" required />
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
-                    <label for="title">Dedication</label>
+                    <label for="dedication">Dedication</label>
                     <br>
                     <div class="form-check form-check-inline">
                       <input class="form-check-input" type="radio" name="dedicationRadio" id="dedicationRadio1"
