@@ -21,8 +21,8 @@
                 <div class="col-md-4">
                   occupational profile(s).
                   <span
-                  tooltip="The job offer can be based on more than one Occupational Profile, if you select more than one, values will be concatenated"
-                  class="badge badge-primary badge-pill">i</span>
+                    tooltip="The job offer can be based on more than one Occupational Profile, if you select more than one, values will be concatenated"
+                    class="badge badge-primary badge-pill">i</span>
                 </div>
               </div>
             </div>
@@ -35,6 +35,16 @@
               <button type="submit" class="btn btn-pill btn-primary"
                 tooltip="Add a title and a description to save your Job Offer.">
                 Save
+              </button>
+            </div>
+          </div>
+          <div class="row" *ngIf="selectedProfiles.length > 0">
+            <div class="col-md-2 mt-4 text-right">
+              Job Offer based on
+            </div>
+            <div class="col-md-10 mt-2">
+              <button *ngFor="let op of selectedProfiles" type="button" class="btn btn-pill btn-outline-primary" disabled>
+                {{ op }}
               </button>
             </div>
           </div>

@@ -27,6 +27,7 @@ export class NewjoComponent implements OnInit {
   public current: string;
 
   selectedProfile: OcupationalProfile;
+  selectedProfiles: string[] = [];
 
   allProfiles: OcupationalProfile[];
 
@@ -220,7 +221,7 @@ export class NewjoComponent implements OnInit {
   fillFormWithOP() {
     // allow merging multiple occupational profiles
     this.model.occuProf = this.occuprofilesService.mergeOccuProfiles(this.model.occuProf, this.selectedProfile);
-   // this.model.occuProf = this.selectedProfile;
+    this.selectedProfiles.push(this.selectedProfile.title);
   }
 
   searchInBok(text: string) {
