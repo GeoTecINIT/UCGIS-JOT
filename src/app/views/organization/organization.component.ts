@@ -177,31 +177,38 @@ export class OrganizationComponent implements OnInit {
 
   makeRegularUser(orgIndex, userId) {
     this.currentOrg = this.orgs[orgIndex];
-    // Remove from admin if toggling permissions
-    if (this.orgs[orgIndex].admin.indexOf(userId) > -1) {
-      const indexToRemove = this.orgs[orgIndex].admin.indexOf(userId);
-      this.orgs[orgIndex].admin.splice(indexToRemove, 1);
-    }
-    // add to regular users
-    this.orgs[orgIndex].regular.push(userId);
-    // remove from pending if pending
-    if (this.currentOrg.pending && this.currentOrg.pending.indexOf(userId) > -1) {
-      const indexToRemovePending = this.currentOrg.pending.indexOf(userId);
-      this.currentOrg.pending.splice(indexToRemovePending, 1);
+    // prevent from changing the last admin user to regular, because the organization will be orphan
+    if (this.orgs[orgIndex].admin.length > 1 || this.orgs[orgIndex].admin.length === 1 && this.orgs[orgIndex].admin[0] !== userId) {
 
-      // add org index to user db
-      const userSub = this.userService.getUserById(userId).subscribe(userDB => {
-        if (userDB) {
-          const u = new User(userDB);
-          u.organizations.push(this.currentOrg._id);
-          this.userService.updateUserWithId(u._id, u);
-        }
-        userSub.unsubscribe();
-      });
+      // Remove from admin if toggling permissions
+      if (this.orgs[orgIndex].admin.indexOf(userId) > -1) {
+        const indexToRemove = this.orgs[orgIndex].admin.indexOf(userId);
+        this.orgs[orgIndex].admin.splice(indexToRemove, 1);
+      }
+      // add to regular users
+      this.orgs[orgIndex].regular.push(userId);
+      // remove from pending if pending
+      if (this.currentOrg.pending && this.currentOrg.pending.indexOf(userId) > -1) {
+        const indexToRemovePending = this.currentOrg.pending.indexOf(userId);
+        this.currentOrg.pending.splice(indexToRemovePending, 1);
+
+        // add org index to user db
+        const userSub = this.userService.getUserById(userId).subscribe(userDB => {
+          if (userDB) {
+            const u = new User(userDB);
+            u.organizations.push(this.currentOrg._id);
+            this.userService.updateUserWithId(u._id, u);
+          }
+          userSub.unsubscribe();
+        });
+      }
+      this.organizationService.updateOrganizationWithId(this.orgs[orgIndex]._id, this.currentOrg);
+      this.msgUsrSaved = 'User made regular!';
+      this.msgUsrError = null;
+    } else {
+      this.msgUsrSaved = null;
+      this.msgUsrError = 'Can not change the only admin to a regular user! Add other admin first.';
     }
-    this.organizationService.updateOrganizationWithId(this.orgs[orgIndex]._id, this.currentOrg);
-    this.msgUsrSaved = 'User made regular!';
-    this.msgUsrError = null;
   }
 
   makeAdminUser(orgIndex, userId) {
