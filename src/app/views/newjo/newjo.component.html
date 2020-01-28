@@ -17,7 +17,7 @@
               </ng-select>
               <button *ngIf="userOrgs.length == 0" type="button" class="btn btn-block btn-link text-secondary"
                 routerLink="/organization">
-                &nbsp;Create an organization to start
+                &nbsp;You need to join or create an organization before you can save an occupational profile.
               </button>
             </div>
             <div class="col-sm-4 offset-md-2 col-md-2 text-right">
@@ -107,8 +107,8 @@
                         class="badge badge-primary badge-pill">i</span>
                       <ng-select [items]="fieldsService.allfields" name="field" bindLabel="name" groupBy="grandparent"
                         [multiple]="true" [(ngModel)]="model.occuProf.fields">
-                        <ng-template ng-optgroup-tmp let-item="itemField">
-                          {{itemField.grandparent || 'Unnamed group'}}
+                        <ng-template ng-optgroup-tmp let-item="item">
+                          {{item.grandparent || 'Unnamed group'}}
                         </ng-template>
                       </ng-select>
                     </div>

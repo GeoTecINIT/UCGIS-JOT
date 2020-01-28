@@ -52,7 +52,13 @@ export class OcuprofilesService {
 
     op1.title = op1.title + ' - ' + op2.title;
     op1.description = op1.description + ' \n\n ' + op2.title + ' \n ' + op2.description;
-    op1.fields = op1.fields ? op2.fields ? op1.fields.concat(op2.fields) : op1.fields : [];
+    if (op2.fields) {
+      op2.fields.forEach(f => {
+        if (op1.fields.indexOf(f) === -1) {
+          op1.fields.push(f);
+        }
+      });
+    }
     if (op2.knowledge) {
       op2.knowledge.forEach(kn => {
         if (op1.knowledge.indexOf(kn) === -1) {
@@ -88,6 +94,7 @@ export class OcuprofilesService {
         }
       });
     }
+    // op1.fields = op1.fields ? op2.fields ? op1.fields.concat(op2.fields) : op1.fields : [];
     // op1.knowledge = op1.knowledge.concat(op2.knowledge);
     // op1.skills = op1.skills.concat(op2.skills);
     // op1.customSkills = op1.customSkills.concat(op2.customSkills);
