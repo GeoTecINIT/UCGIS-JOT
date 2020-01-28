@@ -2,15 +2,25 @@
     margin: 2px;
     pointer-events: none;
 }
+
 .progress {
-   margin-top: 1em;
+    margin-top: 1em;
 }
+
 .btn-list {
     display: list-item;
     text-align: left !important;
 }
+
 .no-padding {
     padding-left: 0 !important;
     padding-right: 0 !important;
-  }
-  
+}
+
+.text-level {
+    color: #8C99A2;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding-left: 1em;
+    font-size: smaller;
+}
