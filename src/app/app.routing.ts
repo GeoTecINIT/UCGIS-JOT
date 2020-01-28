@@ -13,6 +13,8 @@ import { DetailComponent } from './views/detail/detail.component';
 import { NewjoComponent } from './views/newjo/newjo.component';
 
 import { AngularFireAuthGuard } from '@angular/fire/auth-guard';
+import { UserComponent } from './views/user/user.component';
+import { OrganizationComponent } from './views/organization/organization.component';
 
 export const routes: Routes = [
   {
@@ -54,6 +56,20 @@ export const routes: Routes = [
           title: 'List'
         },
         component: ListComponent
+      },
+      {
+        path: 'user',
+        data: {
+          title: 'User Details'
+        },
+        component: UserComponent
+      },
+      {
+        path: 'organization',
+        data: {
+          title: 'Organization Details'
+        },
+        component: OrganizationComponent
       },
       {
         path: 'detail/:name',

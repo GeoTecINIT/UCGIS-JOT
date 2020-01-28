@@ -6,6 +6,8 @@ import { JobofferService } from '../../services/joboffer.service';
 import { FormControl } from '@angular/forms';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { UserService, User } from '../../services/user.service';
+import { OrganizationService } from '../../services/organization.service';
 
 @Component({
   selector: 'app-list',
@@ -21,25 +23,52 @@ export class ListComponent implements OnInit {
   skillFilter: Boolean = true;
   competencesFilter: Boolean = true;
   isAnonymous = null;
+  currentUser: User = new User();
+
   @ViewChild('dangerModal') public dangerModal: ModalDirective;
 
-  constructor(private jobOfferService: JobofferService, public afAuth: AngularFireAuth) {
+  constructor(private jobOfferService: JobofferService,
+    private userService: UserService,
+    public organizationService: OrganizationService,
+    public afAuth: AngularFireAuth) {
     this.afAuth.auth.onAuthStateChanged(user => {
       if (user) {
         this.isAnonymous = user.isAnonymous;
+        this.userService.getUserById(user.uid).subscribe(userDB => {
+          this.currentUser = new User(userDB);
+
+          this.jobOfferService
+            .subscribeToJobOffers()
+            .subscribe(jobOffers => {
+              this.jobOffers = [];
+              jobOffers.forEach(jo => {
+                if (jo.isPublic) {
+                  this.jobOffers.push(jo);
+                } else if (this.currentUser && this.currentUser.organizations && this.currentUser.organizations.indexOf(jo.orgId) > -1) {
+                  this.jobOffers.push(jo);
+                }
+              });
+              this.filteredJobOffers = this.jobOffers;
+            });
+        });
       } else {
         this.isAnonymous = true;
       }
+      this.jobOfferService
+        .subscribeToJobOffers()
+        .subscribe(jobOffers => {
+          this.jobOffers = [];
+          jobOffers.forEach(jo => {
+            if (jo.isPublic) {
+              this.jobOffers.push(jo);
+            }
+          });
+          this.filteredJobOffers = this.jobOffers;
+        });
     });
   }
 
   ngOnInit() {
-    this.jobOfferService
-      .subscribeToJobOffers()
-      .subscribe(jobOffers => {
-        this.jobOffers = jobOffers;
-        this.filteredJobOffers = jobOffers;
-      });
   }
 
   removeJobOffer(id: string) {

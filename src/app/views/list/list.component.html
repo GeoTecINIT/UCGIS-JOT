@@ -80,7 +80,9 @@
             <div class="col-md-10">
               <button type="button" class="btn text-justify" routerLink="/detail/{{ jo._id }}">
                 <span>
-                  <h1>{{ jo.occuProf.title }}</h1>
+                  <h1 style="display: inline;" >{{ jo.occuProf.title }}</h1>
+                  <h6 style="display: inline;" class="text-level text-primary">{{ jo.orgName }}</h6>
+                  <br>
                   {{ jo.occuProf.knowledge.length }} Knowledge |
                   {{ jo.occuProf.skills.length }} Skills |
                   {{ jo.occuProf.competences.length }} Transversal skills
@@ -108,14 +110,14 @@
                 <div class="col-3 col-sm-3 col-md-3 no-padding"
                   tooltip="{{isAnonymous? 'Login to be able to edit' : jo.userId==afAuth.auth.currentUser?.uid?  'Edit' : 'You can edit only your own job offers'}}">
                   <button type="button" class="btn btn-block btn-link" routerLink="/newjo/copy/{{ jo._id }}"
-                    [disabled]="isAnonymous || jo.userId!=afAuth.auth.currentUser?.uid">
+                    [disabled]="isAnonymous || (currentUser?.organizations?.indexOf(jo.orgId) == -1)">
                     <i class="fa fa-edit fa-lg mt-4"></i>
                   </button>
                 </div>
                 <div class="col-3 col-sm-3 col-md-3 no-padding"
                   tooltip="{{isAnonymous? 'Login to be able to remove' : jo.userId==afAuth.auth.currentUser?.uid?  'Remove' : 'You can remove only your own job offers'}}">
                   <button type="button" class="btn btn-block btn-link" data-toggle="modal" (click)="dangerModal.show()"
-                    [disabled]="isAnonymous || jo.userId!=afAuth.auth.currentUser?.uid">
+                    [disabled]="isAnonymous || (currentUser?.organizations?.indexOf(jo.orgId) == -1)">
                     <i class="fa fa-trash-o fa-lg mt-4"></i>
                   </button>
                 </div>

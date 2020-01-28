@@ -2,12 +2,14 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { OcupationalProfile, Competence, JobOffer } from '../../ocupational-profile';
 import * as bok from '@eo4geo/bok-dataviz';
 import { OcuprofilesService } from '../../services/ocuprofiles.service';
+import { Organization, OrganizationService } from '../../services/organization.service';
 import { JobofferService } from '../../services/joboffer.service';
 import { FieldsService, Field } from '../../services/fields.service';
 import { LanguageService } from '../../services/language.service';
 import { EscoCompetenceService } from '../../services/esco-competence.service';
 import { ActivatedRoute } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { User, UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-newjo',
@@ -21,12 +23,14 @@ export class NewjoComponent implements OnInit {
   fullcompetences = [];
 
   // model = new OcupationalProfile('', '', '', '', null, 1, [], [], [], [], []);
-  model = new JobOffer('', '', new OcupationalProfile('', '', '', '', null, 1, [], [], [], [], []), [], '', '', '', 0, 0, [], false);
+  // tslint:disable-next-line:max-line-length
+  model = new JobOffer('', '', '', '', new OcupationalProfile('', '', '', '', '', '', [], 1, [], [], [], [], []), [], '', '', '', 0, 0, [], false, false);
 
   public value: string[];
   public current: string;
 
   selectedProfile: OcupationalProfile;
+  selectedProfiles: string[] = [];
 
   allProfiles: OcupationalProfile[];
 
@@ -93,10 +97,16 @@ export class NewjoComponent implements OnInit {
 
   @ViewChild('textBoK') textBoK: ElementRef;
 
+  userOrgs: Organization[] = [];
+  saveOrg: Organization;
+  currentUser: User;
+
   typeOfContract = ['Internship', 'Scholarship', 'Temporal', 'Fixed'];
 
   constructor(
     public occuprofilesService: OcuprofilesService,
+    private organizationService: OrganizationService,
+    private userService: UserService,
     private jobOfferService: JobofferService,
     public fieldsService: FieldsService,
     public languageService: LanguageService,
@@ -106,15 +116,42 @@ export class NewjoComponent implements OnInit {
   ) {
     this.competences = this.escoService.basicCompetences;
     this.filteredCompetences = this.competences;
+
+    this.afAuth.auth.onAuthStateChanged(user => {
+      if (user) {
+        this.userService.getUserById(user.uid).subscribe(userDB => {
+          this.currentUser = new User(userDB);
+          if (this.currentUser.organizations && this.currentUser.organizations.length > 0) {
+            this.currentUser.organizations.forEach(orgId => {
+              this.organizationService.getOrganizationById(orgId).subscribe(org => {
+                this.userOrgs.push(org);
+                this.saveOrg = this.userOrgs[0];
+              });
+            });
+            this.filterOP();
+          }
+        });
+      }
+    });
   }
 
   ngOnInit() {
     bok.visualizeBOKData('#bubbles', 'assets/saved-bok.xml', '#textBoK');
     this.getMode();
+  }
+
+  filterOP() {
+    this.allProfiles = [];
     this.occuprofilesService
       .subscribeToOccupationalProfiles()
-      .subscribe(op => {
-        this.allProfiles = op;
+      .subscribe(ops => {
+        ops.forEach(op => {
+          // user can use this OP
+          if (op.isPublic || this.currentUser.organizations.indexOf(op.orgId) > -1) {
+            this.allProfiles.push(op);
+          }
+        });
+        // this.allProfiles = op;
       });
   }
 
@@ -184,6 +221,8 @@ export class NewjoComponent implements OnInit {
       this.jobOfferService.updateJobOffer(this._id, this.model);
     } else {
       this.model.userId = this.afAuth.auth.currentUser.uid;
+      this.model.orgId = this.saveOrg._id;
+      this.model.orgName = this.saveOrg.name;
       this.jobOfferService.addNewJobOffer(this.model);
     }
   }
@@ -220,7 +259,7 @@ export class NewjoComponent implements OnInit {
   fillFormWithOP() {
     // allow merging multiple occupational profiles
     this.model.occuProf = this.occuprofilesService.mergeOccuProfiles(this.model.occuProf, this.selectedProfile);
-   // this.model.occuProf = this.selectedProfile;
+    this.selectedProfiles.push(this.selectedProfile.title);
   }
 
   searchInBok(text: string) {

@@ -1,11 +1,11 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { OcuprofilesService } from '../../services/ocuprofiles.service';
 import { JobofferService } from '../../services/joboffer.service';
 import { Observable, Subscription } from 'rxjs';
-import { OcupationalProfile, JobOffer} from '../../ocupational-profile';
+import { JobOffer } from '../../ocupational-profile';
 import { ActivatedRoute } from '@angular/router';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { UserService, User } from '../../services/user.service';
 
 @Component({
   selector: 'app-detail',
@@ -31,16 +31,22 @@ export class DetailComponent implements OnInit {
   };
 
   selectedOffer: JobOffer;
+  currentUser: User = new User();
+
   @ViewChild('dangerModal') public dangerModal: ModalDirective;
 
   constructor(
     public jobOfferService: JobofferService,
+    private userService: UserService,
     private route: ActivatedRoute,
     public afAuth: AngularFireAuth
   ) {
     this.afAuth.auth.onAuthStateChanged(user => {
       if (user) {
         this.isAnonymous = user.isAnonymous;
+        this.userService.getUserById(user.uid).subscribe(userDB => {
+          this.currentUser = new User(userDB);
+        });
       } else {
         this.isAnonymous = true;
       }
