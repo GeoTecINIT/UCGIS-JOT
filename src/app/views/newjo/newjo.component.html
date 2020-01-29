@@ -379,7 +379,9 @@
                 <div class="col-md-3">
                   <div class="form-group">
                     <label for="field">Datasets Required </label>
-                    <span tooltip="Datasets included in EO Handbook http://database.eohandbook.com/data/dataactivity.aspx" class="badge badge-primary badge-pill">i</span>
+                    <span
+                      tooltip="Datasets included in EO Handbook http://database.eohandbook.com/data/dataactivity.aspx"
+                      class="badge badge-primary badge-pill">i</span>
                     <ng-select [items]="fieldsService.allDatasets" name="datasets" bindLabel="name" [multiple]="true"
                       [(ngModel)]="model.dataRequired" [clearable]="false" notFoundText="Dataset not found, add custom."
                       (search)="searchSelect($event, 'data')">
@@ -406,7 +408,9 @@
                 <div class="col-md-3">
                   <div class="form-group">
                     <label for="field">Tools Required</label>
-                    <span tooltip="Tools included in INSPIRE reference: https://inspire-reference.jrc.ec.europa.eu/tools and ESA Open Source Resources: http://www.esa.int/Enabling_Support/Space_Engineering_Technology/Radio_Frequency_Systems/Open_Source_Software_Resources_for_Space_Downstream_Applications" class="badge badge-primary badge-pill">i</span>
+                    <span
+                      tooltip="Tools included in INSPIRE reference: https://inspire-reference.jrc.ec.europa.eu/tools and ESA Open Source Resources: http://www.esa.int/Enabling_Support/Space_Engineering_Technology/Radio_Frequency_Systems/Open_Source_Software_Resources_for_Space_Downstream_Applications"
+                      class="badge badge-primary badge-pill">i</span>
                     <ng-select [items]="fieldsService.allTools" name="tools" bindLabel="name" [multiple]="true"
                       [(ngModel)]="model.toolsRequired" [clearable]="false" notFoundText="Tool not found, add custom."
                       (search)="searchSelect($event, 'tool')">
@@ -451,12 +455,17 @@
                 </div>
               </div>
               <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-6">
                   <div class="form-group">
                     <label for="location">Location</label>
                     <input type="text" class="form-control" id="location" placeholder="Location"
                       [(ngModel)]="model.location" name="location" required />
                   </div>
+                </div>
+                <div class="col-md-2">
+                  <label for="yearsExperience">Years of experience</label>
+                  <input type="number" size="2" class="form-control" id="yearsExperience"
+                    [(ngModel)]="model.yearsExperience" name="yearsExperience" min="0" />
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
@@ -497,11 +506,11 @@
                     <label for="minSalary">Annual Salary Range (Min - Max)</label>
                     <div class="form-row">
                       <div class="col-md-6">
-                        <input type="number" size="10" class="form-control inline" id="minSalary"
+                        <input type="number" size="10" class="form-control" id="minSalary"
                           [(ngModel)]="model.salaryMin" name="minSalary" min="0" />
                       </div>
                       <div class="col-md-6">
-                        <input type="number" size="10" class="form-control inline" id="maxSalary"
+                        <input type="number" size="10" class="form-control" id="maxSalary"
                           [(ngModel)]="model.salaryMax" name="maxSalary" min="0" />
                       </div>
                     </div>

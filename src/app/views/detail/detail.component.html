@@ -159,15 +159,21 @@
             </div>
             <br>
             <div class="row text-left">
-              <div class="col-md-6">
+              <div class="col-md-12">
                 <b> Language(s):</b>
                 <br>
                 <button *ngFor="let lan of selectedOffer.languages" type="button" class="btn btn-pill btn-primary">
                   {{ lan.name }}
                 </button>
               </div>
+            </div>
+            <br>
+            <div class="row text-left">
               <div class="col-md-6">
-                <b> Location:</b> <br> {{ selectedOffer.location }}
+                <b> Location:</b> {{ selectedOffer.location }}
+              </div>
+              <div class="col-md-6">
+                <b> Years of experience:</b> {{ selectedOffer.yearsExperience }}
               </div>
             </div>
             <br>

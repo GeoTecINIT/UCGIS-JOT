@@ -24,7 +24,7 @@ export class NewjoComponent implements OnInit {
 
   // model = new OcupationalProfile('', '', '', '', null, 1, [], [], [], [], []);
   // tslint:disable-next-line:max-line-length
-  model = new JobOffer('', '', '', '', new OcupationalProfile('', '', '', '', '', '', [], 1, [], [], [], [], []), [], '', '', '', 0, 0, [], false, false, [], []);
+  model = new JobOffer('', '', '', '', new OcupationalProfile('', '', '', '', '', '', [], 1, [], [], [], [], []), [], '', '', '', 0, 0, [], false, false, [], [], 0);
 
   public value: string[];
   public current: string;
