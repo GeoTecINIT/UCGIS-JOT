@@ -5,14 +5,14 @@
         Job Offers
       </h1>
       <div class="text-center" [hidden]="!isAnonymous">
-        <h5>You have limited functionality because you are not logged in. <a href="#" routerLink="/login"> Login </a> to use all functionality in the tool.
+        <h5>You have limited functionality because you are not logged in. <a href="#" routerLink="/login"> Login </a> to
+          use all functionality in the tool.
         </h5>
       </div>
       <div class="card card-accent-primary">
         <div class="card-header">
           <div class="row">
-            <div class="col-sm-4 col-md-2"
-              tooltip="{{isAnonymous? 'Login to be able to add job offers' : ''}}">
+            <div class="col-sm-4 col-md-2" tooltip="{{isAnonymous? 'Login to be able to add job offers' : ''}}">
               <button type="button" class="btn btn-block btn-outline-primary" routerLink="/newjo/empty"
                 [disabled]="isAnonymous">
                 New Job Offer
@@ -80,8 +80,10 @@
             <div class="col-md-10">
               <button type="button" class="btn text-justify" routerLink="/detail/{{ jo._id }}">
                 <span>
-                  <h1 style="display: inline;" >{{ jo.occuProf.title }}</h1>
-                  <h6 style="display: inline;" class="text-level text-primary">{{ jo.orgName }}</h6>
+                  <h1 style="display: inline;">{{ jo.occuProf.title }}</h1>
+                  <a href="#" routerLink="/organizationdetails/{{ selectedOffer.orgId }}">
+                    <h6 style="display: inline;" class="text-level text-primary">{{ jo.orgName }}</h6>
+                  </a>
                   <br>
                   {{ jo.occuProf.knowledge.length }} Knowledge |
                   {{ jo.occuProf.skills.length }} Skills |

@@ -69,6 +69,14 @@
                       </div>
                     </div>
 
+                    <div class="input-group mb-3">
+                      <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Organization contact email"
+                          name="contact" required [(ngModel)]="o.contact"
+                          [disabled]="!(o.admin.indexOf(user._id) > -1)">
+                      </div>
+                    </div>
+
                   </div>
                   <div class="col-sm-6 col-md-4 text-right mt-5">
                     <button type="button" class="btn btn-outline-primary px-4 mt-3 " (click)="save(i)"

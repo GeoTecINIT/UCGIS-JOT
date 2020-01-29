@@ -15,6 +15,7 @@ import { NewjoComponent } from './views/newjo/newjo.component';
 import { AngularFireAuthGuard } from '@angular/fire/auth-guard';
 import { UserComponent } from './views/user/user.component';
 import { OrganizationComponent } from './views/organization/organization.component';
+import { OrganizationDetailsComponent } from './views/organizationdetails/organizationdetails.component';
 
 export const routes: Routes = [
   {
@@ -67,9 +68,16 @@ export const routes: Routes = [
       {
         path: 'organization',
         data: {
-          title: 'Organization Details'
+          title: 'Your Organization(s) Details'
         },
         component: OrganizationComponent
+      },
+      {
+        path: 'organizationdetails/:name',
+        data: {
+          title: 'Organization Details'
+        },
+        component: OrganizationDetailsComponent
       },
       {
         path: 'detail/:name',
@@ -103,4 +111,4 @@ export const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
