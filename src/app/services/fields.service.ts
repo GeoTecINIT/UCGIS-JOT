@@ -10,6 +10,8 @@ export interface Field { name: string; code: Number; parent: string; grandparent
 })
 export class FieldsService {
   public allfields: any;
+  public allDatasets: any;
+  public allTools: any;
   public result: any;
   constructor(
     private http: HttpClient) {
@@ -20,16 +22,29 @@ export class FieldsService {
 
     this.http.get('assets/json/fields.json').subscribe((data) => {
       this.allfields = data;
-    /* // sort by two or more keys
-      this.allfields.sort((a, b) => {
-        return this.cmp(
-          [this.cmp(a.grandparent, b.grandparent), this.cmp(a.name, b.name)],
-          [this.cmp(b.grandparent, a.grandparent), this.cmp(b.name, a.name)]
-        );
-      });
-      console.log(JSON.stringify(this.allfields));
-      */
+      /* // sort by two or more keys
+        this.allfields.sort((a, b) => {
+          return this.cmp(
+            [this.cmp(a.grandparent, b.grandparent), this.cmp(a.name, b.name)],
+            [this.cmp(b.grandparent, a.grandparent), this.cmp(b.name, a.name)]
+          );
+        });
+        console.log(JSON.stringify(this.allfields));
+        */
     });
+
+    // http://database.eohandbook.com/data/dataactivity.aspx
+    this.http.get('assets/json/datasets_eohandbook.json').subscribe((data) => {
+      this.allDatasets = data;
+    });
+
+    // https://inspire-reference.jrc.ec.europa.eu/tools
+    // tslint:disable-next-line:max-line-length
+    // http://www.esa.int/Enabling_Support/Space_Engineering_Technology/Radio_Frequency_Systems/Open_Source_Software_Resources_for_Space_Downstream_Applications
+    this.http.get('assets/json/tools.json').subscribe((data) => {
+      this.allTools = data;
+    });
+
   }
 
   // generic comparison function
