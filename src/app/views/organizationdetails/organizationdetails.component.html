@@ -1,0 +1,23 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-sm-12 col-md-12">
+      <h1 class="title">
+        Organization Details
+      </h1>
+      <div class="card card-accent-primary">
+        <div class="card-body" *ngIf="currentOrg; else loading">
+          <div class="row">
+            <div class="col-md-12 mt-3">
+              <!--  <p class="text-muted"> {{ o.name }} Details</p>-->
+              <h1> {{ currentOrg.name }} </h1>
+              <p>{{ currentOrg.description }} </p>
+              <h5> <a href="mailto:{{ currentOrg.contact }}"> {{ currentOrg.contact }} </a> </h5>
+            </div>
+          </div>
+        </div>
+        <ng-template #loading>
+          <app-loading-indicator></app-loading-indicator>
+        </ng-template>
+      </div>
+    </div>
+  </div>
