@@ -1,0 +1,661 @@
+[
+    {
+        "name": "gLAB",
+        "url": "https://gage.upc.es/gLAB/",
+        "author": "Universitat Politecnica de Catalunya (UPC)",
+        "format": "Source and Executable for Linux, Windows and macOS",
+        "license": "Apache, GPL and LGPL"
+    },
+    {
+        "name": "GNSS-SDR",
+        "url": "https://gnss-sdr.org/",
+        "author": "CTTC",
+        "format": "Source code and libs for Linux Debian, macOS. Runs on GNU Radio",
+        "license": "GPL v3"
+    },
+    {
+        "name": "GPS-SDR-SIM",
+        "url": "https://github.com/osqzss/gps-sdr-sim",
+        "author": "Takuji Ebinuma",
+        "format": "Source code",
+        "license": "MIT"
+    },
+    {
+        "name": "GNSS-SDRLIB",
+        "url": "https://github.com/taroz/GNSS-SDRLIB",
+        "author": "Taro Suzuki",
+        "format": "Source and Executable for Windows",
+        "license": "GPL v2"
+    },
+    {
+        "name": "RTKLIB",
+        "url": "http://www.rtklib.com/",
+        "author": "Tomoji Takasu",
+        "format": "Source and Executable for Windows",
+        "license": "BSD-2-Clause"
+    },
+    {
+        "name": "ARAMIS",
+        "url": "http://www.ip-solutions.jp/ionosphere_scintillation_monitor.html",
+        "author": "ip-solutions",
+        "format": "Executable in Windows",
+        "license": "Free for academic use"
+    },
+    {
+        "name": "goGPS",
+        "url": "https://github.com/goGPS-Project",
+        "author": "Geomatics Laboratory of Politecnico di Milano, Como campus (Italy)",
+        "format": "Source code for Matlab 2016a+ and Java",
+        "license": "GPL v3"
+    },
+    {
+        "name": "TEQC",
+        "url": "https://www.unavco.org/software/data-processing/teqc/teqc.html",
+        "author": "UNAVCO",
+        "format": "Executable (Windows, macOS, Linux…). Supports RINEX and BINEX formats"
+    },
+    {
+        "name": "Online Positioning User Service (OPUS)",
+        "url": "https://www.ngs.noaa.gov/OPUS/",
+        "author": "NOAA",
+        "format": "Executable online"
+    },
+    {
+        "name": "CSRS-PPP",
+        "url": "https://webapp.geod.nrcan.gc.ca/geod/tools-outils/ppp.php?locale=en",
+        "author": "Canadian Geodetic Survey (CGS)",
+        "format": "Executable online or as a desktop application. Supports RINEX files",
+        "license": "Open Government Licence - Canada"
+    },
+    {
+        "name": "JAG3D (Java Applied Geodesy 3D)",
+        "url": "https://software.applied-geodesy.org/en/",
+        "author": "Steinbeis Transfer Centre Applied Geodesy",
+        "format": "Java",
+        "license": "GPL v3"
+    },
+    {
+        "name": "Android Raw GNSS Measurement",
+        "url": "https://developer.android.com/guide/topics/sensors/gnss",
+        "author": "Google",
+        "format": "GnssLogger source code in Matlab, but you don’t need Matlab to use it",
+        "license": "Apache v2.0"
+    },
+    {
+        "name": "GPSTk",
+        "url": "https://github.com/SGL-UT/GPSTk",
+        "author": "Applied Research Laboratories at the University of Texas at Austin",
+        "format": "Source and Executable (Unix, Windows, macOS)",
+        "license": "LGPL v3"
+    },
+    {
+        "name": "BKG Ntrip Software",
+        "url": "https://igs.bkg.bund.de/ntrip/download",
+        "author": "Federal Agency for Cartography and Geodesy (BKG)",
+        "format": "Source and Executable for Linux, Solaris, Windows and macOS",
+        "license": "GPU"
+    },
+    {
+        "name": "OpenGTS",
+        "url": "http://opengts.sourceforge.net/",
+        "author": "GeoTelematic Solutions, Inc.",
+        "format": "Java",
+        "license": "Apache v2.0"
+    },
+    {
+        "name": "Viking GPS data editor and analyzer",
+        "url": "https://sourceforge.net/projects/viking/",
+        "author": "Various authors",
+        "format": "Executable (written mostly in C)",
+        "license": "GPL v2"
+    },
+    {
+        "name": "Open Street Map",
+        "url": "https://wiki.openstreetmap.org/wiki/Main_Page",
+        "author": "OpenStreetMap Community",
+        "format": "Data online",
+        "license": "ODbL"
+    },
+    {
+        "name": "GeoServer",
+        "url": "http://geoserver.org/",
+        "author": "Open Source Geospatial Foundation",
+        "format": "Supports WFS, WMS and WCS standards",
+        "license": "GPL v2"
+    },
+    {
+        "name": "Orfeo ToolBox (OTB)",
+        "url": "https://www.orfeo-toolbox.org/",
+        "author": "CNES",
+        "format": "Source and Executable (Linux, Windows, macOS)",
+        "license": "Apache v2.0"
+    },
+    {
+        "name": "PolSARpro",
+        "url": "https://earth.esa.int/web/polsarpro",
+        "author": "ESA / IETR",
+        "format": "Executable for Windows and Linux",
+        "license": "GPL v2"
+    },
+    {
+        "name": "SNAP and Sentinel Toolboxes",
+        "url": "http://step.esa.int/main/download/",
+        "author": "ESA Science Toolbox Exploitation Platform (STEP)",
+        "format": "Source and Executable (Windows, macOS, Unix)",
+        "license": "GPL v3"
+    },
+    {
+        "name": "DIMITRI - Database for Imaging Multi-spectral Instruments and Tools for Radiometric Intercomparison",
+        "url": "https://dimitri.argans.co.uk/",
+        "author": "ESA, ARGANS, Magellium",
+        "format": "Source code, compatible with Linux, Windows and macOS",
+        "license": "SLA"
+    },
+    {
+        "name": "ADAM API Toolkit",
+        "url": "https://adam.noveltis.fr/",
+        "author": "Noveltis",
+        "format": "Executable online",
+        "license": "Free online service after registration"
+    },
+    {
+        "name": "TauDEM - Terrain Analysis Using Digital Elevation Models",
+        "url": "http://hydrology.usu.edu/taudem/taudem5/index.html",
+        "author": "Utah State University, USA",
+        "format": "Source code, command line executable and ArcGIS toolbox GUI",
+        "license": "GPL v3"
+    },
+    {
+        "name": "GRASS GIS - Geographic Resources Analysis Support System",
+        "url": "https://grass.osgeo.org/",
+        "author": "GRASS GIS developers community",
+        "format": "Stand-alone application or backend for other software packages",
+        "license": "GPL v2"
+    },
+    {
+        "name": "SAGA - System for automated Geoscientific Analyses",
+        "url": "http://www.saga-gis.org/en/index.html",
+        "author": "University of Hamburg, Germany",
+        "format": "Coded in C++. Source code and GUI executable for Windows and Linux",
+        "license": "GPL v2"
+    },
+    {
+        "name": "Whitebox GAT - Geospatial Analysis Tools",
+        "url": "https://jblindsay.github.io/ghrg/Whitebox/index.html",
+        "author": "University of Guelph, Canada",
+        "format": "Executable (Windows, Linux, macOS)",
+        "license": "GPL v3"
+    },
+    {
+        "name": "MACCS/MAJA",
+        "url": "http://www.cesbio.ups-tlse.fr/multitemp/?p=6203",
+        "author": "CNES and CESBIO",
+        "format": "Language: C++, Python and Cmake. OS:Linux RedHat 6+, CENTOS 6+ Ubuntu 12.04+",
+        "license": "CNES"
+    },
+    {
+        "name": "Sen2Agri system",
+        "url": "http://www.esa-sen2agri.org/operational-system/system-download/",
+        "author": "ESA",
+        "format": "Linux",
+        "license": "GPL v3"
+    },
+    {
+        "name": "Open Layers",
+        "url": "https://openlayers.org/",
+        "author": "Open Layers",
+        "format": "API and codes",
+        "license": "BSD-2-Clause"
+    },
+    {
+        "name": "GeoTrellis",
+        "url": "https://geotrellis.io/",
+        "author": "LocationTech, Azavea",
+        "format": "Library for Linux",
+        "license": "Apache v2.0"
+    },
+    {
+        "name": "GeoMesa",
+        "url": "https://www.geomesa.org/",
+        "author": "LocationTech, CCRi",
+        "format": "Spatio-temporal index for Linux",
+        "license": "Apache v2.0"
+    },
+    {
+        "name": "gvSIG Desktop",
+        "url": "http://www.gvsig.com/en",
+        "author": "gvSIG Association",
+        "format": "Platforms: Linux / Unix, macOSX, Windows, Android. Languages: Java, Python, Groovy, Renjin, Scala",
+        "license": "GPL"
+    },
+    {
+        "name": "QGIS",
+        "url": "https://qgis.org/en/site/",
+        "author": "QGIS Community",
+        "format": "Linux, Unix, macOS and Windows",
+        "license": "GPL"
+    },
+    {
+        "name": "Get3Di",
+        "url": "https://get3di.com/Account/Login",
+        "author": "GeoCue Group",
+        "format": "Executable online",
+        "license": "Free up to 100 MB/month"
+    },
+    {
+        "name": "AHN-viewer",
+        "url": "https://ahn.arcgisonline.nl/ahnviewer/",
+        "author": "ArcGIS",
+        "format": "Executable online",
+        "license": "Free online service"
+    },
+    {
+        "name": "ESA Online Dissemination",
+        "url": "https://esar-ds.eo.esa.int/oads/access/",
+        "author": "ESA",
+        "format": "Data online"
+    },
+    {
+        "name": "GeoNames",
+        "url": "https://www.geonames.org/",
+        "author": "GeoNames",
+        "format": "Webservice and database exports",
+        "license": "CC BY 4.0"
+    },
+    {
+        "name": "HydroSheds",
+        "url": "https://hydrosheds.cr.usgs.gov/overview.php",
+        "author": "WWF",
+        "format": "Vector and raster data",
+        "license": "HydroSHEDS"
+    },
+    {
+        "name": "SRTM Data",
+        "url": "http://srtm.csi.cgiar.org/srtmdata/",
+        "author": "CGIAR Consortium for Spatial Information",
+        "format": "ACII and GeoTIFF"
+    },
+    {
+        "name": "GSAC",
+        "url": "https://www.unavco.org/software/data-management/gsac/gsac.html",
+        "author": "UNAVCO",
+        "format": "Java. For Linux and Unix"
+    },
+    {
+        "name": "Network Simulator 3 (ns-3)",
+        "url": "https://www.nsnam.org/",
+        "author": "ns-3 project",
+        "format": "Source code",
+        "license": "GPL v2"
+    },
+    {
+        "name": "Satellite Network Simulator (SNS3)",
+        "url": "http://www.sns3.org/",
+        "author": "Jani Puttonen, Janne Kurjenniemi (Magister Solutions), ESA, CNES",
+        "format": "Source code",
+        "license": "GPL v3"
+    },
+    {
+        "name": "Leandvb",
+        "url": "http://www.pabr.org/radio/leandvb/leandvb.en.html",
+        "author": "pabr@pabr.org",
+        "format": "Executable code",
+        "license": "GPL v3"
+    },
+    {
+        "name": "ROHC library",
+        "url": "https://rohc-lib.org/",
+        "author": "CNES, TAS, Viveris Technologies",
+        "format": "Source code for Linux, Windows and macOS",
+        "license": "LGPL v2.1+"
+    },
+    {
+        "name": "gr-dvbs2",
+        "url": "https://github.com/drmpeg/gr-dvbs2",
+        "author": "Ron Economos",
+        "format": "Source code, also part of GNU Radio",
+        "license": "GPL v3"
+    },
+    {
+        "name": "GNU Radio",
+        "url": "https://www.gnuradio.org/",
+        "author": "GNU Project",
+        "format": "Source code for Linux, macOS",
+        "license": "GPL v3"
+    },
+    {
+        "name": "MongoDB",
+        "url": "https://www.mongodb.com/",
+        "author": "MongoDB Inc.",
+        "format": "Source and Executable (Windows, Linux, macOS, Solaris, FreeBSD)",
+        "license": "Server Side Public License"
+    },
+    {
+        "name": "Apache Hadoop",
+        "url": "https://hadoop.apache.org/",
+        "author": "Apache Software Foundation",
+        "format": "Source code download",
+        "license": "Apache v2.0"
+    },
+    {
+        "name": "Apache Storm",
+        "url": "http://storm.apache.org/",
+        "author": "Apache Software Foundation",
+        "format": "Implemented in Java, can be used with any programming language",
+        "license": "Apache v2.0"
+    },
+    {
+        "name": "Apache Spark",
+        "url": "https://spark.apache.org/",
+        "author": "Apache Software Foundation",
+        "format": "Standalone cluster mode, on EC2, on Hadoop YARN, on Mesos, or on Kubernetes.",
+        "license": "Apache v2.0"
+    },
+    {
+        "name": "Tensor Flow",
+        "url": "https://www.tensorflow.org/",
+        "author": "Google",
+        "format": "Collection of workflows",
+        "license": "Apache v2.0"
+    },
+    {
+        "name": "Docker Engine",
+        "url": "https://www.docker.com/",
+        "author": "Docker",
+        "format": "Executable for Linux, Windows, macOS",
+        "license": "Apache v2.0"
+    },
+    {
+        "name": "OpenStack",
+        "url": "https://www.openstack.org/",
+        "author": "OpenStack",
+        "format": "Executable",
+        "license": "Apache v2.0"
+    },
+    {
+        "name": "Rasdaman",
+        "url": "http://www.rasdaman.com/",
+        "author": "Supervised by Jacobs University, in incubation by the OSGeo fundation",
+        "format": "Download of packages that work on distributions with gcc 4.8+, Java 7+",
+        "license": "GPL v3"
+    },
+    {
+        "name": "SciDB Community Edition",
+        "url": "https://www.paradigm4.com/technology/",
+        "author": "Paradigm4",
+        "format": "Software that can run on existing hardware or in the cloud",
+        "license": "GPL v3"
+    },
+    {
+        "name": "Theano",
+        "url": "https://github.com/Theano/",
+        "author": "Several authors",
+        "format": "Python library",
+        "license": "BSD-3-Clause"
+    },
+    {
+        "name": "Deeplearning 4j",
+        "url": "https://deeplearning4j.org/",
+        "author": "Eclipse Deeplearning4j Development Team",
+        "format": "Libraries",
+        "license": "Apache v2.0"
+    },
+    {
+        "name": "Google Earth Engine",
+        "url": "https://earthengine.google.com/",
+        "author": "Google",
+        "format": "The Earth Engine (EE) API is available in Python and JavaScript.",
+        "license": "Google Earth Engine License"
+    },
+    {
+        "name": "Microsoft CNTK",
+        "url": "https://docs.microsoft.com/en-us/cognitive-toolkit/",
+        "author": "Microsoft",
+        "format": "Toolkit compatible with Linux and Windows",
+        "license": "MIT"
+    },
+    {
+        "name": "Keras",
+        "url": "https://keras.io/",
+        "author": "François Chollet and various",
+        "format": "Python libraries",
+        "license": "MIT"
+    },
+    {
+        "name": "Scikit-learn",
+        "url": "https://scikit-learn.org/stable/",
+        "author": "David Cournapeau and various",
+        "format": "Python libraries for Linux, macOS and Windows",
+        "license": "BSD-3-Clause"
+    },
+    {
+        "name": "tslearn",
+        "url": "https://tslearn.readthedocs.io/en/latest/",
+        "author": "Romain Tavenard",
+        "format": "Python package",
+        "license": "BSD-3-Clause"
+    },
+    {
+        "name": "Boto3",
+        "url": "https://github.com/boto/boto3",
+        "author": "Amazon Web Services (AWS)",
+        "format": "Python libraries",
+        "license": "Apache v2.0"
+    },
+    {
+        "name": "PyTorch",
+        "url": "https://pytorch.org/",
+        "author": "Facebook AI research group",
+        "format": "Python libraries for Linux, macOS and Windows",
+        "license": "BSD-3-Clause"
+    },
+    {
+        "name": "OpenCV",
+        "url": "https://opencv.org/",
+        "author": "Intel",
+        "format": "C++ library for Windows, Linux, macOS, FreeBSD, NetBSD, OpenBSD...",
+        "license": "BSD-3-Clause"
+    },
+    {
+        "name": "pandas",
+        "url": "https://pandas.pydata.org/",
+        "author": "Wes McKinney and various",
+        "format": "Python library",
+        "license": "BSD-3-Clause"
+    },
+    {
+        "name": "NVIDIA DIGITS",
+        "url": "https://developer.nvidia.com/digits",
+        "author": "NVIDIA",
+        "format": "Executable",
+        "license": "Free after joining the NVIDIA Developer Program"
+    },
+    {
+        "name": "XGBoost",
+        "url": "https://github.com/dmlc/xgboost",
+        "author": "XGBoost community",
+        "format": "Library, for Python, R, Java, Scala, C++ and more. Runs on single machine, Hadoop, Spark, Flink and DataFlow.",
+        "license": "Apache v2.0"
+    },
+    {
+        "name": "GDAL",
+        "url": "https://gdal.org/",
+        "author": "GDAL community",
+        "format": "Source and binaries for Windows, Debian and containers",
+        "license": "MIT"
+    },
+    {
+        "name": "Open Data Cube",
+        "url": "https://github.com/opendatacube/datacube-core",
+        "author": "Open Data Cube",
+        "format": "Collection of software base on Python library",
+        "license": "Apache v2.0"
+    },
+    {
+        "name": "R Project",
+        "url": "https://www.r-project.org/",
+        "author": "R foundation",
+        "format": "It compiles and runs on a wide variety of UNIX platforms, Windows and macOS.",
+        "license": "GPL v2"
+    },
+    {
+        "name": "Project Jupyter",
+        "url": "https://jupyter.org/",
+        "author": "Jupyter Community",
+        "format": "Web application, executable online and for downloading.",
+        "license": "BSD-3-Clause"
+    },
+    {
+        "name": "Apache NiFi",
+        "url": "https://nifi.apache.org/",
+        "author": "Apache Software Foundation",
+        "format": "Executable",
+        "license": "Apache v2.0"
+    },
+    {
+        "name": "Apache Kafka",
+        "url": "https://kafka.apache.org/",
+        "author": "Apache Software Foundation",
+        "format": "Executable",
+        "license": "Apache v2.0"
+    },
+    {
+        "name": "Kubernetes",
+        "url": "https://kubernetes.io/",
+        "author": "Kubernetes",
+        "format": "Container",
+        "license": "CC BY 4.0"
+    },
+    {
+        "name": "NodeJS",
+        "url": "https://nodejs.org/en/",
+        "author": "Node.js is a trademark of Joyent, Inc",
+        "format": "For Windows, macOS and Linux.",
+        "license": "MIT"
+    },
+    {
+        "name": "Leaflet",
+        "url": "https://leafletjs.com/",
+        "author": "Vladimir Agafonkin and others",
+        "format": "JavaScript library",
+        "license": "CC BY 4.0"
+    },
+    {
+        "name": "Gapminder Tools Offline",
+        "url": "https://www.gapminder.org/downloads/",
+        "author": "Gapminder",
+        "format": "For Windows, macOS and Linux",
+        "license": "CC BY 4.0"
+    },
+    {
+        "name": "Elasticsearch and Kibana",
+        "url": "https://opendistro.github.io/for-elasticsearch/",
+        "author": "Amazon Web Services (AWS)",
+        "format": "Docker images, RPM files, and Debian files",
+        "license": "Apache v2.0"
+    },
+    {
+        "name": "OGC",
+        "url": "http://www.opengeospatial.org/",
+        "author": "OGC members",
+        "format": "Standards",
+        "license": "Open standards"
+    },
+    {
+        "name": "GeoJSON",
+        "url": "https://geojson.org/",
+        "author": "Internet Engineering Task Force (IETF), in conjunction with the original specification authors.",
+        "format": "Format",
+        "license": "Open standards"
+    },
+    {
+        "name": "European Space Software Repository",
+        "url": "https://essr.esa.int/",
+        "author": "Multiple",
+        "format": "ESA informational web portal created to promote reuse of Software - including Open Source Software (OSS) - and to provide all parties involved in the European Space software development (in particular SMEs) with access to results of previous investments. Registration available to ESA member states."
+    },
+    {
+        "name": "ACT Open Source projects & tools",
+        "url": "http://www.esa.int/gsp/ACT/resources/software.html",
+        "author": "Multiple",
+        "format": "ESA Advanced Concepts Team (ACT) resources for Open Sources projects and tools. Together with the introduction of the github and the gitlab dedicated channels for the European Space Agency and the of specific programmes such as SOCIS (the ESA summer of code in space), the ACT, over the years, developed and is now maintaining a number of open source projects that are put at the service of a wider community."
+    },
+    {
+        "name": "CNES Software Catalogue",
+        "url": "https://logiciels.cnes.fr/en",
+        "author": "Multiple",
+        "format": "The \"Centre National d'Études Spatiales\" has produced various software for the space projects. This software covers a broad range of topics, from normalization to space dynamics and simulation tools. Some were developed to support CNES internal needs and are now available to the public."
+    },
+    {
+        "name": "RTL-SDR Software",
+        "url": "https://www.rtl-sdr.com/big-list-rtl-sdr-supported-software/",
+        "author": "Signal processing",
+        "format": "RTL-SDR is a USB dongle based on the RTL2832U chipset, for which many SDR software have been developped for different applications (not only satellite)"
+    },
+    {
+        "name": "ION GNSS SDR Standard",
+        "url": "https://github.com/IonMetadataWorkingGroup/GNSS-Metadata-Standard/tree/master/Specifications/documentation",
+        "author": "GNSS",
+        "format": "The GNSS SDR Metadata Standard defines parameters and schema to express the contents of SDR sample data files. The standard is designed to promote the interoperability of GNSS SDR data collection systems and processors."
+    },
+    {
+        "name": "NOAA collection of GPS software",
+        "url": "https://www.ngs.noaa.gov/gps-toolbox/",
+        "author": "GNSS",
+        "format": "Site is running since 1999. The main purpose of this site is to provide a means for distributing the source code and algorithms discussed in the GPS Toolbox column."
+    },
+    {
+        "name": "UNAVCO software",
+        "url": "https://www.unavco.org/software/software.html",
+        "author": "GNSS",
+        "format": "Web-based data visualization and mapping tools provide users with the ability to view post–processed data while web-based geodetic utilities provide ancillary information."
+    },
+    {
+        "name": "Terrasigna Pathfinder",
+        "url": "http://pathfinder.terrasigna.com/oss/",
+        "author": "Earth observation",
+        "format": "References more than 350 open source software for processing of Earth Observation data, with categorisation and graph representation"
+    },
+    {
+        "name": "ESA Earth online portal",
+        "url": "https://earth.esa.int/web/guest/software-tools",
+        "author": "Earth observation",
+        "format": "List of software tools supported by ESA for Earth Observation"
+    },
+    {
+        "name": "ESA STEP",
+        "url": "http://step.esa.int/main/",
+        "author": "Earth observation",
+        "format": "ESA is developing free open source toolboxes for the scientific exploitation of Earth Observation missions under the the Scientific Exploitation of Operational Missions (SEOM) programme element. STEP is the ESA community platform for accessing the software and its documentation, communicating with the developers, dialoguing within the science community, promoting results and achievements as well as providing tutorials and material for training scientists using the Toolboxes."
+    },
+    {
+        "name": "Sentinel Hub",
+        "url": "https://www.sentinel-hub.com/",
+        "author": "Earth observation",
+        "format": "Sentinel Hub is operated by Sinergise - a GIS IT company with more than 10 years of experience in working with spatial data.\nDifferent applications are available online.\nThe satellite imagery distribution service is based on Sinergise's cloud GIS platform - Geopedia - web based spatial management solution, which is being used by more than one million users annualy and is therefore perfectly suitable for large scale spatial deployments."
+    },
+    {
+        "name": "OSGEO",
+        "url": "https://www.osgeo.org/about/",
+        "author": "Earth observation",
+        "format": "The Open Source Geospatial Foundation (OSGeo) is a not-for-profit organization whose mission is to foster global adoption of open geospatial technology by being an inclusive software foundation devoted to an open philosophy and participatory community driven development."
+    },
+    {
+        "name": "OpenDEM",
+        "url": "https://www.opendem.info/link_dem.html",
+        "author": "Earth observation",
+        "format": "List of free Digital Elevation Models. This project will focus on free high resolution datasets with a spatial resolution of 30 meters and below on county/state scale."
+    },
+    {
+        "name": "On-Line Geodesy Resources",
+        "url": "http://www3.sympatico.ca/craymer/geodesy/gps.html",
+        "author": "Earth observation",
+        "format": "A personal collection of geodesy and related resources on the Web. Created by Mike Craymer."
+    },
+    {
+        "name": "CGRAN",
+        "url": "http://www.cgran.org/",
+        "author": "Satellite communications",
+        "format": "The Comprehensive GNU Radio Archive Network (CGRAN) is a free open source repository for 3rd party GNU Radio applications (a.k.a Out Of Tree Modules) that are not officially supported by the GNU Radio project. Licensed under CC BY 4.0. For Linux OS."
+    }
+]

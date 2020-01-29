@@ -26,7 +26,7 @@
                 <div class="cols-xs-2 col-md-3 no-padding"
                   tooltip="{{isAnonymous? 'Login to be able to edit' : selectedOffer.userId==afAuth.auth.currentUser?.uid?  'Edit' : 'You can edit only your own job offers'}}">
                   <button type="button" class="btn btn-block btn-link" routerLink="/newjo/copy/{{ selectedOffer._id }}"
-                    [disabled]= "isAnonymous || (currentUser?.organizations?.indexOf(selectedOffer.orgId) == -1)">
+                    [disabled]="isAnonymous || (currentUser?.organizations?.indexOf(selectedOffer.orgId) == -1)">
                     <i class="fa fa-edit fa-lg"></i>
                   </button>
                 </div>
@@ -45,13 +45,13 @@
           <ng-container *ngIf="selectedOffer; else loading">
             <div class="row">
               <div class="col-md-6">
-                <h1 style="display: inline;" >{{ selectedOffer.occuProf.title }}</h1>
+                <h1 style="display: inline;">{{ selectedOffer.occuProf.title }}</h1>
                 <h6 style="display: inline;" class="text-level text-primary">{{ selectedOffer.orgName }}</h6>
               </div>
               <div class="col-md-4 offset-md-1">
                 <h5 *ngFor="let f of selectedOffer.occuProf.fields">
                   {{ f.name }} ({{ f.grandparent }})
-                 </h5>
+                </h5>
               </div>
               <div class="col-md-1">
                 <button type="button" class="btn btn-default btn-secondary"
@@ -139,6 +139,23 @@
                   class="badge badge-primary badge-pill">i</span>
               </div>
             </div>
+            <div class="row text-left">
+              <div class="col-md-6">
+                <b> Datasets required:</b>
+                <br>
+                <button *ngFor="let data of selectedOffer.dataRequired" type="button" class="btn btn-pill btn-primary">
+                  {{ data.name }}
+                </button>
+              </div>
+              <div class="col-md-6">
+                <b> Tools required:</b>
+                <br>
+                <button *ngFor="let tool of selectedOffer.toolsRequired" type="button" class="btn btn-pill btn-primary">
+                  {{ tool.name }}
+                </button>
+              </div>
+            </div>
+            <br>
             <div class="row text-left">
               <div class="col-md-6">
                 <b> Language(s):</b>

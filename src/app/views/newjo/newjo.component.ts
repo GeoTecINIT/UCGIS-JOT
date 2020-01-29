@@ -24,7 +24,7 @@ export class NewjoComponent implements OnInit {
 
   // model = new OcupationalProfile('', '', '', '', null, 1, [], [], [], [], []);
   // tslint:disable-next-line:max-line-length
-  model = new JobOffer('', '', '', '', new OcupationalProfile('', '', '', '', '', '', [], 1, [], [], [], [], []), [], '', '', '', 0, 0, [], false, false);
+  model = new JobOffer('', '', '', '', new OcupationalProfile('', '', '', '', '', '', [], 1, [], [], [], [], []), [], '', '', '', 0, 0, [], false, false, [], []);
 
   public value: string[];
   public current: string;
@@ -100,6 +100,9 @@ export class NewjoComponent implements OnInit {
   userOrgs: Organization[] = [];
   saveOrg: Organization;
   currentUser: User;
+
+  notFoundTool = '';
+  notFoundData = '';
 
   typeOfContract = ['Internship', 'Scholarship', 'Temporal', 'Fixed'];
 
@@ -203,6 +206,37 @@ export class NewjoComponent implements OnInit {
         this.model.occuProf.fields.splice(index, 1);
       }
     });
+  }
+
+  removeDataTool(remove: any, fromArray: any[]) {
+    fromArray.forEach((item, index) => {
+      if (item === remove) {
+        fromArray.splice(index, 1);
+      }
+    });
+  }
+
+  searchSelect(event, model) {
+    // If no search results, add new custom item
+    if (event.items.length === 0) {
+      if (model === 'tool') {
+        this.notFoundTool = event.term;
+      } else if (model === 'data') {
+        this.notFoundData = event.term;
+      }
+    }
+  }
+
+  addCustomData() {
+    this.model.dataRequired = [...this.model.dataRequired , { name: this.notFoundData, custom: true }];
+    this.notFoundTool = '';
+    this.notFoundData = '';
+  }
+
+  addCustomTool() {
+    this.model.toolsRequired = [...this.model.toolsRequired , { name: this.notFoundTool, custom: true }];
+    this.notFoundTool = '';
+    this.notFoundData = '';
   }
 
   removeSkillsAssociated() {

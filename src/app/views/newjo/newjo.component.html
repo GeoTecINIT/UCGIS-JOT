@@ -378,6 +378,60 @@
               <div class="row">
                 <div class="col-md-3">
                   <div class="form-group">
+                    <label for="field">Datasets Required </label>
+                    <span tooltip="Datasets included in EO Handbook http://database.eohandbook.com/data/dataactivity.aspx" class="badge badge-primary badge-pill">i</span>
+                    <ng-select [items]="fieldsService.allDatasets" name="datasets" bindLabel="name" [multiple]="true"
+                      [(ngModel)]="model.dataRequired" [clearable]="false" notFoundText="Dataset not found, add custom."
+                      (search)="searchSelect($event, 'data')">
+                      <ng-template ng-optgroup-tmp let-item="item">
+                        {{item.name || 'Unnamed group'}}
+                      </ng-template>
+                    </ng-select>
+                  </div>
+                </div>
+                <div *ngIf="notFoundData != ''" class="col-md-3">
+                  <button type="button" class="btn btn-primary" (click)="addCustomData()">
+                    Add custom dataset
+                  </button>
+                </div>
+                <div [ngClass]="{'col-md-6': notFoundData != '', 'col-md-6': notFoundData == ''}">
+                  <button *ngFor="let da of model.dataRequired" type="button" class="btn btn-pill btn-primary"
+                    (click)="removeDataTool(da, model.dataRequired)">
+                    <i class="fa fa-close"></i> {{ da.name }}
+                  </button>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label for="field">Tools Required</label>
+                    <span tooltip="Tools included in INSPIRE reference: https://inspire-reference.jrc.ec.europa.eu/tools and ESA Open Source Resources: http://www.esa.int/Enabling_Support/Space_Engineering_Technology/Radio_Frequency_Systems/Open_Source_Software_Resources_for_Space_Downstream_Applications" class="badge badge-primary badge-pill">i</span>
+                    <ng-select [items]="fieldsService.allTools" name="tools" bindLabel="name" [multiple]="true"
+                      [(ngModel)]="model.toolsRequired" [clearable]="false" notFoundText="Tool not found, add custom."
+                      (search)="searchSelect($event, 'tool')">
+                      <ng-template ng-optgroup-tmp let-item="item">
+                        {{item.name || 'Unnamed group'}}
+                      </ng-template>
+                    </ng-select>
+                  </div>
+                </div>
+                <div *ngIf="notFoundTool != ''" class="col-md-3">
+                  <button type="button" class="btn btn-primary" (click)="addCustomTool()">
+                    Add custom tool
+                  </button>
+                </div>
+                <div [ngClass]="{'col-md-6': notFoundTool != '', 'col-md-6': notFoundTool == ''}">
+                  <button *ngFor="let to of model.toolsRequired" type="button" class="btn btn-pill btn-primary"
+                    (click)="removeDataTool(to, model.toolsRequired)">
+                    <i class="fa fa-close"></i> {{ to.name }}
+                  </button>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="form-group">
                     <label for="field">Language</label>
                     <span tooltip="List of languages in UNICODE LOCALE DATA MARKUP LANGUAGE (LDML)"
                       class="badge badge-primary badge-pill">i</span>

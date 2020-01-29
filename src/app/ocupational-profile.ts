@@ -46,7 +46,9 @@ export class JobOffer extends Object {
     public salaryMax: number,
     public additionalQuestions: string[],
     public motivationLetter: boolean,
-    public isPublic: boolean = false
+    public isPublic: boolean = false,
+    public dataRequired: any[],
+    public toolsRequired: any[]
   ) {
     super();
   }
