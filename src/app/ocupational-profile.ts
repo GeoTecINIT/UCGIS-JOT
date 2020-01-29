@@ -48,7 +48,8 @@ export class JobOffer extends Object {
     public motivationLetter: boolean,
     public isPublic: boolean = false,
     public dataRequired: any[],
-    public toolsRequired: any[]
+    public toolsRequired: any[],
+    public yearsExperience: number
   ) {
     super();
   }
