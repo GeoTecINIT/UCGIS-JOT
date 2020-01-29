@@ -44,7 +44,6 @@ export class FieldsService {
     this.http.get('assets/json/tools.json').subscribe((data) => {
       this.allTools = data;
     });
-
   }
 
   // generic comparison function

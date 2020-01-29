@@ -226,14 +226,12 @@
         "url": "http://www.gvsig.com/en",
         "author": "gvSIG Association",
         "format": "Platforms: Linux / Unix, macOSX, Windows, Android. Languages: Java, Python, Groovy, Renjin, Scala",
-        "license": "GPL"
-    },
-    {
-        "name": "QGIS",
-        "url": "https://qgis.org/en/site/",
-        "author": "QGIS Community",
-        "format": "Linux, Unix, macOS and Windows",
-        "license": "GPL"
+        "pluginof": "",
+        "scope": "GIS",
+        "platform": "Desktop",
+        "language": "Java",
+        "lictype": "Open Source",
+        "license": "GNU GPL"
     },
     {
         "name": "Get3Di",
@@ -324,13 +322,6 @@
         "license": "GPL v3"
     },
     {
-        "name": "MongoDB",
-        "url": "https://www.mongodb.com/",
-        "author": "MongoDB Inc.",
-        "format": "Source and Executable (Windows, Linux, macOS, Solaris, FreeBSD)",
-        "license": "Server Side Public License"
-    },
-    {
         "name": "Apache Hadoop",
         "url": "https://hadoop.apache.org/",
         "author": "Apache Software Foundation",
@@ -377,7 +368,12 @@
         "url": "http://www.rasdaman.com/",
         "author": "Supervised by Jacobs University, in incubation by the OSGeo fundation",
         "format": "Download of packages that work on distributions with gcc 4.8+, Java 7+",
-        "license": "GPL v3"
+        "license": "GPL v3",
+        "pluginof": "",
+        "scope": "Data Stores, Web Servers",
+        "platform": "Server",
+        "language": "",
+        "lictype": "Open Source"
     },
     {
         "name": "SciDB Community Edition",
@@ -492,13 +488,6 @@
         "license": "Apache v2.0"
     },
     {
-        "name": "R Project",
-        "url": "https://www.r-project.org/",
-        "author": "R foundation",
-        "format": "It compiles and runs on a wide variety of UNIX platforms, Windows and macOS.",
-        "license": "GPL v2"
-    },
-    {
         "name": "Project Jupyter",
         "url": "https://jupyter.org/",
         "author": "Jupyter Community",
@@ -532,13 +521,6 @@
         "author": "Node.js is a trademark of Joyent, Inc",
         "format": "For Windows, macOS and Linux.",
         "license": "MIT"
-    },
-    {
-        "name": "Leaflet",
-        "url": "https://leafletjs.com/",
-        "author": "Vladimir Agafonkin and others",
-        "format": "JavaScript library",
-        "license": "CC BY 4.0"
     },
     {
         "name": "Gapminder Tools Offline",
@@ -1489,16 +1471,6 @@
         "license": "GNU GPLv2"
     },
     {
-        "name": "gvSIG Desktop",
-        "pluginof": "",
-        "url": "http://www.gvsig.com/es/productos/gvsig-desktop",
-        "scope": "GIS",
-        "platform": "Desktop",
-        "language": "Java",
-        "lictype": "Open Source",
-        "license": "GNU GPL"
-    },
-    {
         "name": "gvSIG Mini",
         "pluginof": "",
         "url": "https://confluence.prodevelop.es/display/GVMN/Download",
@@ -1776,7 +1748,9 @@
         "platform": "Server",
         "language": "JavaScript",
         "lictype": "Open Source",
-        "license": ""
+        "author": "Vladimir Agafonkin and others",
+        "format": "JavaScript library",
+        "license": "CC BY 4.0"
     },
     {
         "name": "libLAS - LiDAR Data Access",
@@ -1926,7 +1900,9 @@
         "platform": "Server",
         "language": "C++",
         "lictype": "Open Source",
-        "license": "AGPL3"
+        "license": "AGPL3",
+        "author": "MongoDB Inc.",
+        "format": "Source and Executable (Windows, Linux, macOS, Solaris, FreeBSD)"
     },
     {
         "name": "MySQL Spatial",
@@ -2226,7 +2202,9 @@
         "platform": "Desktop",
         "language": "C++, Python",
         "lictype": "Open Source",
-        "license": "GNU GPL"
+        "license": "GNU GPL",
+        "author": "QGIS Community",
+        "format": "Linux, Unix, macOS and Windows"
     },
     {
         "name": "QGIS for Android",
@@ -2316,17 +2294,9 @@
         "platform": "Desktop",
         "language": "C, C++",
         "lictype": "Open Source",
-        "license": "GNU GPL"
-    },
-    {
-        "name": "Rasdaman",
-        "pluginof": "",
-        "url": "http://rasdaman.com/",
-        "scope": "Data Stores, Web Servers",
-        "platform": "Server",
-        "language": "",
-        "lictype": "Open Source",
-        "license": "LGPL"
+        "license": "GNU GPL",
+        "author": "R foundation",
+        "format": "It compiles and runs on a wide variety of UNIX platforms, Windows and macOS."
     },
     {
         "name": "Re3gistry",
