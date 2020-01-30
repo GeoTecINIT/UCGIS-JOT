@@ -66,8 +66,20 @@ export class PopupComponent implements OnInit {
     if (this.selectedJobOffer.occuProf.title != null) {
       const titleLines = doc.setFontSize(38).splitTextToSize(this.selectedJobOffer.occuProf.title, 150);
       doc.text(30, currentLinePoint, titleLines);
+      // tslint:disable-next-line:max-line-length
+      doc.link(15, currentLinePoint - 5, 600, currentLinePoint, { url: 'https://eo4geo-jot.web.app/' });
       currentLinePoint = currentLinePoint + (15 * titleLines.length);
     }
+
+    if (this.selectedJobOffer.orgName != null) {
+      doc.setFontSize(12).setTextColor('#1a80b6').setFontType('bold'); // headline
+      doc.text(30, currentLinePoint, this.selectedJobOffer.orgName);
+      // draw a line
+      // const textWidth = doc.getTextWidth(this.selectedJobOffer.orgName);
+      // doc.line(30, currentLinePoint, textWidth, currentLinePoint);
+      currentLinePoint = currentLinePoint + 8;
+    }
+
     doc.setFontSize(12).setTextColor('#1a80b6').setFontType('bold'); // headline
     doc.text(30, currentLinePoint, 'EQF' + this.selectedJobOffer.occuProf.eqf);
     currentLinePoint = currentLinePoint + 5;
@@ -88,7 +100,7 @@ export class PopupComponent implements OnInit {
     // const d = new Date();
     // doc.text(90, 90, d.toLocaleDateString('es-ES'));
 
-    if (this.selectedJobOffer.occuProf.knowledge.length > 0) {
+    if (this.selectedJobOffer.occuProf.knowledge && this.selectedJobOffer.occuProf.knowledge.length > 0) {
       doc.setFontSize(12).setTextColor('#1a80b6').setFontType('bold'); // headline
       doc.text(30, currentLinePoint, 'Knowledge required');
       currentLinePoint = currentLinePoint + 5;
@@ -101,7 +113,7 @@ export class PopupComponent implements OnInit {
       });
     }
 
-    if (this.selectedJobOffer.occuProf.skills.length > 0) {
+    if (this.selectedJobOffer.occuProf.skills && this.selectedJobOffer.occuProf.skills.length > 0) {
       currentLinePoint = currentLinePoint + 10;
       doc.setFontSize(12).setTextColor('#1a80b6').setFontType('bold'); // headline
       doc.text(30, currentLinePoint, 'Skills required');
@@ -116,7 +128,7 @@ export class PopupComponent implements OnInit {
       });
     }
 
-    if (this.selectedJobOffer.occuProf.competences.length > 0) {
+    if (this.selectedJobOffer.occuProf.competences && this.selectedJobOffer.occuProf.competences.length > 0) {
       currentLinePoint = currentLinePoint + 10;
       doc.setFontSize(12).setTextColor('#1a80b6').setFontType('bold'); // headline
       doc.text(30, currentLinePoint, 'Transversal skills required');
@@ -130,7 +142,35 @@ export class PopupComponent implements OnInit {
       });
     }
 
-    if (this.selectedJobOffer.languages.length > 0) {
+    if (this.selectedJobOffer.dataRequired && this.selectedJobOffer.dataRequired.length > 0) {
+      currentLinePoint = currentLinePoint + 10;
+      doc.setFontSize(12).setTextColor('#1a80b6').setFontType('bold'); // headline
+      doc.text(30, currentLinePoint, 'Datasets required');
+      currentLinePoint = currentLinePoint + 5;
+      doc.setTextColor('#000').setFontType('normal').setFontSize(8); // normal text
+      this.selectedJobOffer.dataRequired.forEach(da => {
+        currentLinePoint = this.checkEndOfPage(currentLinePoint, doc);
+        const coLines = doc.setFontSize(8).splitTextToSize('· ' + da.name, 150);
+        doc.text(30, currentLinePoint, coLines);
+        currentLinePoint = currentLinePoint + 4 * coLines.length;
+      });
+    }
+
+    if (this.selectedJobOffer.toolsRequired && this.selectedJobOffer.toolsRequired.length > 0) {
+      currentLinePoint = currentLinePoint + 10;
+      doc.setFontSize(12).setTextColor('#1a80b6').setFontType('bold'); // headline
+      doc.text(30, currentLinePoint, 'Tools required');
+      currentLinePoint = currentLinePoint + 5;
+      doc.setTextColor('#000').setFontType('normal').setFontSize(8); // normal text
+      this.selectedJobOffer.toolsRequired.forEach(tool => {
+        currentLinePoint = this.checkEndOfPage(currentLinePoint, doc);
+        const coLines = doc.setFontSize(8).splitTextToSize('· ' + tool.name, 150);
+        doc.text(30, currentLinePoint, coLines);
+        currentLinePoint = currentLinePoint + 4 * coLines.length;
+      });
+    }
+
+    if (this.selectedJobOffer.languages && this.selectedJobOffer.languages.length > 0) {
       currentLinePoint = currentLinePoint + 10;
       doc.setFontSize(12).setTextColor('#1a80b6').setFontType('bold'); // headline
       doc.text(30, currentLinePoint, 'Languages');
@@ -151,7 +191,19 @@ export class PopupComponent implements OnInit {
       currentLinePoint = currentLinePoint + 5;
       doc.setTextColor('#000').setFontType('normal').setFontSize(8); // normal text
       currentLinePoint = this.checkEndOfPage(currentLinePoint, doc);
-      const coLines = doc.setFontSize(8).splitTextToSize( this.selectedJobOffer.location, 150);
+      const coLines = doc.setFontSize(8).splitTextToSize(this.selectedJobOffer.location, 150);
+      doc.text(30, currentLinePoint, coLines);
+      currentLinePoint = currentLinePoint + 4 * coLines.length;
+    }
+
+    if (this.selectedJobOffer.yearsExperience != null) {
+      currentLinePoint = currentLinePoint + 10;
+      doc.setFontSize(12).setTextColor('#1a80b6').setFontType('bold'); // headline
+      doc.text(30, currentLinePoint, 'Years of experience');
+      currentLinePoint = currentLinePoint + 5;
+      doc.setTextColor('#000').setFontType('normal').setFontSize(8); // normal text
+      currentLinePoint = this.checkEndOfPage(currentLinePoint, doc);
+      const coLines = doc.setFontSize(8).splitTextToSize(this.selectedJobOffer.yearsExperience + '', 150);
       doc.text(30, currentLinePoint, coLines);
       currentLinePoint = currentLinePoint + 4 * coLines.length;
     }
@@ -175,7 +227,7 @@ export class PopupComponent implements OnInit {
       currentLinePoint = currentLinePoint + 5;
       doc.setTextColor('#000').setFontType('normal').setFontSize(8); // normal text
       currentLinePoint = this.checkEndOfPage(currentLinePoint, doc);
-      const coLines = doc.setFontSize(8).splitTextToSize( this.selectedJobOffer.typeContract, 150);
+      const coLines = doc.setFontSize(8).splitTextToSize(this.selectedJobOffer.typeContract, 150);
       doc.text(30, currentLinePoint, coLines);
       currentLinePoint = currentLinePoint + 4 * coLines.length;
     }
@@ -200,7 +252,7 @@ export class PopupComponent implements OnInit {
       currentLinePoint = currentLinePoint + 5;
     }
 
-    if (this.selectedJobOffer.additionalQuestions.length > 0 ) {
+    if (this.selectedJobOffer.additionalQuestions && this.selectedJobOffer.additionalQuestions.length > 0) {
       currentLinePoint = currentLinePoint + 10;
       doc.setFontSize(12).setTextColor('#1a80b6').setFontType('bold'); // headline
       doc.text(30, currentLinePoint, 'Additional questions');
@@ -208,7 +260,7 @@ export class PopupComponent implements OnInit {
       doc.setTextColor('#000').setFontType('normal').setFontSize(8); // normal text
       currentLinePoint = this.checkEndOfPage(currentLinePoint, doc);
       // tslint:disable-next-line:max-line-length
-      const coLines = doc.setFontSize(8).splitTextToSize( this.selectedJobOffer.additionalQuestions , 150);
+      const coLines = doc.setFontSize(8).splitTextToSize(this.selectedJobOffer.additionalQuestions, 150);
       doc.text(30, currentLinePoint, coLines);
       currentLinePoint = currentLinePoint + 4 * coLines.length;
     }
