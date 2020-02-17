@@ -168,11 +168,16 @@ export class OrganizationComponent implements OnInit {
   }
 
   deleteUserFromOrg(user, org) {
-    console.log('deleteUserFromOrg ' + user.name + ' org ' + org.name);
-    const indexToRemove = user.organizations.indexOf(org._id);
-    user.organizations.splice(indexToRemove, 1);
-    this.userService.updateUserWithId(user._id, user);
-
+    if (org.admin.length > 1 && user) {
+      const indexToRemove = user.organizations.indexOf(org._id);
+      if (indexToRemove !== -1) {
+        user.organizations.splice(indexToRemove, 1);
+        this.userService.updateUserWithId(user._id, user);
+      }
+    } else {
+      this.msgUsrSaved = null;
+      this.msgUsrError = 'Can not remove the only admin! Remove organization if you prefer.';
+    }
   }
 
   makeRegularUser(orgIndex, userId) {
@@ -241,8 +246,6 @@ export class OrganizationComponent implements OnInit {
   }
 
   addUserToOrg(orgIndex, userEmail) {
-    console.log('************* addUserToOrg:');
-
     this.currentOrg = this.orgs[orgIndex];
 
     const userSub = this.userService.getUserByEmail(userEmail).subscribe(users => {
@@ -281,9 +284,17 @@ export class OrganizationComponent implements OnInit {
     if (type === 'regular') {
       const indexToRemove = this.currentOrg.regular.indexOf(userId);
       this.currentOrg.regular.splice(indexToRemove, 1);
+    } else if (type === 'pending') {
+      const indexToRemove = this.currentOrg.pending.indexOf(userId);
+      this.currentOrg.pending.splice(indexToRemove, 1);
     } else if (type === 'admin') {
-      const indexToRemove = this.currentOrg.admin.indexOf(userId);
-      this.currentOrg.admin.splice(indexToRemove, 1);
+      if (this.currentOrg.admin.length > 1) {
+        const indexToRemove = this.currentOrg.admin.indexOf(userId);
+        this.currentOrg.admin.splice(indexToRemove, 1);
+      } else {
+        this.msgUsrSaved = null;
+        this.msgUsrError = 'Can not remove the only admin! Remove organization if you prefer.';
+      }
     }
     this.organizationService.updateOrganizationWithId(this.orgs[orgIndex]._id, this.orgs[orgIndex]);
     const userSub = this.userService.getUserById(userId).subscribe(userDB => {
