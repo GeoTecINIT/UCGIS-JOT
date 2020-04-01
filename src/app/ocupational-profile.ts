@@ -49,7 +49,9 @@ export class JobOffer extends Object {
     public isPublic: boolean = false,
     public dataRequired: any[],
     public toolsRequired: any[],
-    public yearsExperience: number
+    public yearsExperience: number,
+    public lastModified: string
+
   ) {
     super();
   }
