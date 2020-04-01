@@ -24,7 +24,7 @@ export class NewjoComponent implements OnInit {
 
   // model = new OcupationalProfile('', '', '', '', null, 1, [], [], [], [], []);
   // tslint:disable-next-line:max-line-length
-  model = new JobOffer('', '', '', '', new OcupationalProfile('', '', '', '', '', '', [], 1, [], [], [], [], []), [], '', '', '', 0, 0, [], false, false, [], [], 0);
+  model = new JobOffer('', '', '', '', new OcupationalProfile('', '', '', '', '', '', [], 1, [], [], [], [], []), [], '', '', '', 0, 0, [], false, false, [], [], 0, new Date().toDateString());
 
   public value: string[];
   public current: string;
@@ -252,11 +252,13 @@ export class NewjoComponent implements OnInit {
 
   saveOccuProfile() {
     if (this.mode === 'copy') {
+      this.model.lastModified = new Date().toDateString();
       this.jobOfferService.updateJobOffer(this._id, this.model);
     } else {
       this.model.userId = this.afAuth.auth.currentUser.uid;
       this.model.orgId = this.saveOrg._id;
       this.model.orgName = this.saveOrg.name;
+      this.model.lastModified = new Date().toDateString();
       this.jobOfferService.addNewJobOffer(this.model);
     }
   }
