@@ -15,7 +15,7 @@
     <!-- breaking change 'cui-breadcrumb' -->
     <cui-breadcrumb>
       <!-- Breadcrumb Menu-->
-      <li class="breadcrumb-menu d-md-down-none" (click)="refreshPending()">
+      <li class="breadcrumb-menu" (click)="refreshPending()">
         <div class="btn-group" role="group" aria-label="Menu button group">
           <a class="btn text-primary" href="#" routerLink="/user" [hidden]="isAnonymous"> Hello {{username}}! </a>
           <a class="btn text-primary" href="#" routerLink="/organization" [hidden]="isAnonymous">
