@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 const collection = 'Fields';
 
-export interface Field { name: string; code: Number; parent: string; grandparent: string; greatgrandparent: string; }
+export interface Field { name: string; code: Number; parent: string; grandparent: string; greatgrandparent: string; concatName: string; }
 
 @Injectable({
   providedIn: 'root'

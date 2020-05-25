@@ -139,7 +139,7 @@ export class NewjoComponent implements OnInit {
   }
 
   ngOnInit() {
-    bok.visualizeBOKData('#bubbles', 'assets/saved-bok.xml', '#textBoK');
+    bok.visualizeBOKData('#bubbles', '#textBoK');
     this.getMode();
   }
 
