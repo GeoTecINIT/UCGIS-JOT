@@ -18,16 +18,21 @@ export class DetailComponent implements OnInit {
   isAnonymous = null;
 
   kaCodes = {
-    GC: 'Geocomputation',
-    WB: 'Web-based GI',
-    GS: 'GI and Society',
-    DA: 'Design and Setup of GI Systems',
-    CV: 'Cartography and Visualization',
-    OI: 'Organizational and Institutional Aspects',
-    GD: 'Geospatial Data',
+    AM: 'Analytical Methods',
     CF: 'Conceptual Foundations',
+    CV: 'Cartography and Visualization',
+    DA: 'Design and Setup of Geographic Information Systems',
     DM: 'Data Modeling, Storage and Exploitation',
-    AM: 'Analytical Methods'
+    GC: 'Geocomputation',
+    GD: 'Geospatial Data',
+    GS: 'GI and Society',
+    IP: 'Image processing and analysis',
+    OI: 'Organizational and Institutional Aspects',
+    PP: 'Physical principles',
+    PS: 'Platforms, sensors and digital imagery',
+    TA: 'Thematic and application domains',
+    WB: 'Web-based GI',
+    GI: 'Geographic Information Science and Technology'
   };
 
   selectedOffer: JobOffer;
