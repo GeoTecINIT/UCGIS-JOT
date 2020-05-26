@@ -27,6 +27,7 @@
               </button>
               <button type="submit" class="btn btn-pill btn-primary"
                 *ngIf="model.occuProf.title == '' || model.occuProf.description == '' "
+                [hidden]="userOrgs.length == 0"
                 tooltip="Add a title and a description to save your Job Offer." [disabled]="!saveOrg">
                 Save
               </button>
