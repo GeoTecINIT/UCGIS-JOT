@@ -76,20 +76,50 @@
           </div>
         </div>
         <div class="card-body">
+          <div class="row">
+            <div class="col-sm-0 col-md-2"></div>
+            <div class="col-sm-3 col-md-2 text-center">
+              Sort by:
+            </div>
+            <!-- sortedBy -->
+            <div class="col-sm-3 col-md-2 text-center">
+              <button type="button" class="btn btn-block btn-link" (click)="sortBy('lastUpdated');">
+                <i [ngClass]="sortUpdAsc? 'fa fa-arrow-down' : 'fa fa-arrow-up'"></i>
+                <span [ngClass]="sortedBy == 'lastUpdated'? 'bolder' : ''">Last updated</span>
+              </button>
+            </div>
+            <div class="col-sm-3 col-md-2 text-center">
+              <button type="button" class="btn btn-block btn-link" (click)="sortBy('name');">
+                <i [ngClass]="sortNameAsc? 'fa fa-arrow-down' : 'fa fa-arrow-up'"></i>
+                <span [ngClass]="sortedBy == 'name'? 'bolder' : ''"> Name</span>
+              </button>
+            </div>
+            <div class="col-sm-3 col-md-2 text-center">
+              <button type="button" class="btn btn-block btn-link" (click)="sortBy('organization');">
+                <i [ngClass]="sortOrgAsc? 'fa fa-arrow-down' : 'fa fa-arrow-up'"></i>
+                <span [ngClass]="sortedBy == 'organization'? 'bolder' : ''">Organization</span>
+              </button>
+            </div>
+            <div class="col-sm-0 col-md-2"></div>
+          </div>
+
           <div *ngFor="let jo of filteredJobOffers" class="row">
             <div class="col-md-10">
               <button type="button" class="btn text-justify" routerLink="/detail/{{ jo._id }}">
                 <span>
                   <h1 style="display: inline;">{{ jo.occuProf.title }}</h1>
                   <a href="#" routerLink="/organizationdetails/{{ jo.orgId }}">
-                    <h6 style="display: inline;" class="text-level text-primary">{{ jo.orgName }}</h6>
+                    <h6 *ngIf="!jo.isPublic" style="display: inline;" class="text-level">Draft</h6>
+                    <h6 style="display: inline;" class="text-level text-secondary">{{ jo.orgName }}</h6>
                   </a>
                   <br>
                   {{ jo.occuProf.knowledge.length }} Knowledge |
                   {{ jo.occuProf.skills.length }} Skills |
                   {{ jo.occuProf.competences.length }} Transversal skills
                 </span>
-
+                <span *ngIf="jo.updatedAt" class="text-lastupdated ">| Last updated:
+                  {{jo.updatedAt.toDate() | date:'dd-MMM-yyyy'}}
+                </span>
                 <p>{{ jo.occuProf.description }}</p>
               </button>
             </div>
