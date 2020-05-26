@@ -190,7 +190,7 @@
                   </div>
                 </div>
                 <div class="col-lg-8 col-sm-6 text-justify">
-                  <a (click)="navigateToConcept('GIST')" *ngIf="!(!hasResults && currentConcept != 'GIST')">
+                  <a (click)="navigateToConcept('GIST')" [hidden]="!hasResults || currentConcept == 'GIST'">
                     < To full BoK </a>
                       <a (click)="hasResults = !hasResults; currentConcept=''"
                         *ngIf="!hasResults && currentConcept != 'GIST'">
