@@ -25,7 +25,10 @@ export class OcupationalProfile extends Object {
     public customSkills: string[],
     public customCompetences: string[],
     public competences: Competence[],
-    public isPublic: boolean = false
+    public lastModified: string,
+    public isPublic: boolean = false,
+    public updatedAt: any,
+    public createdAt: any,
   ) {
     super();
   }
@@ -50,7 +53,9 @@ export class JobOffer extends Object {
     public dataRequired: any[],
     public toolsRequired: any[],
     public yearsExperience: number,
-    public lastModified: string
+    public lastModified: string,
+    public updatedAt: any,
+    public createdAt: any,
 
   ) {
     super();
