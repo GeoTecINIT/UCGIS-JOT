@@ -56,6 +56,7 @@ export class JobOffer extends Object {
     public lastModified: string,
     public updatedAt: any,
     public createdAt: any,
+    public contactDetails: string,
 
   ) {
     super();

@@ -195,6 +195,12 @@
               </div>
             </div>
             <br>
+            <div *ngIf="selectedOffer && selectedOffer.contactDetails" class="row text-left">
+              <div class="col-md-12">
+                <b> Contact Details:</b>
+                <p>{{ selectedOffer.contactDetails }}</p>
+              </div>
+            </div>
             <div class="row text-left">
               <div class="col-md-12">
                 <b> Additional Questions:</b>

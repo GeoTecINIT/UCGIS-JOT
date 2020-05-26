@@ -26,8 +26,7 @@
                 Save
               </button>
               <button type="submit" class="btn btn-pill btn-primary"
-                *ngIf="model.occuProf.title == '' || model.occuProf.description == '' "
-                [hidden]="userOrgs.length == 0"
+                *ngIf="model.occuProf.title == '' || model.occuProf.description == '' " [hidden]="userOrgs.length == 0"
                 tooltip="Add a title and a description to save your Job Offer." [disabled]="!saveOrg">
                 Save
               </button>
@@ -281,7 +280,7 @@
                     </div>
                     <div class="col-md-6">
                       <input #skillExtra type="text" class="form-control" id="skillExtra" placeholder="Custom skill"
-                        name="skillExtra" (keydown.enter)="addExtraSkill(skillExtra.value); skillExtra.value= ''"  />
+                        name="skillExtra" (keydown.enter)="addExtraSkill(skillExtra.value); skillExtra.value= ''" />
                     </div>
                     <div class="col-md-2">
                       <button type="submit" class="btn btn-primary" tooltip="Add your custom skill."
@@ -333,7 +332,8 @@
                       <span class="switch-slider" tooltip="Click here to add to the dropdown full list of ESCO skills."
                         data-checked="✓" data-unchecked="X"></span>
                     </label>
-                    <div class="pl-1">Search full <a href="https://ec.europa.eu/esco/portal/skill" target="_blank">ESCO</a> skills</div>
+                    <div class="pl-1">Search full <a href="https://ec.europa.eu/esco/portal/skill"
+                        target="_blank">ESCO</a> skills</div>
                   </span>
                 </div>
                 <div class="col-md-6">
@@ -346,7 +346,8 @@
               <div class="row pt-1">
                 <div class="col-md-12">
 
-                  This service uses the <a href="http://ec.europa.eu/esco" target="_blank"> ESCO </a> classification of the
+                  This service uses the <a href="http://ec.europa.eu/esco" target="_blank"> ESCO </a> classification of
+                  the
                   European Commission.
                 </div>
               </div>
@@ -358,8 +359,8 @@
                 <div class="col-md-6">
                   <input #competenceExtra type="text" class="form-control" id="competenceExtra"
                     placeholder="Custom transversal skill" name="competenceExtra"
-                    (keyup)="competenceExtraAdd.disabled = false" 
-                    (keydown.enter)="addExtraCompetence(competenceExtra.value); competenceExtra.value= ''; competenceExtraAdd.disabled = true"/>
+                    (keyup)="competenceExtraAdd.disabled = false"
+                    (keydown.enter)="addExtraCompetence(competenceExtra.value); competenceExtra.value= ''; competenceExtraAdd.disabled = true" />
                 </div>
                 <div class="col-md-2">
                   <button #competenceExtraAdd type="submit" class="btn btn-primary"
@@ -511,12 +512,12 @@
                     <label for="minSalary">Annual Salary Range (Min - Max)</label>
                     <div class="form-row">
                       <div class="col-md-6">
-                        <input type="number" size="10" class="form-control" id="minSalary"
-                          [(ngModel)]="model.salaryMin" name="minSalary" min="0" />
+                        <input type="number" size="10" class="form-control" id="minSalary" [(ngModel)]="model.salaryMin"
+                          name="minSalary" min="0" />
                       </div>
                       <div class="col-md-6">
-                        <input type="number" size="10" class="form-control" id="maxSalary"
-                          [(ngModel)]="model.salaryMax" name="maxSalary" min="0" />
+                        <input type="number" size="10" class="form-control" id="maxSalary" [(ngModel)]="model.salaryMax"
+                          name="maxSalary" min="0" />
                       </div>
                     </div>
                   </div>
@@ -531,6 +532,16 @@
                     </label>
                     <div class="pl-1">Ask for motivation letter </div>
                   </span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="contactDetails">Contact details</label>
+                    <textarea class="form-control" id="contactDetails"
+                      placeholder="Write here webpage or email and contact instructions for the candidates." name="textarea-input"
+                      [(ngModel)]="model.contactDetails" rows="4"></textarea>
+                  </div>
                 </div>
               </div>
               <div class="row">
