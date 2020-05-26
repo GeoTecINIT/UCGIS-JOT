@@ -114,7 +114,7 @@
             </div>
           </div>
 
-          <div *ngFor="let jo of filteredJobOffers" class="row">
+          <div *ngFor="let jo of filteredJobOffers| slice:paginationLimitFrom:paginationLimitTo; let i=index" class="row">
             <div class="col-md-10">
               <button type="button" class="btn text-justify" routerLink="/detail/{{ jo._id }}">
                 <span>
@@ -191,6 +191,29 @@
               </div><!-- /.modal-dialog -->
             </div><!-- /.modal -->
           </div>
+
+          <div *ngIf="this.filteredJobOffers" class="row">
+            <div class="col-md-6 ml-auto mr-auto">
+              <nav aria-label="pagination">
+                <ul class="pagination justify-content-center">
+                  <li class="page-item">
+                    <a class="page-link" href="javascript:;" (click)="previousPage()">Previous</a>
+                  </li>
+                  <li *ngFor="let page of range(this.filteredJobOffers.length/LIMIT_PER_PAGE, 0)" class="page-item"
+                    [ngClass]="currentPage == page? 'active': ''">
+                    <a class="page-link" href="javascript:;"
+                      (click)="currentPage=page; paginationLimitFrom=page*LIMIT_PER_PAGE; paginationLimitTo=page*LIMIT_PER_PAGE+LIMIT_PER_PAGE ">{{page+1}}
+                      <span *ngIf="currentPage == page" class="sr-only">(current)</span>
+                    </a></li>
+
+                  <li class="page-item">
+                    <a class="page-link" href="javascript:;" (click)="nextPage()">Next</a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
