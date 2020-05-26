@@ -69,6 +69,7 @@ import { Base64img } from './components/popup/base64img';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { Eo4geoFooterComponent } from './components/eo4geo-footer/eo4geo-footer.component';
 import { Eo4geoHeaderComponent } from './components/eo4geo-header/eo4geo-header.component';
+import { ReleaseNotesComponent } from './components/release-notes/release-notes.component';
 
 
 @NgModule({
@@ -113,7 +114,8 @@ import { Eo4geoHeaderComponent } from './components/eo4geo-header/eo4geo-header.
     HighlightPipe,
     PopupComponent,
     Eo4geoFooterComponent,
-    Eo4geoHeaderComponent
+    Eo4geoHeaderComponent,
+    ReleaseNotesComponent
   ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy },

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { OcupationalProfile, JobOffer } from '../ocupational-profile';
+import * as firebase from 'firebase';
 
 const collection = 'JobOffers';
 
@@ -27,6 +28,9 @@ export class JobofferService {
 
   addNewJobOffer(newJobOffer: JobOffer) {
     const id = this.db.createId();
+    const timestamp = firebase.firestore.FieldValue.serverTimestamp();
+    newJobOffer.updatedAt = timestamp;
+    newJobOffer.createdAt = timestamp;
     newJobOffer._id = id;
     this.db
       .collection(collection)
@@ -42,6 +46,8 @@ export class JobofferService {
   }
 
   updateJobOffer(jobOfferId: string, updatedJobOffer: JobOffer) {
+    const timestamp = firebase.firestore.FieldValue.serverTimestamp();
+    updatedJobOffer.updatedAt = timestamp;
     this.db
       .collection(collection)
       .doc<OcupationalProfile>(jobOfferId)
