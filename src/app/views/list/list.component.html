@@ -95,7 +95,7 @@
               </button>
             </div>
             <div class="col-sm-12 col-md-6">
-              <div class="text-center">
+              <div [hidden]="isAnonymous" class="text-center">
                 <button class="btn btn-pill btn-outline-primary" [ngClass]="{'active': showOnlyAuthor==-1}"
                   (click)="showOnlyAuthor=-1; filterByAuthor(-1)" [disabled]="isAnonymous">All</button>
                 <button class="btn btn-pill btn-outline-primary" [ngClass]="{'active': showOnlyAuthor==0}"
@@ -225,3 +225,4 @@
   <!--/.col-->
 </div>
 <!--/.row-->
+<app-release-notes #releaseNotesModal></app-release-notes>

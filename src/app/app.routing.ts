@@ -59,6 +59,13 @@ export const routes: Routes = [
         component: ListComponent
       },
       {
+        path: 'release-notes',
+        data: {
+          title: 'List'
+        },
+        component: ListComponent
+      },
+      {
         path: 'user',
         data: {
           title: 'User Details'
