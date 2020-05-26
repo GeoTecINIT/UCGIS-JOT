@@ -103,6 +103,17 @@
             <div class="col-sm-0 col-md-2"></div>
           </div>
 
+          <div *ngIf="filteredJobOffers && filteredJobOffers.length == 0">
+            <div class="text-center">
+              <h5> Your search did not return any result. Try with advanced search to search in more attributes.</h5>
+            </div>
+          </div>
+          <div *ngIf="filteredJobOffers && filteredJobOffers.length > 0 && searchText!='' && searchText!= null">
+            <div class="text-left">
+              <h5> Results: {{filteredJobOffers.length}}</h5>
+            </div>
+          </div>
+
           <div *ngFor="let jo of filteredJobOffers" class="row">
             <div class="col-md-10">
               <button type="button" class="btn text-justify" routerLink="/detail/{{ jo._id }}">
