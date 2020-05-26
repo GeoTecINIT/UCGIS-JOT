@@ -32,6 +32,7 @@ export class ListComponent implements OnInit {
   public paginationLimitTo = 6;
   public LIMIT_PER_PAGE = 6;
   public currentPage = 0;
+  showOnlyAuthor = -1;
 
   @ViewChild('dangerModal') public dangerModal: ModalDirective;
 
@@ -97,6 +98,7 @@ export class ListComponent implements OnInit {
     if (this.advancedSearch) {
       this.applyFilters();
     }
+    this.showOnlyAuthor = -1;
   }
 
   applyFilters() {
@@ -176,6 +178,27 @@ export class ListComponent implements OnInit {
       this.paginationLimitFrom = this.paginationLimitFrom - this.LIMIT_PER_PAGE;
       this.paginationLimitTo = this.paginationLimitTo - this.LIMIT_PER_PAGE;
       this.currentPage--;
+    }
+  }
+
+  filterByAuthor(author) {
+    this.filteredJobOffers = [];
+    this.paginationLimitFrom = 0;
+    this.paginationLimitTo = 6;
+    this.currentPage = 0;
+    this.searchText = '';
+    if (author === -1) { // all
+      this.filteredJobOffers = this.jobOffers;
+    } else if (author === 0) { // mine
+      this.filteredJobOffers = this.jobOffers.filter(
+        it =>
+          it.userId === this.currentUser._id
+      );
+    } else if (author === 1) { // my orgs
+      this.filteredJobOffers = this.jobOffers.filter(
+        it =>
+          this.currentUser.organizations.includes(it.orgId)
+      );
     }
   }
 }

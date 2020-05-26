@@ -77,30 +77,34 @@
         </div>
         <div class="card-body">
           <div class="row">
-            <div class="col-sm-0 col-md-2"></div>
-            <div class="col-sm-3 col-md-2 text-center">
+            <div class="col-sm-12 col-md-6 text-center">
               Sort by:
-            </div>
+           <!--  </div> -->
             <!-- sortedBy -->
-            <div class="col-sm-3 col-md-2 text-center">
-              <button type="button" class="btn btn-block btn-link" (click)="sortBy('lastUpdated');">
+             <button type="button" class="btn btn-link" (click)="sortBy('lastUpdated');">
                 <i [ngClass]="sortUpdAsc? 'fa fa-arrow-down' : 'fa fa-arrow-up'"></i>
                 <span [ngClass]="sortedBy == 'lastUpdated'? 'bolder' : ''">Last updated</span>
               </button>
-            </div>
-            <div class="col-sm-3 col-md-2 text-center">
-              <button type="button" class="btn btn-block btn-link" (click)="sortBy('name');">
+              <button type="button" class="btn btn-link" (click)="sortBy('name');">
                 <i [ngClass]="sortNameAsc? 'fa fa-arrow-down' : 'fa fa-arrow-up'"></i>
                 <span [ngClass]="sortedBy == 'name'? 'bolder' : ''"> Name</span>
               </button>
-            </div>
-            <div class="col-sm-3 col-md-2 text-center">
-              <button type="button" class="btn btn-block btn-link" (click)="sortBy('organization');">
+              <button type="button" class="btn btn-link" (click)="sortBy('organization');">
                 <i [ngClass]="sortOrgAsc? 'fa fa-arrow-down' : 'fa fa-arrow-up'"></i>
                 <span [ngClass]="sortedBy == 'organization'? 'bolder' : ''">Organization</span>
               </button>
             </div>
-            <div class="col-sm-0 col-md-2"></div>
+            <div class="col-sm-12 col-md-6">
+              <div class="text-center">
+                <button class="btn btn-pill btn-outline-primary" [ngClass]="{'active': showOnlyAuthor==-1}"
+                  (click)="showOnlyAuthor=-1; filterByAuthor(-1)" [disabled]="isAnonymous">All</button>
+                <button class="btn btn-pill btn-outline-primary" [ngClass]="{'active': showOnlyAuthor==0}"
+                  (click)="showOnlyAuthor=0; filterByAuthor(0)" [disabled]="isAnonymous">My content</button>
+                <button class="btn btn-pill btn-outline-primary" [ngClass]="{'active': showOnlyAuthor==1}"
+                  (click)="showOnlyAuthor=1; filterByAuthor(1)" [disabled]="isAnonymous">My organization's
+                  content</button>
+              </div>
+            </div>
           </div>
 
           <div *ngIf="filteredJobOffers && filteredJobOffers.length == 0">
