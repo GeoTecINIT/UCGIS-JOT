@@ -127,8 +127,10 @@ export class NewjoComponent implements OnInit {
           if (this.currentUser.organizations && this.currentUser.organizations.length > 0) {
             this.currentUser.organizations.forEach(orgId => {
               this.organizationService.getOrganizationById(orgId).subscribe(org => {
-                this.userOrgs.push(org);
-                this.saveOrg = this.userOrgs[0];
+                if (org) {
+                  this.userOrgs.push(org);
+                  this.saveOrg = this.userOrgs[0];
+                }
               });
             });
             this.filterOP();
@@ -154,7 +156,6 @@ export class NewjoComponent implements OnInit {
             this.allProfiles.push(op);
           }
         });
-        // this.allProfiles = op;
       });
   }
 
