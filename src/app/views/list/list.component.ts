@@ -58,6 +58,7 @@ export class ListComponent implements OnInit {
                 }
               });
               this.filteredJobOffers = this.jobOffers;
+              this.sortBy('lastUpdated');
             });
         });
       } else {
@@ -73,6 +74,7 @@ export class ListComponent implements OnInit {
             }
           });
           this.filteredJobOffers = this.jobOffers;
+          this.sortBy('lastUpdated');
         });
     });
   }

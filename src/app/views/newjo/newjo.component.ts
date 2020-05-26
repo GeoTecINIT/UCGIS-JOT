@@ -254,7 +254,7 @@ export class NewjoComponent implements OnInit {
     this.model.userId = this.afAuth.auth.currentUser.uid;
     this.model.orgId = this.saveOrg._id;
     this.model.orgName = this.saveOrg.name;
-    this.model.isPublic = this.saveOrg.isPublic ? this.model.isPublic : false;
+    this.model.isPublic = this.model.isPublic;
     this.model.lastModified = new Date().toDateString();
     if (this.mode === 'copy') {
       this.jobOfferService.updateJobOffer(this._id, this.model);
