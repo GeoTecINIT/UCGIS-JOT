@@ -4,10 +4,11 @@ import { Observable, Subscription } from 'rxjs';
 import { JobOffer } from '../../ocupational-profile';
 import { JobofferService } from '../../services/joboffer.service';
 import { FormControl } from '@angular/forms';
-import { ModalDirective } from 'ngx-bootstrap/modal';
+import { ModalDirective, ModalOptions } from 'ngx-bootstrap/modal';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { UserService, User } from '../../services/user.service';
 import { OrganizationService } from '../../services/organization.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-list',
@@ -35,10 +36,12 @@ export class ListComponent implements OnInit {
   showOnlyAuthor = -1;
 
   @ViewChild('dangerModal') public dangerModal: ModalDirective;
+  @ViewChild('releaseNotesModal') public releaseNotesModal: any;
 
   constructor(private jobOfferService: JobofferService,
     private userService: UserService,
     public organizationService: OrganizationService,
+    private route: ActivatedRoute,
     public afAuth: AngularFireAuth) {
     this.afAuth.auth.onAuthStateChanged(user => {
       if (user) {
@@ -80,6 +83,11 @@ export class ListComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (this.route.snapshot.url[0].path === 'release-notes') {
+      const config: ModalOptions = { backdrop: true, keyboard: true };
+      this.releaseNotesModal.basicModal.config = config;
+      this.releaseNotesModal.basicModal.show({});
+    }
   }
 
   removeJobOffer(id: string) {
