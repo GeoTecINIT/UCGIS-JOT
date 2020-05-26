@@ -41,7 +41,7 @@
               <ng-select [items]="allProfiles" name="field" bindLabel="title" [multiple]="false"
                 [(ngModel)]="selectedProfile" (change)="fillFormWithOP()">
                 <ng-template ng-optgroup-tmp let-item="item">
-                  {{item.title}}
+                  {{item.title}} ({{item.orgName}})
                 </ng-template>
               </ng-select>
             </div>
