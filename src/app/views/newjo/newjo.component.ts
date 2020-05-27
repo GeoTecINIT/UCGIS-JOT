@@ -153,6 +153,7 @@ export class NewjoComponent implements OnInit {
         ops.forEach(op => {
           // user can use this OP
           if (op.isPublic || this.currentUser.organizations.indexOf(op.orgId) > -1) {
+            op.title = op.title + ' ( ' + op.orgName + ' ) ';
             this.allProfiles.push(op);
           }
         });
