@@ -24,3 +24,11 @@
     padding-left: 1em;
     font-size: smaller;
 }
+
+.btn-pill a {
+    pointer-events: all !important;
+}
+
+button a {
+    color: white !important;
+}

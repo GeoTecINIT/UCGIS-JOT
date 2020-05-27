@@ -302,7 +302,7 @@ export class NewjoComponent implements OnInit {
 
   searchInBok(text: string) {
     this.selectedNodes = bok.searchInBoK(text);
-    this.hasResults = this.selectedNodes.length > 0 ? true : false;
+    this.hasResults = true;
     this.currentConcept = '';
     this.cleanTip();
   }
