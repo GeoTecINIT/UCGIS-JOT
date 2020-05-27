@@ -115,7 +115,7 @@
                   </div>
                   <div class="col-md-6">
                     <button *ngFor="let mf of model.occuProf.fields" type="button" class="btn btn-pill btn-primary"
-                      (click)="removeField(mf)">
+                      tooltip="Click to remove" (click)="removeField(mf)">
                       <i class="fa fa-close"></i> {{ mf.concatName }}
                     </button>
                   </div>
@@ -243,7 +243,7 @@
                       in
                       previous section to add some.</p>
                     <button *ngFor="let mk of model.occuProf.knowledge.slice().reverse()" type="button"
-                      class="btn btn-pill" [ngClass]="'bok-' + (mk | slice: 1:3)"
+                      class="btn btn-pill" [ngClass]="'bok-' + (mk | slice: 1:3)" tooltip="Click to remove"
                       (click)="removeCompetence(mk, model.occuProf.knowledge); associatedSkillsToDelete > 0 ? dangerModal.show(): null">
                       <i class="fa fa-close"></i> {{ mk }}
                     </button>
@@ -266,7 +266,7 @@
                         BoK in
                         previous section to add some.</p>
                       <div *ngIf="model.occuProf.skills.length > 0">
-                        <button *ngFor="let ms of model.occuProf.skills.slice().reverse()"
+                        <button *ngFor="let ms of model.occuProf.skills.slice().reverse()" tooltip="Click to remove"
                           (click)="removeCompetence(ms, model.occuProf.skills)" type="button"
                           class="btn btn-pill btn-light btn-list">
                           <i class="fa fa-close"></i> {{ ms }}
@@ -338,7 +338,7 @@
                 </div>
                 <div class="col-md-6">
                   <button *ngFor="let mc of model.occuProf.competences" type="button" class="btn btn-pill btn-primary"
-                    (click)="removeCompetence(mc, model.occuProf.competences)">
+                    tooltip="Click to remove" (click)="removeCompetence(mc, model.occuProf.competences)">
                     <i class="fa fa-close"></i> {{ mc.preferredLabel }}
                   </button>
                 </div>
@@ -404,7 +404,7 @@
                 </div>
                 <div [ngClass]="{'col-md-6': notFoundData != '', 'col-md-6': notFoundData == ''}">
                   <button *ngFor="let da of model.dataRequired" type="button" class="btn btn-pill btn-primary"
-                    (click)="removeDataTool(da, model.dataRequired)">
+                    tooltip="Click to remove" (click)="removeDataTool(da, model.dataRequired)">
                     <i class="fa fa-close"></i> {{ da.name }}
                   </button>
                 </div>
@@ -433,7 +433,7 @@
                 </div>
                 <div [ngClass]="{'col-md-6': notFoundTool != '', 'col-md-6': notFoundTool == ''}">
                   <button *ngFor="let to of model.toolsRequired" type="button" class="btn btn-pill btn-primary"
-                    (click)="removeDataTool(to, model.toolsRequired)">
+                    tooltip="Click to remove" (click)="removeDataTool(to, model.toolsRequired)">
                     <i class="fa fa-close"></i> {{ to.name }}
                   </button>
                 </div>
@@ -455,7 +455,7 @@
                 </div>
                 <div class="col-md-9">
                   <button *ngFor="let ml of model.languages" type="button" class="btn btn-pill btn-primary"
-                    (click)="removeCompetence(ml, model.languages)">
+                    tooltip="Click to remove" (click)="removeCompetence(ml, model.languages)">
                     <i class="fa fa-close"></i> {{ ml.name }}
                   </button>
                 </div>
@@ -539,8 +539,8 @@
                   <div class="form-group">
                     <label for="contactDetails">Contact details</label>
                     <textarea class="form-control" id="contactDetails"
-                      placeholder="Write here webpage or email and contact instructions for the candidates." name="textarea-input"
-                      [(ngModel)]="model.contactDetails" rows="4"></textarea>
+                      placeholder="Write here webpage or email and contact instructions for the candidates."
+                      name="textarea-input" [(ngModel)]="model.contactDetails" rows="4"></textarea>
                   </div>
                 </div>
               </div>
