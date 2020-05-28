@@ -182,24 +182,46 @@ export class NewjoComponent implements OnInit {
     this.isShowingSkillsTip = true;
   }
 
-  removeCompetence(name: string, array: string[]) {
-    this.nameCodeToDelete = '';
-    array.forEach((item, index) => {
-      if (item === name) {
-        //  console.log('removing concept' + name);
-        array.splice(index, 1);
-        this.nameCodeToDelete = name.split(']')[0];
+  removeCompetence(name: any, array: any[]) {
+    if (typeof (name) === 'string') { // for skills
+      this.nameCodeToDelete = '';
+      array.forEach((item, index) => {
+        if (item === name) {
+          array.splice(index, 1);
+          array = [...array];
+          this.nameCodeToDelete = name.split(']')[0];
+        }
+      });
+      const skillsFiltered = [];
+      this.model.occuProf.skills.forEach((sk, i) => {
+        //  console.log('code skill' + sk.split(']')[0] + '=' + this.nameCodeToDelete);
+        if (sk.split(']')[0] === this.nameCodeToDelete) { // There is a knowledge that starts with same code, don't include it
+          skillsFiltered.push(sk);
+        }
+      });
+      this.associatedSkillsToDelete = skillsFiltered.length;
+    } else {
+      if (name.preferredLabel) {
+        // for transversal skills
+        array.forEach((item, index) => {
+          if (item.preferredLabel === name.preferredLabel) {
+            array.splice(index, 1);
+            array = [...array];
+            this.competences = [...this.competences];
+            this.model.occuProf.competences = [...this.model.occuProf.competences];
+          }
+        });
+      } else if (name.name) {
+        // for languages
+        array.forEach((item, index) => {
+          if (item.name === name.name) {
+            array.splice(index, 1);
+            array = [...array];
+            this.model.languages = [...this.model.languages];
+          }
+        });
       }
-    });
-
-    const skillsFiltered = [];
-    this.model.occuProf.skills.forEach((sk, i) => {
-      //  console.log('code skill' + sk.split(']')[0] + '=' + this.nameCodeToDelete);
-      if (sk.split(']')[0] === this.nameCodeToDelete) { // There is a knowledge that starts with same code, don't include it
-        skillsFiltered.push(sk);
-      }
-    });
-    this.associatedSkillsToDelete = skillsFiltered.length;
+    }
   }
 
   removeField(f: Field) {
@@ -208,6 +230,7 @@ export class NewjoComponent implements OnInit {
         this.model.occuProf.fields.splice(index, 1);
       }
     });
+    this.model.occuProf.fields = [...this.model.occuProf.fields];
   }
 
   removeDataTool(remove: any, fromArray: any[]) {
@@ -216,6 +239,9 @@ export class NewjoComponent implements OnInit {
         fromArray.splice(index, 1);
       }
     });
+    fromArray = [...fromArray];
+    this.model.dataRequired = [...this.model.dataRequired];
+    this.model.toolsRequired = [...this.model.toolsRequired];
   }
 
   searchSelect(event, model) {
@@ -230,13 +256,13 @@ export class NewjoComponent implements OnInit {
   }
 
   addCustomData() {
-    this.model.dataRequired = [...this.model.dataRequired , { name: this.notFoundData, custom: true }];
+    this.model.dataRequired = [...this.model.dataRequired, { name: this.notFoundData, custom: true }];
     this.notFoundTool = '';
     this.notFoundData = '';
   }
 
   addCustomTool() {
-    this.model.toolsRequired = [...this.model.toolsRequired , { name: this.notFoundTool, custom: true }];
+    this.model.toolsRequired = [...this.model.toolsRequired, { name: this.notFoundTool, custom: true }];
     this.notFoundTool = '';
     this.notFoundData = '';
   }
@@ -298,6 +324,8 @@ export class NewjoComponent implements OnInit {
     // allow merging multiple occupational profiles
     this.model.occuProf = this.occuprofilesService.mergeOccuProfiles(this.model.occuProf, this.selectedProfile);
     this.selectedProfiles.push(this.selectedProfile.title);
+    this.model.occuProf.fields = [...this.model.occuProf.fields];
+    this.model.occuProf.competences = [...this.model.occuProf.competences];
   }
 
   searchInBok(text: string) {
