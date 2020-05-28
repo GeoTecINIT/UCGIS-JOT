@@ -183,7 +183,7 @@ export class NewjoComponent implements OnInit {
   }
 
   removeCompetence(name: any, array: any[]) {
-    if (typeof(name) === 'string') { // for skills
+    if (typeof (name) === 'string') { // for skills
       this.nameCodeToDelete = '';
       array.forEach((item, index) => {
         if (item === name) {
@@ -200,15 +200,27 @@ export class NewjoComponent implements OnInit {
         }
       });
       this.associatedSkillsToDelete = skillsFiltered.length;
-    } else { // for transversal skills
-      array.forEach((item, index) => {
-        if (item.preferredLabel === name.preferredLabel) {
-          array.splice(index, 1);
-          array = [...array];
-          this.competences = [...this.competences];
-          this.model.occuProf.competences = [...this.model.occuProf.competences];
-        }
-      });
+    } else {
+      if (name.preferredLabel) {
+        // for transversal skills
+        array.forEach((item, index) => {
+          if (item.preferredLabel === name.preferredLabel) {
+            array.splice(index, 1);
+            array = [...array];
+            this.competences = [...this.competences];
+            this.model.occuProf.competences = [...this.model.occuProf.competences];
+          }
+        });
+      } else if (name.name) {
+        // for languages
+        array.forEach((item, index) => {
+          if (item.preferredLabel === name.preferredLabel) {
+            array.splice(index, 1);
+            array = [...array];
+            this.model.languages = [...this.model.languages];
+          }
+        });
+      }
     }
   }
 
@@ -228,6 +240,8 @@ export class NewjoComponent implements OnInit {
       }
     });
     fromArray = [...fromArray];
+    this.model.dataRequired = [...this.model.dataRequired];
+    this.model.toolsRequired = [...this.model.toolsRequired];
   }
 
   searchSelect(event, model) {
@@ -242,13 +256,13 @@ export class NewjoComponent implements OnInit {
   }
 
   addCustomData() {
-    this.model.dataRequired = [...this.model.dataRequired , { name: this.notFoundData, custom: true }];
+    this.model.dataRequired = [...this.model.dataRequired, { name: this.notFoundData, custom: true }];
     this.notFoundTool = '';
     this.notFoundData = '';
   }
 
   addCustomTool() {
-    this.model.toolsRequired = [...this.model.toolsRequired , { name: this.notFoundTool, custom: true }];
+    this.model.toolsRequired = [...this.model.toolsRequired, { name: this.notFoundTool, custom: true }];
     this.notFoundTool = '';
     this.notFoundData = '';
   }
