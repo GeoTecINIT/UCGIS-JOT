@@ -214,7 +214,7 @@ export class NewjoComponent implements OnInit {
       } else if (name.name) {
         // for languages
         array.forEach((item, index) => {
-          if (item.preferredLabel === name.preferredLabel) {
+          if (item.name === name.name) {
             array.splice(index, 1);
             array = [...array];
             this.model.languages = [...this.model.languages];
