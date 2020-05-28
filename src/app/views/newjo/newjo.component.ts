@@ -182,24 +182,34 @@ export class NewjoComponent implements OnInit {
     this.isShowingSkillsTip = true;
   }
 
-  removeCompetence(name: string, array: string[]) {
-    this.nameCodeToDelete = '';
-    array.forEach((item, index) => {
-      if (item === name) {
-        //  console.log('removing concept' + name);
-        array.splice(index, 1);
-        this.nameCodeToDelete = name.split(']')[0];
-      }
-    });
-
-    const skillsFiltered = [];
-    this.model.occuProf.skills.forEach((sk, i) => {
-      //  console.log('code skill' + sk.split(']')[0] + '=' + this.nameCodeToDelete);
-      if (sk.split(']')[0] === this.nameCodeToDelete) { // There is a knowledge that starts with same code, don't include it
-        skillsFiltered.push(sk);
-      }
-    });
-    this.associatedSkillsToDelete = skillsFiltered.length;
+  removeCompetence(name: any, array: any[]) {
+    if (typeof(name) === 'string') { // for skills
+      this.nameCodeToDelete = '';
+      array.forEach((item, index) => {
+        if (item === name) {
+          array.splice(index, 1);
+          array = [...array];
+          this.nameCodeToDelete = name.split(']')[0];
+        }
+      });
+      const skillsFiltered = [];
+      this.model.occuProf.skills.forEach((sk, i) => {
+        //  console.log('code skill' + sk.split(']')[0] + '=' + this.nameCodeToDelete);
+        if (sk.split(']')[0] === this.nameCodeToDelete) { // There is a knowledge that starts with same code, don't include it
+          skillsFiltered.push(sk);
+        }
+      });
+      this.associatedSkillsToDelete = skillsFiltered.length;
+    } else { // for transversal skills
+      array.forEach((item, index) => {
+        if (item.preferredLabel === name.preferredLabel) {
+          array.splice(index, 1);
+          array = [...array];
+          this.competences = [...this.competences];
+          this.model.occuProf.competences = [...this.model.occuProf.competences];
+        }
+      });
+    }
   }
 
   removeField(f: Field) {
@@ -208,6 +218,7 @@ export class NewjoComponent implements OnInit {
         this.model.occuProf.fields.splice(index, 1);
       }
     });
+    this.model.occuProf.fields = [...this.model.occuProf.fields];
   }
 
   removeDataTool(remove: any, fromArray: any[]) {
@@ -216,6 +227,7 @@ export class NewjoComponent implements OnInit {
         fromArray.splice(index, 1);
       }
     });
+    fromArray = [...fromArray];
   }
 
   searchSelect(event, model) {
@@ -298,6 +310,8 @@ export class NewjoComponent implements OnInit {
     // allow merging multiple occupational profiles
     this.model.occuProf = this.occuprofilesService.mergeOccuProfiles(this.model.occuProf, this.selectedProfile);
     this.selectedProfiles.push(this.selectedProfile.title);
+    this.model.occuProf.fields = [...this.model.occuProf.fields];
+    this.model.occuProf.competences = [...this.model.occuProf.competences];
   }
 
   searchInBok(text: string) {
