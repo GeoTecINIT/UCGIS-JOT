@@ -104,7 +104,8 @@ export class NewjoComponent implements OnInit {
   notFoundTool = '';
   notFoundData = '';
 
-  typeOfContract = [ 'Fixed', 'Internship', 'Scholarship', 'Temporal'];
+  typeOfContract = ['Fixed', 'Internship', 'Scholarship', 'Temporal'];
+
 
   constructor(
     public occuprofilesService: OcuprofilesService,
