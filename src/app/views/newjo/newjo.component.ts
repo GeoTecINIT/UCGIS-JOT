@@ -130,6 +130,7 @@ export class NewjoComponent implements OnInit {
                 if (org) {
                   this.userOrgs.push(org);
                   this.saveOrg = this.userOrgs[0];
+                  this.setOrganization();
                 }
               });
             });
@@ -326,6 +327,17 @@ export class NewjoComponent implements OnInit {
     this.selectedProfiles.push(this.selectedProfile.title);
     this.model.occuProf.fields = [...this.model.occuProf.fields];
     this.model.occuProf.competences = [...this.model.occuProf.competences];
+  }
+
+  setOrganization() {
+    // iterate orgs to select right one
+    if (this.userOrgs.length > 0 && this.currentUser && this.model) {
+      this.userOrgs.forEach(o => {
+        if (o._id === this.model.orgId) {
+          this.saveOrg = o;
+        }
+      });
+    }
   }
 
   searchInBok(text: string) {
