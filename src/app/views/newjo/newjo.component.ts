@@ -106,6 +106,7 @@ export class NewjoComponent implements OnInit {
 
   typeOfContract = ['Fixed', 'Internship', 'Scholarship', 'Temporal'];
 
+
   constructor(
     public occuprofilesService: OcuprofilesService,
     private organizationService: OrganizationService,
