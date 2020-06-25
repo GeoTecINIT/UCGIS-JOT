@@ -40,7 +40,13 @@ export class NewjoComponent implements OnInit {
 
   selectedNodes = [];
   hasResults = false;
-  limitSearch = 5;
+  limitSearchFrom = 0;
+  limitSearchTo = 10;
+
+  observer: MutationObserver;
+  lastBoKTitle = 'GIST';
+
+  searchInputField = '';
   currentConcept = 'GIST';
 
   isfullESCOcompetences = false;
@@ -145,6 +151,18 @@ export class NewjoComponent implements OnInit {
   ngOnInit() {
     bok.visualizeBOKData('#bubbles', '#textBoK');
     this.getMode();
+
+    this.observer = new MutationObserver(mutations => {
+      mutations.forEach(mutation => {
+        if ((<any>mutation.target).children[1].innerText !== this.lastBoKTitle) {
+          this.lastBoKTitle = (<any>mutation.target).children[1].innerText;
+          this.hasResults = false;
+        }
+      });
+    });
+    const config = { attributes: true, childList: true, characterData: true };
+
+    this.observer.observe(this.textBoK.nativeElement, config);
   }
 
   filterOP() {
@@ -355,12 +373,24 @@ export class NewjoComponent implements OnInit {
     this.cleanTip();
   }
 
+  cleanResults() {
+    this.searchInputField = '';
+    bok.searchInBoK('');
+    this.navigateToConcept('GIST');
+  }
+
   cleanTip() {
     this.isShowingSkillsTip = false;
   }
 
   incrementLimit() {
-    this.limitSearch = this.limitSearch + 5;
+    this.limitSearchTo = this.limitSearchTo + 10;
+    this.limitSearchFrom = this.limitSearchFrom + 10;
+  }
+
+  decrementLimit() {
+    this.limitSearchTo = this.limitSearchTo - 10;
+    this.limitSearchFrom = this.limitSearchFrom - 10;
   }
 
   addExtraSkill(skill) {
