@@ -191,16 +191,12 @@
                 </div>
                 <div class="col-lg-6 col-sm-6 text-justify">
                   <div class="row text-left">
-                    <div class="col-md-4">
-                      <a (click)="navigateToConcept('GIST')" [hidden]="!hasResults || currentConcept == 'GIST'">
-                        < To full BoK </a>
-                    </div>
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                       <a (click)="hasResults = !hasResults; currentConcept=''"
                         *ngIf="!hasResults && currentConcept != 'GIST'">
                         < Back to search results </a>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                       <a (click)="hasResults = false; cleanResults()" *ngIf="hasResults">
                         &nbsp; X Clear search results </a>
                     </div>
@@ -215,7 +211,7 @@
                       {{ searchInput.value }}
                     </h3>
                     <div *ngFor="let item of selectedNodes; index as i">
-                      <div *ngIf="i < limitSearch">
+                      <div *ngIf="i < limitSearchTo && i >= limitSearchFrom">
                         <div class="inline">{{ item.nameShort }}</div>
                         <div class="inline" [innerHTML]="
                             item.name | truncate: 100:searchInput.value

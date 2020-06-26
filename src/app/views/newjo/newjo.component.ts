@@ -360,10 +360,14 @@ export class NewjoComponent implements OnInit {
   }
 
   searchInBok(text: string) {
-    this.selectedNodes = bok.searchInBoK(text);
-    this.hasResults = true;
-    this.currentConcept = '';
-    this.cleanTip();
+    if (text === '' || text === ' ') {
+      this.cleanResults();
+    } else {
+      this.selectedNodes = bok.searchInBoK(text);
+      this.hasResults = true;
+      this.currentConcept = '';
+      this.cleanTip();
+    }
   }
 
   navigateToConcept(conceptName) {
