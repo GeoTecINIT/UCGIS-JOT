@@ -324,17 +324,11 @@
                       bindLabel="preferredLabel" groupBy="reuseLevel" [multiple]="true" [searchFn]="customSearchFn"
                       placeholder="Search..." [clearSearchOnAdd]="true" [(ngModel)]="model.occuProf.competences"
                       [clearable]="false">
-                      <ng-template ng-optgroup-tmp let-item="item">
-                        {{item.reuseLevel || 'Unnamed group'}}
-                      </ng-template>
                     </ng-select>
                     <ng-select *ngIf="!isfullESCOcompetences" [items]="competences" name="competences"
                       bindLabel="preferredLabel" groupBy="reuseLevel" [multiple]="true" [searchFn]="customSearchFn"
                       placeholder="Search..." [clearSearchOnAdd]="true" [(ngModel)]="model.occuProf.competences"
                       [clearable]="false">
-                      <ng-template ng-optgroup-tmp let-item="item">
-                        {{item.reuseLevel || 'Unnamed group'}}
-                      </ng-template>
                     </ng-select>
                   </div>
                 </div>
@@ -351,9 +345,14 @@
                   </span>
                 </div>
                 <div class="col-md-6">
-                  <button *ngFor="let mc of model.occuProf.competences" type="button" class="btn btn-pill btn-primary"
-                    tooltip="Click to remove" (click)="removeCompetence(mc, model.occuProf.competences)">
-                    <i class="fa fa-close"></i> {{ mc.preferredLabel }}
+                  <button *ngFor="let mc of model.occuProf.competences" type="button" class="btn btn-pill"
+                    [ngClass]="mc.uri? 'btn-primary' : 'btn-secondary' ">
+                    <button type="button" class="btn btn-white" tooltip="Click to remove"
+                      (click)="removeCompetence(mc, model.occuProf.competences)">
+                      <i class="fa fa-close"></i>
+                    </button>
+                    <a *ngIf="mc.uri" href="{{mc.uri}}" target="_blank">{{ mc.preferredLabel }}</a>
+                    <span *ngIf="!mc.uri">{{ mc.preferredLabel }} </span>
                   </button>
                 </div>
               </div>
