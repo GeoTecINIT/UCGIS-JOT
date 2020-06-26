@@ -43,6 +43,19 @@ a {
   cursor: pointer;
 }
 
+button a {
+  color: white !important;
+  cursor: pointer;
+}
+
+button span {
+  color: white !important;
+}
+
+.btn-white {
+  color: white !important;
+}
+
 .skillsTip {
   padding-bottom: 10px;
   color: #ef9a3d;
