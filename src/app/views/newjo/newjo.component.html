@@ -296,6 +296,7 @@
                       <input #skillExtra type="text" class="form-control" id="skillExtra" placeholder="Custom skill"
                         name="skillExtra" (keydown.enter)="addExtraSkill(skillExtra.value); skillExtra.value= ''" />
                     </div>
+
                     <div class="col-md-2">
                       <button type="submit" class="btn btn-primary" tooltip="Add your custom skill."
                         (click)="addExtraSkill(skillExtra.value); skillExtra.value= ''">
@@ -303,6 +304,46 @@
                       </button>
                     </div>
                   </div>
+                  <div style="text-align: center">
+                    <a (click)="openModal(template)">Please see the guidelines to define skills</a>
+                  </div>
+                  <ng-template #template>
+                    <div class="modal-primary ">
+                        <div class="modal-header">
+                          <h4 class="modal-title pull-left">Guidelines</h4>
+                          <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                         <p style="text-align:justify;"> A skill represents the ability to apply knowledge and use know-how to complete tasks and solve problems in a certain occupational profile. Source: EQF and ECVET
+                          In the context of EO4GEO, it is formulated as <strong> verb + (BoK) concept relevant statement </strong>, using active voice, by the use of verbs from the Bloom's revised taxonomy. <br>
+                          Some examples of skills associated to BoK concepts are: </p>
+
+                          <p style="text-align:justify;"> <span>&#8226;</span> BoK concept - Skill <br>
+                            <span>&#8226;</span> Spatial simulation modelling - Perform a simulation experiment using available simulation software <br>
+                            <span>&#8226;</span> Data model and format conversion - Convert a data set from the native format of one GIS product to another <br>
+                            <span>&#8226;</span> Vagueness - Evaluate vagueness in the locations, time, attributes, and other aspects of geographic phenomena </p>
+
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                  <th *ngFor="let tax of taxonomy"> {{tax.name}}</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                                <ng-container *ngFor="let tax of taxonomy; index as a" >
+                                  <td>
+                                    <tr  *ngFor="let obj of tax.content; index as b" >
+                                      {{obj}}
+                                    </tr>
+                                  </td>
+                                </ng-container>
+                            </tbody>
+                          </table>
+                        </div>
+                    </div>
+                  </ng-template>
                 </div>
               </div>
             </div>
