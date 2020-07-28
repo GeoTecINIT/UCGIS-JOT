@@ -53,10 +53,17 @@ export class OcuprofilesService {
     op1.title = op1.title + ' - ' + op2.title;
     op1.description = op1.description + ' \n\n ' + op2.title + ' \n ' + op2.description;
     if (op2.fields) {
+      let found = false;
       op2.fields.forEach(f => {
-        if (op1.fields.indexOf(f) === -1) {
-          op1.fields.push(f);
+        op1.fields.forEach( cc2 => {
+          if ( cc2.name === f.name) {
+            found = true;
+          }
+        });
+        if (!found) {
+          op1.fields.push( f );
         }
+        found = false;
       });
     }
     if (op2.knowledge) {
@@ -88,10 +95,17 @@ export class OcuprofilesService {
       });
     }
     if (op2.competences) {
+      let found = false;
       op2.competences.forEach(cc => {
-        if (op1.competences.indexOf(cc) === -1) {
-          op1.competences.push(cc);
+        op1.competences.forEach( cc2 => {
+          if ( cc2.preferredLabel === cc.preferredLabel) {
+            found = true;
+          }
+        });
+        if (!found) {
+          op1.competences.push( cc );
         }
+        found = false;
       });
     }
     // op1.fields = op1.fields ? op2.fields ? op1.fields.concat(op2.fields) : op1.fields : [];
