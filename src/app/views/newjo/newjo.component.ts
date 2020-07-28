@@ -416,6 +416,8 @@ export class NewjoComponent implements OnInit {
       this.hasResults = true;
       this.currentConcept = '';
       this.cleanTip();
+      this.limitSearchFrom = 0;
+      this.limitSearchTo = 10;
     }
   }
 
