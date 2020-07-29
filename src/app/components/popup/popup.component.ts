@@ -294,6 +294,18 @@ export class PopupComponent implements OnInit {
       currentLinePoint = currentLinePoint + 4 * coLines.length;
     }
 
+    if (this.selectedJobOffer.contactDetails) {
+      currentLinePoint = currentLinePoint + 10;
+      doc.setFontSize(12).setTextColor('#1a80b6').setFontType('bold'); // headline
+      doc.text(30, currentLinePoint, 'Contact details');
+      currentLinePoint = currentLinePoint + 5;
+      doc.setTextColor('#000').setFontType('normal').setFontSize(8); // normal text
+      currentLinePoint = this.checkEndOfPage(currentLinePoint, doc);
+      const coLines = doc.setFontSize(8).splitTextToSize(this.selectedJobOffer.contactDetails, 150);
+      doc.text(30, currentLinePoint, coLines);
+      currentLinePoint = currentLinePoint + 4 * coLines.length;
+    }
+
     // doc.textWithLink('asdfasdf', 20, 260, { url: 'https://' });
     doc.save(this.selectedJobOffer.occuProf.title + '.pdf');
   }
@@ -311,73 +323,109 @@ export class PopupComponent implements OnInit {
 
     getCompetences ( data: any ) {
         let resultCompetences = '';
-        data.competences.forEach( competence => {
+        if ( data.competences && data.competences.length > 0 ) {
+          data.competences.forEach( competence => {
+            const uri = competence.uri ? competence.uri : '';
+            const type = competence.skillType ? competence.skillType : '';
+            const level = competence.reuseLevel ? competence.reuseLevel : '';
+            const preferred = competence.preferredLabel ? competence.preferredLabel : '';
+            const description = competence.description ? competence.uri : '';
             resultCompetences = resultCompetences + '<rdf:li>' +
-                '<rdf:Description rdf:about="' + competence.uri  + '">' +
-                '<esco:skillType>' + competence.skillType + '</esco:skillType>' +
-                '<esco:reuseLevel>' + competence.reuseLevel + '</esco:reuseLevel>' +
-                '<esco:preferredLabel>' + competence.preferredLabel + '</esco:preferredLabel>' +
-                '<esco:description>' + competence.description + '</esco:description>' +
-                '</rdf:Description>' + ' </rdf:li>';
-        });
+              '<rdf:Description rdf:about="' + uri  + '">' +
+              '<esco:skillType>' + type + '</esco:skillType>' +
+              '<esco:reuseLevel>' + level + '</esco:reuseLevel>' +
+              '<esco:preferredLabel>' + preferred + '</esco:preferredLabel>' +
+              '<esco:description>' + description + '</esco:description>' +
+              '</rdf:Description>' + ' </rdf:li>';
+          });
+        }
         return resultCompetences;
     }
 
     getCustomCompetences ( data: any ) {
         let resultCompetences = '';
-        data.customCompetences.forEach( competence => {
+        if ( data.customCompetences && data.customCompetences.length > 0 ) {
+          data.customCompetences.forEach( competence => {
             resultCompetences = resultCompetences + '<rdf:li>' + competence + ' </rdf:li>';
-        });
+          });
+        }
         return resultCompetences;
     }
 
     getFields ( data: any ) {
-        let resultFields = '';
-            resultFields = resultFields + '<rdf:li>' + data.field.greatgrandparent + ' </rdf:li>' +
-                '<rdf:li>' + data.field.code + ' </rdf:li>' +
-                '<rdf:li>' + data.field.grandparent + ' </rdf:li>' +
-                '<rdf:li>' + data.field.name + ' </rdf:li>' +
-                '<rdf:li>' + data.field.concatName + ' </rdf:li>' +
-                '<rdf:li>' + data.field.parent + ' </rdf:li>';
+      let resultFields = '';
+      if ( data.field ) {
+        resultFields = resultFields + '<rdf:li>' + data.field.name + ' </rdf:li>';
+      } else if ( data.fields && data.fields.length > 0 ) {
+        data.fields.forEach(field => {
+          resultFields = resultFields + '<rdf:li>' + field.name + ' </rdf:li>';
+        });
+      }
         return resultFields;
     }
 
     getKnowledge ( data: any ) {
-        const occPro = 'https://eo4geo-opt.web.app/#/detail/';
+        const occPro = 'https://bok.eo4geo.eu/';
         let resultKnowledges = '';
-        data.knowledge.forEach( know => {
+        if ( data.knowledge && data.knowledge.length > 0 ) {
+          data.knowledge.forEach( know => {
+            const code = know.split(']', 1)[0].split('[', 2)[1] !== undefined ? occPro + know.split(']', 1)[0].split('[', 2)[1] : '';
             resultKnowledges = resultKnowledges + '<rdf:li>' +
-                '<rdf:Description rdf:about="' + occPro + '">' +
-                '<know:knowledge>' + know + '</know:knowledge>' +
-                '</rdf:Description>' + ' </rdf:li>';
-        });
+              '<rdf:Description rdf:about="' +  code + '">' +
+              '<know:knowledge>' + know + '</know:knowledge>' +
+              '</rdf:Description>' + ' </rdf:li>';
+          });
+        }
         return resultKnowledges;
     }
 
     getSkills ( data: any ) {
-        const urlSkills = 'https://eo4geo-opt.web.app/#/detail/';
+        const urlSkills = 'https://bok.eo4geo.eu/';
         let resultSkills = '';
-        data.skills.forEach( skill => {
+        if ( data.skills && data.skills.length > 0 ) {
+          data.skills.forEach( skill => {
+            const code = skill.split(']', 1)[0].split('[', 2)[1] !== undefined ?  urlSkills + skill.split(']', 1)[0].split('[', 2)[1] : '';
             resultSkills = resultSkills + '<rdf:li>' +
-                '<rdf:Description rdf:about="' + urlSkills + skill.split(']', 1)[0].split('[', 2)[1] + '">' +
-                '<skill:skill>' + skill + '</skill:skill>' +
-                '</rdf:Description>' + ' </rdf:li>';
-        });
+              '<rdf:Description rdf:about="' + code + '">' +
+              '<skill:skill>' + skill + '</skill:skill>' +
+              '</rdf:Description>' + ' </rdf:li>';
+          });
+        }
         return resultSkills;
     }
     getAdditionalQuestions ( data: any ) {
         let resultQuestions = '';
-        data.additionalQuestions.forEach( question => {
-            resultQuestions = resultQuestions + '<rdf:li>' + question + ' </rdf:li>';
-        });
+        if ( data.additionalQuestions ) {
+          resultQuestions = resultQuestions + '<rdf:li>' + data.additionalQuestions + ' </rdf:li>';
+        }
         return resultQuestions;
     }
     getLanguages ( data: any ) {
         let resultLanguages = '';
-        data.languages.forEach( language => {
-            resultLanguages = resultLanguages + '<rdf:li>' + language + ' </rdf:li>';
-        });
+        if ( data.languages && data.languages.length > 0 ) {
+          data.languages.forEach( language => {
+            resultLanguages = resultLanguages + '<rdf:li>' + language.name.replace('&', ' ') + ' </rdf:li>';
+          });
+        }
         return resultLanguages;
+    }
+    getTools ( data: any ) {
+      let resultLanguages = '';
+      if ( data.toolsRequired && data.toolsRequired.length > 0 ) {
+        data.toolsRequired.forEach( tool => {
+          resultLanguages = resultLanguages + '<rdf:li>' + tool.name.replace('&', ' ') + ' </rdf:li>';
+        });
+      }
+      return resultLanguages;
+    }
+    getDataSet ( data: any ) {
+      let resultLanguages = '';
+      if ( data.dataRequired && data.dataRequired.length > 0 ) {
+        data.dataRequired.forEach( dataSet => {
+          resultLanguages = resultLanguages + '<rdf:li>' + dataSet.name.replace('&', ' ') + ' </rdf:li>';
+        });
+      }
+      return resultLanguages;
     }
     getOccupationProfiles(data: any) {
         const urlOCP = 'https://eo4geo-opt.web.app/#/detail/';
@@ -419,18 +467,27 @@ export class PopupComponent implements OnInit {
     }
     createRDFFile(data: any) {
         const header = this.headerRDF(data);
+        const salaryMax = data.salaryMax ? data.salaryMax : '';
+        const salaryMin = data.salaryMin ? data.salaryMin : '';
+        const typeContract = data.typeContract ? data.typeContract : '';
+        const contactDetails = data.contactDetails ? data.contactDetails : '';
+        const motivationLetter =  data.motivationLetter ?  data.motivationLetter : '';
+        const dedication = data.dedication ? data.dedication : '';
         const description = '<jot:occupationProfile> <rdf:Bag rdf:ID="occupationProfile"> ' + this.getOccupationProfiles(data.occuProf) +
             '</rdf:Bag> </jot:occupationProfile>' +
             '<jot:additionalQuestions> <rdf:Bag rdf:ID="additionalQuestions"> ' + this.getAdditionalQuestions(data) + '</rdf:Bag> </jot:additionalQuestions>' +
+            '<jot:tools> <rdf:Bag rdf:ID="toolsRequired"> ' + this.getTools(data) + ' </rdf:Bag> </jot:tools>' +
+            '<jot:dataset> <rdf:Bag rdf:ID="dataRequired"> ' + this.getDataSet(data) + ' </rdf:Bag> </jot:dataset>' +
             '<jot:languages> <rdf:Bag rdf:ID="languages"> ' + this.getLanguages(data) + ' </rdf:Bag> </jot:languages>' +
-            '<jot:dedication> ' + data.dedication + '</jot:dedication>' +
+            '<jot:dedication> ' + dedication + '</jot:dedication>' +
             '<jot:isPublic> ' + data.isPublic + '</jot:isPublic>' +
             '<jot:location> ' + data.location + '</jot:location>' +
-            '<jot:motivationLetter> ' + data.motivationLetter + '</jot:motivationLetter>' +
+            '<jot:motivationLetter> ' + motivationLetter + '</jot:motivationLetter>' +
             '<jot:orgName> ' + data.orgName + '</jot:orgName>' +
-            '<jot:salaryMax> ' + data.salaryMax + '</jot:salaryMax>' +
-            '<jot:salaryMin> ' + data.salaryMin + '</jot:salaryMin>' +
-            '<jot:typeContract> ' + data.typeContract + '</jot:typeContract>' +
+            '<jot:salaryMax> ' + salaryMax + '</jot:salaryMax>' +
+            '<jot:salaryMin> ' + salaryMin + '</jot:salaryMin>' +
+            '<jot:typeContract> ' + typeContract + '</jot:typeContract>' +
+            '<jot:contactDetails> ' + contactDetails + '</jot:contactDetails>' +
             '</rdf:Description>';
         return header +
             description +
