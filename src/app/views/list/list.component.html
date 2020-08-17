@@ -29,7 +29,7 @@
                   </button>
                 </span>
                 <input class="form-control" id="input1-group2" type="search" name="input1-group2" placeholder="Search"
-                  autocomplete="search" [(ngModel)]="searchText" (keyup)="filter()" />
+                  autocomplete="search" [(ngModel)]="searchText" (ngModelChange)="filter()" />
               </div>
             </div>
             <div class="col-sm-4 col-md-2">
@@ -46,7 +46,7 @@
                     <span class="input-group-prepend">
                       <label class="switch switch-label switch-pill switch-outline-primary-alt">
                         <input class="switch-input" type="checkbox" value="knowledges" [(ngModel)]="knowledgeFilter"
-                          checked />
+                          checked (change)="filter()" />
                         <span class="switch-slider" data-checked="✓" data-unchecked="X"></span>
                       </label>
                       <div class="pl-1">Knowledges</div>
@@ -56,7 +56,7 @@
                     <!-- Skills checkbox -->
                     <span class="input-group-prepend">
                       <label class="switch switch-label switch-pill switch-outline-primary-alt">
-                        <input class="switch-input" type="checkbox" value="skills" [(ngModel)]="skillFilter" checked />
+                        <input class="switch-input" type="checkbox" value="skills" [(ngModel)]="skillFilter" checked  (change)="filter()" />
                         <span class="switch-slider" data-checked="✓" data-unchecked="X"></span>
                       </label>
                       <div class="pl-1">Skills</div>
@@ -67,7 +67,7 @@
                     <span class="input-group-prepend">
                       <label class="switch switch-label switch-pill switch-outline-primary-alt">
                         <input class="switch-input" type="checkbox" value="competences" [(ngModel)]="competencesFilter"
-                          checked />
+                          checked  (change)="filter()" />
                         <span class="switch-slider" data-checked="✓" data-unchecked="X"></span>
                       </label>
                       <div class="pl-1">Transversal skills</div>
