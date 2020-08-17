@@ -24,14 +24,14 @@
                   </button>
                 </div>
                 <div class="cols-xs-2 col-md-3 no-padding"
-                  tooltip="{{isAnonymous? 'Login to be able to edit' : selectedOffer.userId==afAuth.auth.currentUser?.uid?  'Edit' : 'You can edit only your own job offers'}}">
+                  tooltip="{{isAnonymous? 'Login to be able to edit' : (currentUser?.organizations?.indexOf(selectedOffer.orgId) > -1)?  'Edit' : 'You can edit only your own or your organization job offers'}}">
                   <button type="button" class="btn btn-block btn-link" routerLink="/newjo/copy/{{ selectedOffer._id }}"
                     [disabled]="isAnonymous || (currentUser?.organizations?.indexOf(selectedOffer.orgId) == -1)">
                     <i class="fa fa-edit fa-lg"></i>
                   </button>
                 </div>
                 <div class="cols-xs-2 col-md-3 no-padding"
-                  tooltip="{{isAnonymous? 'Login to be able to remove' : selectedOffer.userId==afAuth.auth.currentUser?.uid?  'Remove' : 'You can remove only your own job offers'}}">
+                  tooltip="{{isAnonymous? 'Login to be able to remove' : (currentUser?.organizations?.indexOf(selectedOffer.orgId) > -1)?  'Remove' : 'You can remove only your own or your organization job offers'}}">
                   <button type="button" class="btn btn-block btn-link" data-toggle="modal" (click)="dangerModal.show()"
                     [disabled]="isAnonymous || (currentUser?.organizations?.indexOf(selectedOffer.orgId) == -1)">
                     <i class="fa fa-trash-o fa-lg"></i>
