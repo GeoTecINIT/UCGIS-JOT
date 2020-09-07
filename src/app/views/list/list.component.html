@@ -29,7 +29,7 @@
                   </button>
                 </span>
                 <input class="form-control" id="input1-group2" type="search" name="input1-group2" placeholder="Search"
-                  autocomplete="search" [(ngModel)]="searchText" (keyup)="filter()" />
+                  autocomplete="search" [(ngModel)]="searchText" (ngModelChange)="filter()" />
               </div>
             </div>
             <div class="col-sm-4 col-md-2">
@@ -46,7 +46,7 @@
                     <span class="input-group-prepend">
                       <label class="switch switch-label switch-pill switch-outline-primary-alt">
                         <input class="switch-input" type="checkbox" value="knowledges" [(ngModel)]="knowledgeFilter"
-                          checked />
+                          checked (change)="filter()" />
                         <span class="switch-slider" data-checked="✓" data-unchecked="X"></span>
                       </label>
                       <div class="pl-1">Knowledges</div>
@@ -56,7 +56,7 @@
                     <!-- Skills checkbox -->
                     <span class="input-group-prepend">
                       <label class="switch switch-label switch-pill switch-outline-primary-alt">
-                        <input class="switch-input" type="checkbox" value="skills" [(ngModel)]="skillFilter" checked />
+                        <input class="switch-input" type="checkbox" value="skills" [(ngModel)]="skillFilter" checked  (change)="filter()" />
                         <span class="switch-slider" data-checked="✓" data-unchecked="X"></span>
                       </label>
                       <div class="pl-1">Skills</div>
@@ -67,7 +67,7 @@
                     <span class="input-group-prepend">
                       <label class="switch switch-label switch-pill switch-outline-primary-alt">
                         <input class="switch-input" type="checkbox" value="competences" [(ngModel)]="competencesFilter"
-                          checked />
+                          checked  (change)="filter()" />
                         <span class="switch-slider" data-checked="✓" data-unchecked="X"></span>
                       </label>
                       <div class="pl-1">Transversal skills</div>
@@ -82,9 +82,9 @@
           <div class="row">
             <div class="col-sm-12 col-md-6 text-center">
               Sort by:
-           <!--  </div> -->
-            <!-- sortedBy -->
-             <button type="button" class="btn btn-link" (click)="sortBy('lastUpdated');">
+              <!--  </div> -->
+              <!-- sortedBy -->
+              <button type="button" class="btn btn-link" (click)="sortBy('lastUpdated');">
                 <i [ngClass]="sortUpdAsc? 'fa fa-arrow-down' : 'fa fa-arrow-up'"></i>
                 <span [ngClass]="sortedBy == 'lastUpdated'? 'bolder' : ''">Last updated</span>
               </button>
@@ -121,10 +121,11 @@
             </div>
           </div>
 
-          <div *ngFor="let jo of filteredJobOffers| slice:paginationLimitFrom:paginationLimitTo; let i=index" class="row">
+          <div *ngFor="let jo of filteredJobOffers| slice:paginationLimitFrom:paginationLimitTo; let i=index"
+            class="row">
             <div class="col-md-10">
-              <button type="button" class="btn text-justify" routerLink="/detail/{{ jo._id }}">
-                <span>
+              <a href="#" class="no-decoration" style="margin-bottom: 0.75em;" routerLink="/detail/{{ jo._id }}">
+                <span class="text-normal">
                   <h1 style="display: inline;">{{ jo.occuProf.title }}</h1>
                   <a href="#" routerLink="/organizationdetails/{{ jo.orgId }}">
                     <h6 *ngIf="!jo.isPublic" style="display: inline;" class="text-level">Draft</h6>
@@ -139,7 +140,7 @@
                   {{jo.updatedAt.toDate() | date:'dd-MMM-yyyy'}}
                 </span>
                 <p>{{ jo.occuProf.description }}</p>
-              </button>
+              </a>
             </div>
 
             <div class="col-md-2">
@@ -158,14 +159,14 @@
                   </button>
                 </div>
                 <div class="col-3 col-sm-3 col-md-3 no-padding"
-                  tooltip="{{isAnonymous? 'Login to be able to edit' : jo.userId==afAuth.auth.currentUser?.uid?  'Edit' : 'You can edit only your own job offers'}}">
+                  tooltip="{{isAnonymous? 'Login to be able to edit' : (currentUser?.organizations?.indexOf(jo.orgId) > -1)?  'Edit' : 'You can edit only your own or your organization job offers'}}">
                   <button type="button" class="btn btn-block btn-link" routerLink="/newjo/copy/{{ jo._id }}"
                     [disabled]="isAnonymous || (currentUser?.organizations?.indexOf(jo.orgId) == -1)">
                     <i class="fa fa-edit fa-lg mt-4"></i>
                   </button>
                 </div>
                 <div class="col-3 col-sm-3 col-md-3 no-padding"
-                  tooltip="{{isAnonymous? 'Login to be able to remove' : jo.userId==afAuth.auth.currentUser?.uid?  'Remove' : 'You can remove only your own job offers'}}">
+                  tooltip="{{isAnonymous? 'Login to be able to remove' : (currentUser?.organizations?.indexOf(jo.orgId) > -1)?  'Remove' : 'You can remove only your own or your organization job offers'}}">
                   <button type="button" class="btn btn-block btn-link" data-toggle="modal" (click)="dangerModal.show()"
                     [disabled]="isAnonymous || (currentUser?.organizations?.indexOf(jo.orgId) == -1)">
                     <i class="fa fa-trash-o fa-lg mt-4"></i>

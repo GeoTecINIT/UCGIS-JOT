@@ -81,7 +81,7 @@
                   <div class="col-md-8">
                     <div class="form-group">
                       <label for="title">Title</label>
-                      <input type="text" class="form-control" id="title" placeholder="Title"
+                      <input type="text" class="form-control" id="title" placeholder="Title" maxlength="100"
                         [(ngModel)]="model.occuProf.title" name="title" required />
                     </div>
                   </div>
@@ -294,12 +294,14 @@
                     </div>
                     <div class="col-md-6">
                       <input #skillExtra type="text" class="form-control" id="skillExtra" placeholder="Custom skill"
-                        name="skillExtra" (keydown.enter)="addExtraSkill(skillExtra.value); skillExtra.value= ''" />
+                        name="skillExtra" (keydown.enter)="addExtraSkill(skillExtra.value); skillExtra.value= ''"
+                        (keyup)="skillExtra.value" maxlength="150"  />
                     </div>
 
                     <div class="col-md-2">
                       <button type="submit" class="btn btn-primary" tooltip="Add your custom skill."
-                        (click)="addExtraSkill(skillExtra.value); skillExtra.value= ''">
+                        (click)="addExtraSkill(skillExtra.value); skillExtra.value= ''"
+                        [disabled]="skillExtra.value == ''">
                         Add Skill
                       </button>
                     </div>
@@ -309,39 +311,45 @@
                   </div>
                   <ng-template #template>
                     <div class="modal-primary ">
-                        <div class="modal-header">
-                          <h4 class="modal-title pull-left">Guidelines</h4>
-                          <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-                            <span aria-hidden="true">&times;</span>
-                          </button>
-                        </div>
-                        <div class="modal-body">
-                         <p style="text-align:justify;"> A skill represents the ability to apply knowledge and use know-how to complete tasks and solve problems in a certain occupational profile. Source: EQF and ECVET
-                          In the context of EO4GEO, it is formulated as <strong> verb + (BoK) concept relevant statement </strong>, using active voice, by the use of verbs from the Bloom's revised taxonomy. <br>
+                      <div class="modal-header">
+                        <h4 class="modal-title pull-left">Guidelines</h4>
+                        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <p style="text-align:justify;"> A skill represents the ability to apply knowledge and use
+                          know-how to complete tasks and solve problems in a certain occupational profile. Source: EQF
+                          and ECVET
+                          In the context of EO4GEO, it is formulated as <strong> verb + (BoK) concept relevant statement
+                          </strong>, using active voice, by the use of verbs from the Bloom's revised taxonomy. <br>
                           Some examples of skills associated to BoK concepts are: </p>
 
-                          <p style="text-align:justify;"> <span>&#8226;</span> BoK concept - Skill <br>
-                            <span>&#8226;</span> Spatial simulation modelling - Perform a simulation experiment using available simulation software <br>
-                            <span>&#8226;</span> Data model and format conversion - Convert a data set from the native format of one GIS product to another <br>
-                            <span>&#8226;</span> Vagueness - Evaluate vagueness in the locations, time, attributes, and other aspects of geographic phenomena </p>
+                        <p style="text-align:justify;"> <span>&#8226;</span> BoK concept - Skill <br>
+                          <span>&#8226;</span> Spatial simulation modelling - Perform a simulation experiment using
+                          available simulation software <br>
+                          <span>&#8226;</span> Data model and format conversion - Convert a data set from the native
+                          format of one GIS product to another <br>
+                          <span>&#8226;</span> Vagueness - Evaluate vagueness in the locations, time, attributes, and
+                          other aspects of geographic phenomena </p>
 
-                          <table class="table">
-                            <thead>
-                              <tr>
-                                  <th *ngFor="let tax of taxonomy"> {{tax.name}}</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                                <ng-container *ngFor="let tax of taxonomy; index as a" >
-                                  <td>
-                                    <tr  *ngFor="let obj of tax.content; index as b" >
-                                      {{obj}}
-                                    </tr>
-                                  </td>
-                                </ng-container>
-                            </tbody>
-                          </table>
-                        </div>
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              <th *ngFor="let tax of taxonomy"> {{tax.name}}</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <ng-container *ngFor="let tax of taxonomy; index as a">
+                              <td>
+                                <tr *ngFor="let obj of tax.content; index as b">
+                                  {{obj}}
+                                </tr>
+                              </td>
+                            </ng-container>
+                          </tbody>
+                        </table>
+                      </div>
                     </div>
                   </ng-template>
                 </div>
@@ -413,7 +421,7 @@
                 <div class="col-md-6">
                   <input #competenceExtra type="text" class="form-control" id="competenceExtra"
                     placeholder="Custom transversal skill" name="competenceExtra"
-                    (keyup)="competenceExtraAdd.disabled = false"
+                    (keyup)="competenceExtraAdd.disabled = false" maxlength="150" 
                     (keydown.enter)="addExtraCompetence(competenceExtra.value); competenceExtra.value= ''; competenceExtraAdd.disabled = true" />
                 </div>
                 <div class="col-md-2">
