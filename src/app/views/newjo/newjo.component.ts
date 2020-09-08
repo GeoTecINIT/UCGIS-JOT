@@ -25,7 +25,7 @@ export class NewjoComponent implements OnInit {
 
   // model = new OcupationalProfile('', '', '', '', null, 1, [], [], [], [], []);
   // tslint:disable-next-line:max-line-length
-  model = new JobOffer('', '', '', '', new OcupationalProfile('', '', '', '', '', '', [], 1, [], [], [], [], [], '', false, null, null), [], '', '', '', 0, 0, [], false, false, [], [], 0, new Date().toDateString(), null, null, '');
+  model = new JobOffer('', '', '', '', '', new OcupationalProfile('', '', '', '', '' , '', '', [], 1, [], [], [], [], [], '', false, null, null), [], '', '', '', 0, 0, [], false, false, [], [], 0, new Date().toDateString(), null, null, '');
 
   public value: string[];
   public current: string;
@@ -160,6 +160,9 @@ export class NewjoComponent implements OnInit {
 
   typeOfContract = ['Fixed', 'Internship', 'Scholarship', 'Temporal'];
 
+  userDivisions: string[] = [];
+  saveDiv = '';
+
 
   constructor(
     public occuprofilesService: OcuprofilesService,
@@ -187,6 +190,7 @@ export class NewjoComponent implements OnInit {
                   this.userOrgs.push(org);
                   this.saveOrg = this.userOrgs[0];
                   this.setOrganization();
+                  this.loadDivisions();
                 }
               });
             });
@@ -352,6 +356,7 @@ export class NewjoComponent implements OnInit {
     this.model.orgId = this.saveOrg._id;
     this.model.orgName = this.saveOrg.name;
     this.model.isPublic = this.model.isPublic;
+    this.model.division = this.saveDiv;
     this.model.lastModified = new Date().toDateString();
     if (this.mode === 'copy') {
       this.jobOfferService.updateJobOffer(this._id, this.model);
@@ -403,6 +408,7 @@ export class NewjoComponent implements OnInit {
       this.userOrgs.forEach(o => {
         if (o._id === this.model.orgId) {
           this.saveOrg = o;
+          this.loadDivisions();
         }
       });
     }
@@ -493,4 +499,10 @@ export class NewjoComponent implements OnInit {
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template, {class: 'modal-lg'});
   }
+
+  loadDivisions() {
+    this.userDivisions = this.saveOrg.divisions ? this.saveOrg.divisions : [];
+    this.saveDiv = this.model ? this.model.division ? this.model.division : '' : '';
+  }
+
 }

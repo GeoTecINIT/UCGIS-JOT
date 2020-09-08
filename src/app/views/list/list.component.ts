@@ -7,8 +7,9 @@ import { FormControl } from '@angular/forms';
 import { ModalDirective, ModalOptions } from 'ngx-bootstrap/modal';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { UserService, User } from '../../services/user.service';
-import { OrganizationService } from '../../services/organization.service';
+import { OrganizationService, Organization } from '../../services/organization.service';
 import { ActivatedRoute } from '@angular/router';
+import * as cloneDeep from 'lodash/cloneDeep';
 
 @Component({
   selector: 'app-list',
@@ -80,6 +81,21 @@ export class ListComponent implements OnInit {
           this.sortBy('lastUpdated');
         });
     });
+    this.organizationService.subscribeToOrganizations().subscribe(orgs => {
+      let allOrgsWithDiv = [];
+      orgs.forEach(o => {
+        let copyOrg = cloneDeep(o);
+        copyOrg.description = o.name;
+        allOrgsWithDiv.push(copyOrg);
+        if (o.divisions) {
+          o.divisions.forEach(d => {
+            let copyOrg = cloneDeep(o);
+            copyOrg.description = o.name + ' - ' + d;
+            allOrgsWithDiv.push(copyOrg);
+          });
+        }
+      });
+    });
   }
 
   ngOnInit() {
@@ -98,13 +114,21 @@ export class ListComponent implements OnInit {
     this.paginationLimitFrom = 0;
     this.paginationLimitTo = this.LIMIT_PER_PAGE;
     this.currentPage = 0;
+    this.jobOffers.forEach(sp => {
+      if (!sp.division) {
+        sp.division = '';
+      }
+    });
     const search = this.searchText.toLowerCase();
     this.filteredJobOffers = [];
     this.filteredJobOffers = this.jobOffers.filter(
       it =>
         it.occuProf.title.toLowerCase().includes(search) ||
-        it.occuProf.description.toLowerCase().includes(search)
-    );
+        it.occuProf.description.toLowerCase().includes(search) ||
+        it.orgName.toLowerCase().includes(search) ||
+        it.division.toLowerCase().includes(search)
+
+  );
     if (this.advancedSearch) {
       this.applyFilters();
     }
