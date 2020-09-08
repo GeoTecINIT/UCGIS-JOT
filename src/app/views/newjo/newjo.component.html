@@ -5,12 +5,15 @@
       <div class="card card-accent-primary">
         <div class="card-header">
           <div class="row">
-            <div class="col-sm-4 col-md-4">
-              <p *ngIf="userOrgs.length > 0" class="text-right">Save under organization </p>
+            <div class="col-sm-3 col-md-3">
+              <p *ngIf="userOrgs.length > 0" class="text-right"><span
+                style="display:inline-table; margin:2px"
+                tooltip="You can select an organization if you are member of it. Select a division or leave it empty. Division is not compulsory but it's useful to have the content organized."
+                class="badge badge-primary badge-pill">i</span> Save under organization </p>
             </div>
-            <div class="col-sm-4 col-md-4">
+            <div class="col-sm-3 col-md-3">
               <ng-select *ngIf="userOrgs.length > 0 && userOrgs.length == currentUser.organizations.length"
-                [items]="userOrgs" name="userOrgs" bindLabel="name" [multiple]="false" [(ngModel)]="saveOrg">
+                [items]="userOrgs" name="userOrgs" bindLabel="name" [multiple]="false" [(ngModel)]="saveOrg" (change)="loadDivisions()">
                 <ng-template ng-optgroup-tmp let-item="item">
                   {{item.name}}
                 </ng-template>
@@ -20,7 +23,19 @@
                 &nbsp;You need to join or create an organization before you can save an occupational profile.
               </button>
             </div>
-            <div class="col-sm-4 offset-md-2 col-md-2 text-right">
+            <div class="col-sm-6 col-md-2">
+              <p *ngIf="userOrgs.length > 0" class="text-right">Division </p>
+            </div>
+            <div class="col-sm-6 col-md-2">
+              <ng-select *ngIf="userDivisions.length > 0" [items]="userDivisions" name="userDivisions" bindLabel="name"
+                         [multiple]="false" [(ngModel)]="saveDiv">
+                <ng-template ng-optgroup-tmp let-item="item">
+                  {{item}}
+                </ng-template>
+              </ng-select>
+
+            </div>
+            <div class="col-sm-4 col-md-2 text-right">
               <button type="submit" class="btn btn-pill btn-primary" (click)="saveOccuProfile()" routerLink="/list"
                 *ngIf="model.occuProf.title != '' && model.occuProf.description != '' ">
                 Save
@@ -33,10 +48,10 @@
             </div>
           </div>
           <div class="row" *ngIf="mode!='copy' && mode!='duplicate' && allProfiles && allProfiles.length> 0">
-            <div class="col-md-4 text-right">
+            <div class="col-md-3 text-right">
               Fill your job offer based on
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
               <ng-select [items]="allProfiles" name="field" bindLabel="title" [multiple]="false"
                 [(ngModel)]="selectedProfile" (change)="fillFormWithOP()">
                 <ng-template ng-optgroup-tmp let-item="item">
@@ -421,7 +436,7 @@
                 <div class="col-md-6">
                   <input #competenceExtra type="text" class="form-control" id="competenceExtra"
                     placeholder="Custom transversal skill" name="competenceExtra"
-                    (keyup)="competenceExtraAdd.disabled = false" maxlength="150" 
+                    (keyup)="competenceExtraAdd.disabled = false" maxlength="150"
                     (keydown.enter)="addExtraCompetence(competenceExtra.value); competenceExtra.value= ''; competenceExtraAdd.disabled = true" />
                 </div>
                 <div class="col-md-2">

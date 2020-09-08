@@ -129,7 +129,7 @@
                   <h1 style="display: inline;">{{ jo.occuProf.title }}</h1>
                   <a href="#" routerLink="/organizationdetails/{{ jo.orgId }}">
                     <h6 *ngIf="!jo.isPublic" style="display: inline;" class="text-level">Draft</h6>
-                    <h6 style="display: inline;" class="text-level text-secondary">{{ jo.orgName }}</h6>
+                    <h6 style="display: inline;" class="text-level text-secondary">{{ jo.orgName }}<span *ngIf="jo.division"> - {{ jo.division }} </span></h6>
                   </a>
                   <br>
                   {{ jo.occuProf.knowledge.length }} Knowledge |
