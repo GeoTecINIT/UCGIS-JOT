@@ -20,7 +20,7 @@
               </ng-select>
               <button *ngIf="userOrgs.length == 0" type="button" class="btn btn-block btn-link text-secondary"
                 routerLink="/organization">
-                &nbsp;You need to join or create an organization before you can save an occupational profile.
+                &nbsp;You need to join or create an organization before you can save a job offer.
               </button>
             </div>
             <div class="col-sm-6 col-md-2">
@@ -81,7 +81,7 @@
 
         </div>
         <!-- card body -->
-        <div class="card-body">
+        <div [hidden]="userOrgs.length == 0" class="card-body">
           <form #newOPForm="ngForm">
             <!-- general info card -->
             <div class="card card-accent-secondary">
