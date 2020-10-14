@@ -1,4 +1,14 @@
-## Job Offer Tool - EO4GEO
+## EO4GEO - Job Offer Tool (JOT)
+
+#### Introduction
+
+The Job Offer Tool (JOT) allows users to create job and training offers in the field of Earth Observation and Geographic Information. These offers can be based on an occupational profile – a prototypical function description in the field – or created from scratch. Job offers use the EO4GEO BoK to precisely describe EO/GI-specific concepts and skills, and the [European Skills/Competences and Occupation (ESCO)](https://ec.europa.eu/esco/portal/skill) classification for transversal skills. For a better dissemination JOT allows sharing and exporting a job offer in different formats.
+
+#### Authors
+The EO4GEO BoK tools are developed by the [Geospatial Technologies Research Group](http://geotec.uji.es/) (GEOTEC) from the University Jaume I, Castellón (Spain) and are Licenced under GNU GPLv3.
+
+
+## Installation
 
 #### Prerequisites
 Before you begin, make sure your development environment includes `Node.js®` and an `npm` package manager.
@@ -15,8 +25,6 @@ Install the Angular CLI globally using a terminal/console window.
 npm install -g @angular/cli
 ```
 
-## Installation
-
 ### Clone repo
 
 ``` bash
@@ -29,6 +37,9 @@ $ cd my-project
 # install app's dependencies
 $ npm install
 ```
+
+## Firebase
+Set up a Firebase project, and copy keys to src/environments/environments.ts 
 
 ## Usage
 
