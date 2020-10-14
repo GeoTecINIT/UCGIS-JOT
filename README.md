@@ -2,7 +2,7 @@
 
 #### Introduction
 
-The Job Offer Tool (JOT) allows users to create job and training offers in the field of Earth Observation and Geographic Information. These offers can be based on an occupational profile – a prototypical function description in the field – or created from scratch. Job offers use the EO4GEO BoK to precisely describe EO/GI-specific concepts and skills, and the [European Skills/Competences and Occupation (ESCO)](https://ec.europa.eu/esco/portal/skill) classification for transversal skills. For a better dissemination JOT allows sharing and exporting a job offer in different formats.
+The [Job Offer Tool (JOT)](https://eo4geo-jot.web.app) allows users to create job and training offers in the field of Earth Observation and Geographic Information. These offers can be based on an occupational profile – a prototypical function description in the field – or created from scratch. Job offers use the EO4GEO BoK to precisely describe EO/GI-specific concepts and skills, and the [European Skills/Competences and Occupation (ESCO)](https://ec.europa.eu/esco/portal/skill) classification for transversal skills. For a better dissemination JOT allows sharing and exporting a job offer in different formats.
 
 #### Authors
 The EO4GEO BoK tools are developed by the [Geospatial Technologies Research Group](http://geotec.uji.es/) (GEOTEC) from the University Jaume I, Castellón (Spain) and are Licenced under GNU GPLv3.
