@@ -46,10 +46,6 @@ export class ListComponent implements OnInit {
   isFiltered = false;
   filterClean = false;
 
-  spFilterDepth = [];
-  spFilterAuthor = [];
-  spFilterPrivate = [];
-
   public paginationLimitFrom = 0;
   public paginationLimitTo = 6;
   public LIMIT_PER_PAGE = 6;
@@ -330,16 +326,12 @@ export class ListComponent implements OnInit {
     if ( this.filterClean ) {
       this.filteredJobOffers = this.jobOffers;
     }
-    // Check if the filter by depth is active
-    if ( this.spFilterDepth.length > 0 && this.conceptsToSearch.length == 0 ) {
-      this.filteredJobOffers = this.spFilterDepth;
-    }
     let toFilter = this.isFiltered ? this.filteredJobOffers : this.jobOffers;
     for ( const node of this.conceptsToSearch ) {
       let found = false;
       const filteredConcepts = [];
-      toFilter.forEach(sp => {
-        sp.occuProf.knowledge.forEach( cpt => {
+      toFilter.forEach(jo => {
+        jo.occuProf.knowledge.forEach( cpt => {
           let code = '';
           if ( cpt.split(']').length >= 1  ) {
             code = cpt.split(']')[0].split('[')[1];
@@ -347,12 +339,10 @@ export class ListComponent implements OnInit {
             code = cpt;
           }
           if ( node.code == code  ) {
-            filteredConcepts.push(sp);
+            filteredConcepts.push(jo);
             found = true;
           }
         });
-        // search if children have the concept
-        this.getChildrenConceptsLink(sp, node.code, filteredConcepts);
       });
       toFilter = filteredConcepts;
     }
@@ -360,42 +350,6 @@ export class ListComponent implements OnInit {
       this.filteredJobOffers = toFilter;
     } else {
       this.filterClean = this.filterClean ? false : true;
-    }
-  }
-
-  getChildrenConceptsLink ( sp, codeToSearch, filteredConcepts ) {
-    if (sp.children) {
-      sp.children.forEach(mod => {
-        mod.linksToBok.forEach(linkM => { // Module links
-          if (linkM.concept_id == codeToSearch ) {
-            if (filteredConcepts.indexOf(sp) === -1) {
-              filteredConcepts.push(sp);
-            }
-          }
-        });
-        if (mod.children) {
-          mod.children.forEach(cour => {
-            cour.linksToBok.forEach(linkC => { // Course links
-              if (linkC.concept_id == codeToSearch ) {
-                if (filteredConcepts.indexOf(sp) === -1) {
-                  filteredConcepts.push(sp);
-                }
-              }
-            });
-            if (cour.children) {
-              cour.children.forEach(lect => {
-                lect.linksToBok.forEach(linkL => { // Lecture links
-                  if (linkL.concept_id == codeToSearch ) {
-                    if (filteredConcepts.indexOf(sp) === -1) {
-                      filteredConcepts.push(sp);
-                    }
-                  }
-                });
-              });
-            }
-          });
-        }
-      });
     }
   }
 }
