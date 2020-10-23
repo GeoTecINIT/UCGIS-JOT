@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input, ViewChild } from '@angular/core';
+import {Component, OnInit, OnDestroy, Input, ViewChild, ElementRef} from '@angular/core';
 import { NgForOf } from '@angular/common';
 import { Observable, Subscription } from 'rxjs';
 import { JobOffer } from '../../ocupational-profile';
@@ -10,6 +10,7 @@ import { UserService, User } from '../../services/user.service';
 import { OrganizationService, Organization } from '../../services/organization.service';
 import { ActivatedRoute } from '@angular/router';
 import * as cloneDeep from 'lodash/cloneDeep';
+import * as bok from '@eo4geo/bok-dataviz';
 
 @Component({
   selector: 'app-list',
@@ -30,14 +31,36 @@ export class ListComponent implements OnInit {
   sortOrgAsc = true;
   sortUpdAsc = true;
   sortedBy = 'lastUpdated';
+
+  customSelect = 0;
+  hasResults = false;
+  limitSearchFrom = 0;
+  limitSearchTo = 10;
+  searchInputField = '';
+  currentConcept = 'GIST';
+  buttonClear = 0;
+
+  selectedNodes = [];
+  conceptsToSearch = [];
+
+  isFiltered = false;
+  filterClean = false;
+
+  spFilterDepth = [];
+  spFilterAuthor = [];
+  spFilterPrivate = [];
+
   public paginationLimitFrom = 0;
   public paginationLimitTo = 6;
   public LIMIT_PER_PAGE = 6;
   public currentPage = 0;
   showOnlyAuthor = -1;
+  public BOK_PERMALINK_PREFIX = 'https://bok.eo4geo.eu/';
 
   @ViewChild('dangerModal') public dangerModal: ModalDirective;
   @ViewChild('releaseNotesModal') public releaseNotesModal: any;
+  @ViewChild('bokModal') public bokModal: ModalDirective;
+  @ViewChild('textBoK') textBoK: ElementRef;
 
   constructor(private jobOfferService: JobofferService,
     private userService: UserService,
@@ -82,14 +105,14 @@ export class ListComponent implements OnInit {
         });
     });
     this.organizationService.subscribeToOrganizations().subscribe(orgs => {
-      let allOrgsWithDiv = [];
+      const allOrgsWithDiv = [];
       orgs.forEach(o => {
-        let copyOrg = cloneDeep(o);
+        const copyOrg = cloneDeep(o);
         copyOrg.description = o.name;
         allOrgsWithDiv.push(copyOrg);
         if (o.divisions) {
           o.divisions.forEach(d => {
-            let copyOrg = cloneDeep(o);
+            const copyOrg = cloneDeep(o);
             copyOrg.description = o.name + ' - ' + d;
             allOrgsWithDiv.push(copyOrg);
           });
@@ -104,6 +127,7 @@ export class ListComponent implements OnInit {
       this.releaseNotesModal.basicModal.config = config;
       this.releaseNotesModal.basicModal.show({});
     }
+    bok.visualizeBOKData('#bubbles', '#textBoK');
   }
 
   removeJobOffer(id: string) {
@@ -133,6 +157,11 @@ export class ListComponent implements OnInit {
       this.applyFilters();
     }
     this.showOnlyAuthor = -1;
+    if ( search.length > 0 ) {
+      this.isFiltered = true;
+    } else {
+      this.isFiltered = this.isFiltered ? true : false;
+    }
   }
 
   applyFilters() {
@@ -233,6 +262,140 @@ export class ListComponent implements OnInit {
         it =>
           this.currentUser.organizations.includes(it.orgId)
       );
+    }
+  }
+
+  cleanResults() {
+    this.searchInputField = '';
+    bok.searchInBoK('');
+    this.navigateToConcept('GIST');
+  }
+
+  navigateToConcept(conceptName) {
+    bok.browseToConcept(conceptName);
+    console.log('Current concept: ' + conceptName);
+    this.currentConcept = conceptName;
+    this.hasResults = false;
+  }
+
+  incrementLimit() {
+    this.limitSearchTo = this.limitSearchTo + 10;
+    this.limitSearchFrom = this.limitSearchFrom + 10;
+  }
+
+  decrementLimit() {
+    this.limitSearchTo = this.limitSearchTo - 10;
+    this.limitSearchFrom = this.limitSearchFrom - 10;
+  }
+
+  searchInBok(text: string) {
+    if (text === '' || text === ' ') {
+      this.cleanResults();
+    } else {
+      this.selectedNodes = bok.searchInBoK(text);
+      this.hasResults = true;
+      this.currentConcept = '';
+
+      this.limitSearchFrom = 0;
+      this.limitSearchTo = 10;
+    }
+  }
+  addBokConcept() {
+    const concept = this.textBoK.nativeElement.getElementsByTagName('h4')[0]
+      .textContent;
+    const conceptId = concept.split(']')[0].substring(1);
+    let itExist = false;
+    this.conceptsToSearch.forEach( cpt => {
+      if ( cpt.code === conceptId) { itExist = true; }
+    });
+    if ( !itExist ) {
+      this.conceptsToSearch.push({ code: conceptId, name: concept });
+    }
+    this.filterByBokConcept();
+  }
+
+  removeConceptSelected(concept) {
+    const index = this.conceptsToSearch.indexOf(concept);
+    this.conceptsToSearch.splice(index, 1);
+    this.filterClean = this.conceptsToSearch.length == 0 ? true : false ;
+    this.filterByBokConcept();
+  }
+
+  filterByBokConcept() {
+    this.paginationLimitFrom = 0;
+    this.paginationLimitTo = 6;
+    this.currentPage = 0;
+    this.searchText = '';
+    // check if the complete selection was removed
+    if ( this.filterClean ) {
+      this.filteredJobOffers = this.jobOffers;
+    }
+    // Check if the filter by depth is active
+    if ( this.spFilterDepth.length > 0 && this.conceptsToSearch.length == 0 ) {
+      this.filteredJobOffers = this.spFilterDepth;
+    }
+    let toFilter = this.isFiltered ? this.filteredJobOffers : this.jobOffers;
+    for ( const node of this.conceptsToSearch ) {
+      let found = false;
+      const filteredConcepts = [];
+      toFilter.forEach(sp => {
+        sp.occuProf.knowledge.forEach( cpt => {
+          let code = '';
+          if ( cpt.split(']').length >= 1  ) {
+            code = cpt.split(']')[0].split('[')[1];
+          } else {
+            code = cpt;
+          }
+          if ( node.code == code  ) {
+            filteredConcepts.push(sp);
+            found = true;
+          }
+        });
+        // search if children have the concept
+        this.getChildrenConceptsLink(sp, node.code, filteredConcepts);
+      });
+      toFilter = filteredConcepts;
+    }
+    if ( this.conceptsToSearch.length > 0 ) {
+      this.filteredJobOffers = toFilter;
+    } else {
+      this.filterClean = this.filterClean ? false : true;
+    }
+  }
+
+  getChildrenConceptsLink ( sp, codeToSearch, filteredConcepts ) {
+    if (sp.children) {
+      sp.children.forEach(mod => {
+        mod.linksToBok.forEach(linkM => { // Module links
+          if (linkM.concept_id == codeToSearch ) {
+            if (filteredConcepts.indexOf(sp) === -1) {
+              filteredConcepts.push(sp);
+            }
+          }
+        });
+        if (mod.children) {
+          mod.children.forEach(cour => {
+            cour.linksToBok.forEach(linkC => { // Course links
+              if (linkC.concept_id == codeToSearch ) {
+                if (filteredConcepts.indexOf(sp) === -1) {
+                  filteredConcepts.push(sp);
+                }
+              }
+            });
+            if (cour.children) {
+              cour.children.forEach(lect => {
+                lect.linksToBok.forEach(linkL => { // Lecture links
+                  if (linkL.concept_id == codeToSearch ) {
+                    if (filteredConcepts.indexOf(sp) === -1) {
+                      filteredConcepts.push(sp);
+                    }
+                  }
+                });
+              });
+            }
+          });
+        }
+      });
     }
   }
 }
