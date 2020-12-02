@@ -588,12 +588,22 @@
                     <label for="minSalary">Annual Salary Range (Min - Max)</label>
                     <div class="form-row">
                       <div class="col-md-6">
-                        <input type="number" size="10" class="form-control" id="minSalary" [(ngModel)]="model.salaryMin"
-                          name="minSalary" min="0" />
+                        <div class="input-group">
+                          <input type="number" size="10" class="form-control" id="minSalary" [(ngModel)]="model.salaryMin"
+                            name="minSalary" min="0" />
+                          <div class="input-group-append">
+                            <span class="input-group-text">€</span>
+                          </div>
+                        </div>
                       </div>
                       <div class="col-md-6">
-                        <input type="number" size="10" class="form-control" id="maxSalary" [(ngModel)]="model.salaryMax"
-                          name="maxSalary" min="0" />
+                        <div class="input-group">
+                          <input type="number" size="10" class="form-control" id="maxSalary" [(ngModel)]="model.salaryMax"
+                            name="maxSalary" min="0" />
+                          <div class="input-group-append">
+                            <span class="input-group-text">€</span>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
