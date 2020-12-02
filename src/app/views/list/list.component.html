@@ -159,7 +159,7 @@
                   {{ jo.occuProf.knowledge.length }} Knowledge |
                   {{ jo.occuProf.skills.length }} Skills |
                   {{ jo.occuProf.competences.length }} Transversal skills
-                 <span *ngIf="jo.location">| {{ jo.location }}</span>
+                 <span *ngIf="jo.location">| <i class="fa fa-map-marker"></i> {{ jo.location }}</span>
                 </span>
                 <span *ngIf="jo.updatedAt" class="text-lastupdated ">| Last updated:
                   {{jo.updatedAt.toDate() | date:'dd-MMM-yyyy'}}
