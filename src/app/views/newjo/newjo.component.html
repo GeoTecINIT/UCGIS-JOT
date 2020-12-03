@@ -120,6 +120,7 @@
                       <span
                         tooltip="The term relates directly to a specific area of study. The International Standard Classification of Education: Fields of Education and Training 2013 (ISCED-F). Maintained by the UNESCO Institute for Statistics."
                         class="badge badge-primary badge-pill">i</span>
+                      <a href="https://circabc.europa.eu/sd/a/286ebac6-aa7c-4ada-a42b-ff2cf3a442bf/ISCED-F 2013 - Detailed field descriptions.pdf" target="_blank">What is an Application domain?</a>
                       <ng-select [items]="fieldsService.allfields" name="field" bindLabel="name" groupBy="grandparent"
                         [multiple]="true" [(ngModel)]="model.occuProf.fields">
                         <ng-template ng-optgroup-tmp let-item="item">
@@ -136,19 +137,21 @@
                   </div>
                 </div>
                 <div class="row">
-                  <div class="col-md-11">
+                  <div class="col-md-10">
                     <div class="form-group">
                       <label for="description">Description</label>
                       <textarea class="form-control" id="description" placeholder="Description" name="textarea-input"
                         [(ngModel)]="model.occuProf.description" rows="4"></textarea>
                     </div>
                   </div>
-                  <div class="col-md-1">
+                  <div class="col-md-2">
                     <div class="form-group">
                       <label for="eqf">EQF</label>
                       <span
                         tooltip="The core of the EQF concerns eight reference levels describing what a learner knows, understands and is able to do – 'skills', ranging from basic (Level 1) to advanced (Level 8)."
                         class="badge badge-primary badge-pill">i</span>
+                      <a style="text-align: right" href="https://www.cedefop.europa.eu/en/events-and-projects/projects/european-qualifications-framework-eqf" target="_blank" >What is EQF?</a>
+
                       <input type="number" size="1" class="form-control" id="eqf" [(ngModel)]="model.occuProf.eqf"
                         name="eqf" min="1" max="8" />
                     </div>
