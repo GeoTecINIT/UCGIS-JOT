@@ -141,7 +141,7 @@
                     <div class="form-group">
                       <label for="description">Description</label>
                       <textarea class="form-control" id="description" placeholder="Description" name="textarea-input"
-                        [(ngModel)]="model.occuProf.description" rows="4"></textarea>
+                        [(ngModel)]="model.occuProf.description" rows="4" maxlength="2000"></textarea>
                     </div>
                   </div>
                   <div class="col-md-2">
@@ -551,7 +551,7 @@
                 <div class="col-md-2">
                   <label for="yearsExperience">Years of experience</label>
                   <input type="number" size="2" class="form-control" id="yearsExperience"
-                    [(ngModel)]="model.yearsExperience" name="yearsExperience" min="0" />
+                    [(ngModel)]="model.yearsExperience" name="yearsExperience" min="0" max="50" />
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
@@ -632,7 +632,7 @@
                     <label for="contactDetails">Contact details</label>
                     <textarea class="form-control" id="contactDetails"
                       placeholder="Write here webpage or email and contact instructions for the candidates."
-                      name="textarea-input" [(ngModel)]="model.contactDetails" rows="4"></textarea>
+                      name="textarea-input" [(ngModel)]="model.contactDetails" rows="4" maxlength="1000"></textarea>
                   </div>
                 </div>
               </div>
@@ -642,7 +642,7 @@
                     <label for="additionalQuestions">Additional information / questions</label>
                     <textarea class="form-control" id="additionalQuestions"
                       placeholder="Write here any other information or question(s) to be answered by candidates." name="textarea-input"
-                      [(ngModel)]="model.additionalQuestions" rows="4"></textarea>
+                      [(ngModel)]="model.additionalQuestions" rows="4" maxlength="1000"></textarea>
                   </div>
                 </div>
               </div>
