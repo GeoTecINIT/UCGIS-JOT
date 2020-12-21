@@ -591,13 +591,9 @@
                     <label for="minSalary">Annual Salary Range (Min - Max)</label>
                     <div class="form-row">
                       <div class="col-md-2">
-                        <div class="input-group-append">
-                          <select class="custom-select" [(ngModel)]="model.currency">
-                            <option value="USD" >$</option>
-                            <option value="EUR" selected>€</option>
-                            <option value="GBP" >£</option>
-                          </select>
-                        </div>
+                        <ng-select  [multiple]="false" [clearable]="false" [(ngModel)]="model.currency">
+                          <ng-option *ngFor="let cur of currency" [value]="cur.cod">{{cur.name}}</ng-option>
+                        </ng-select>
                       </div>
                       <div class="col-md-5">
                         <div class="input-group">

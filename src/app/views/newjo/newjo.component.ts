@@ -160,6 +160,8 @@ export class NewjoComponent implements OnInit {
 
   typeOfContract = ['Fixed', 'Internship', 'Scholarship', 'Temporal'];
 
+  currency = [{cod: '$', name: 'USD'}, {cod: '€', name: 'EUR'}, {cod: '£', name: 'GBP'}];
+
   userDivisions: string[] = [];
   saveDiv = '';
 
