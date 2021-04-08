@@ -74,6 +74,7 @@ export class ListComponent implements OnInit {
             .subscribe(jobOffers => {
               this.jobOffers = [];
               jobOffers.forEach(jo => {
+                jo.currency = jo.currency != null ? jo.currency : '€';
                 if (jo.isPublic) {
                   this.jobOffers.push(jo);
                 } else if (this.currentUser && this.currentUser.organizations && this.currentUser.organizations.indexOf(jo.orgId) > -1) {

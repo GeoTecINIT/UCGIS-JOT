@@ -67,8 +67,11 @@ export class DetailComponent implements OnInit {
     this.jobOfferService
       .getJobOfferById(_id)
       .subscribe(offer => {
-        this.selectedOffer = offer;
-        this.calculateStatistics();
+        if (offer) {
+          offer.currency = offer.currency != null ? offer.currency : '€';
+          this.selectedOffer = offer;
+          this.calculateStatistics();
+        }
       });
   }
 
