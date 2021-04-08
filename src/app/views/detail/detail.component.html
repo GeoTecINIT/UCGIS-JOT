@@ -51,10 +51,10 @@
                 </a>
               </div>
               <div class="col-md-4 offset-md-1">
-                <div  class="row">
+                <div class="row">
                   <label class="col-md-4">Application domain(s) </label>
                   <a href="https://circabc.europa.eu/sd/a/286ebac6-aa7c-4ada-a42b-ff2cf3a442bf/ISCED-F 2013 - Detailed field descriptions.pdf"
-                     target="_blank" class="col-md-5">What is an Application domain?</a>
+                    target="_blank" class="col-md-5">What is an Application domain?</a>
                 </div>
 
                 <li *ngFor="let f of selectedOffer.occuProf.fields">
@@ -62,7 +62,9 @@
                 </li>
               </div>
               <div class="col-md-1">
-                <a role="button" class="btn btn-default btn-secondary" href="https://www.cedefop.europa.eu/en/events-and-projects/projects/european-qualifications-framework-eqf" target="_blank"
+                <a role="button" class="btn btn-default btn-secondary"
+                  href="https://www.cedefop.europa.eu/en/events-and-projects/projects/european-qualifications-framework-eqf"
+                  target="_blank"
                   tooltip="EQF concerns the level of what a learner knows, understands (knowledge) and is able to do (skills). It ranges from 1 (basic) to 8 (advanced)"
                   placement="left">
                   EQF {{ selectedOffer.occuProf.eqf }}
@@ -70,6 +72,29 @@
               </div>
             </div>
             <p style="padding-top: 20px;">{{ selectedOffer.occuProf.description }}</p>
+            <hr />
+            <span class="text-normal">
+              {{ selectedOffer.occuProf.knowledge.length }} Knowledge |
+              {{ selectedOffer.occuProf.skills.length }} Skills |
+              {{ selectedOffer.occuProf.competences.length }} Transversal skills
+
+              <span *ngIf="selectedOffer.yearsExperience">| Exp: {{ selectedOffer.yearsExperience }} years</span>
+              <span *ngIf="selectedOffer.salaryMin && selectedOffer.salaryMax">| (Min: {{ selectedOffer.salaryMin }} -
+                Max: {{ selectedOffer.salaryMax }})
+                {{selectedOffer.currency}}</span>
+              <span *ngIf="selectedOffer.location">| <i class="fa fa-map-marker"></i> {{ selectedOffer.location
+                }}</span>
+              <span *ngIf="selectedOffer.languages.length > 0">| <i class="fa fa-language"></i> </span>
+              <span *ngFor="let lan of selectedOffer.languages"> {{ lan.name }} </span>
+              <span *ngIf="selectedOffer.dedication">| {{ selectedOffer.dedication
+                }}</span>
+              <span *ngIf="selectedOffer.typeContract">| {{ selectedOffer.typeContract
+                }}</span>
+            </span>
+            <span *ngIf="selectedOffer.updatedAt" class="text-lastupdated ">| Last updated:
+              {{selectedOffer.updatedAt.toDate() | date:'dd-MMM-yyyy'}}
+            </span>
+
             <hr />
             <div class="row">
               <div class="col-md-4">
@@ -195,7 +220,8 @@
             <br>
             <div class="row text-left">
               <div class="col-md-6">
-                <b> Annual Salary Range</b> (Min: {{ selectedOffer.salaryMin }} - Max: {{ selectedOffer.salaryMax }}) {{selectedOffer.currency}}
+                <b> Annual Salary Range</b> (Min: {{ selectedOffer.salaryMin }} - Max: {{ selectedOffer.salaryMax }})
+                {{selectedOffer.currency}}
               </div>
               <div class="col-md-6">
                 <b> Ask for motivation letter:</b> {{ selectedOffer.motivationLetter }}
