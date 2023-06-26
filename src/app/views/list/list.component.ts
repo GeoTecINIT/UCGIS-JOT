@@ -10,7 +10,7 @@ import { UserService, User } from '../../services/user.service';
 import { OrganizationService, Organization } from '../../services/organization.service';
 import { ActivatedRoute } from '@angular/router';
 import * as cloneDeep from 'lodash/cloneDeep';
-import * as bok from '@eo4geo/bok-dataviz';
+import * as bok from '@ucgis/find-in-bok-dataviz-tools';
 
 @Component({
   selector: 'app-list',
@@ -37,7 +37,7 @@ export class ListComponent implements OnInit {
   limitSearchFrom = 0;
   limitSearchTo = 10;
   searchInputField = '';
-  currentConcept = 'GIST';
+  currentConcept = 'UCGIS';
   buttonClear = 0;
 
   selectedNodes = [];
@@ -124,7 +124,7 @@ export class ListComponent implements OnInit {
       this.releaseNotesModal.basicModal.config = config;
       this.releaseNotesModal.basicModal.show({});
     }
-    bok.visualizeBOKData('#bubbles', '#textBoK');
+    bok.visualizeBOKData('https://ucgis-bok-default-rtdb.firebaseio.com/', 'current');
   }
 
   removeJobOffer(id: string) {
@@ -265,7 +265,7 @@ export class ListComponent implements OnInit {
   cleanResults() {
     this.searchInputField = '';
     bok.searchInBoK('');
-    this.navigateToConcept('GIST');
+    this.navigateToConcept('UCGIS');
   }
 
   navigateToConcept(conceptName) {

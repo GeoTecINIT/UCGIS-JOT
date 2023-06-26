@@ -320,14 +320,14 @@
                     <button type="button" class="btn btn-danger" (click)="bokModal.hide()">Finish</button>
                   </div>
                 </div>
-                <div id="bubbles">
+                <div id="graph">
                 </div>
               </div>
               <div class="col-lg-6 col-sm-6 text-justify">
                 <div class="row text-left">
                   <div class="col-md-6">
                     <a (click)="hasResults = !hasResults; currentConcept=''"
-                      *ngIf="!hasResults && currentConcept != 'GIST'">
+                      *ngIf="!hasResults && currentConcept != 'UCGIS'">
                       < Back to search results </a>
                   </div>
                   <div class="col-md-6">
@@ -336,8 +336,8 @@
                   </div>
                 </div>
                 <br>
-                <h5 [hidden]="currentConcept == '' && currentConcept != 'GIST'">Knowledge</h5>
-                <div #textBoK id="textBoK" [hidden]="hasResults">
+                <h5 [hidden]="currentConcept == '' && currentConcept != 'UCGIS'">Knowledge</h5>
+                <div #textInfo id="textInfo" [hidden]="hasResults">
                 </div>
                 <div class="col" *ngIf="hasResults">
                   <h3 class="center">

@@ -1,6 +1,6 @@
 {
-  "name": "@eo4geo/jot",
-  "version": "0.1.0",
+  "name": "@ucgis/jot",
+  "version": "1.0.0",
   "description": "Job Offer Tool",
   "author": {
     "name": "UJI",
@@ -9,8 +9,8 @@
     "twitter": "https://twitter.com/geotecUJI"
   },
   "contributors": [],
-  "homepage": "http://eo4geo.uji.es/jot",
-  "copyright": "Copyright 2019",
+  "homepage": "http://ucgis-tools-jot.web.app",
+  "copyright": "Copyright 2023",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
@@ -37,7 +37,7 @@
     "@coreui/coreui": "^2.1.8",
     "@coreui/coreui-plugin-chartjs-custom-tooltips": "^1.2.0",
     "@coreui/icons": "0.3.0",
-    "@eo4geo/bok-dataviz": "^5.2.9",
+    "@ucgis/find-in-bok-dataviz-tools": "^1.0.0",
     "@ng-select/ng-select": "^2.20.0",
     "acorn": "^6.0.0",
     "acorn-dynamic-import": "^4.0.0",
