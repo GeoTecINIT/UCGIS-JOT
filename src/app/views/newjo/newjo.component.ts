@@ -217,7 +217,7 @@ export class NewjoComponent implements OnInit {
         });
         const config = { attributes: true, childList: true, characterData: true };
     
-        this.observer.observe(this.textBoK.nativeElement, config); */
+        this.observer.observe(this.textInfo.nativeElement, config); */
   }
 
   filterOP() {

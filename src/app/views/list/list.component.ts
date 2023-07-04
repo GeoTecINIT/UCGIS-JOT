@@ -56,7 +56,7 @@ export class ListComponent implements OnInit {
   @ViewChild('dangerModal') public dangerModal: ModalDirective;
   @ViewChild('releaseNotesModal') public releaseNotesModal: any;
   @ViewChild('bokModal') public bokModal: ModalDirective;
-  @ViewChild('textBoK') textBoK: ElementRef;
+  @ViewChild('textInfo') textInfo: ElementRef;
 
   constructor(private jobOfferService: JobofferService,
     private userService: UserService,
@@ -298,7 +298,7 @@ export class ListComponent implements OnInit {
     }
   }
   addBokConcept() {
-    const concept = this.textBoK.nativeElement.getElementsByTagName('h4')[0]
+    const concept = this.textInfo.nativeElement.getElementsByTagName('h4')[0]
       .textContent;
     const conceptId = concept.split(']')[0].substring(1);
     let itExist = false;
