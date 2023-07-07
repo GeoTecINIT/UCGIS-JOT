@@ -67,8 +67,11 @@ export class ListComponent implements OnInit {
       if (user) {
         this.isAnonymous = user.isAnonymous;
         this.userService.getUserById(user.uid).subscribe(userDB => {
-          this.currentUser = new User(userDB);
-
+          if (userDB) {
+            this.currentUser = new User(userDB);
+          } else {
+            this.userService.addNewUser(user);
+          }
           this.jobOfferService
             .subscribeToJobOffers()
             .subscribe(jobOffers => {
