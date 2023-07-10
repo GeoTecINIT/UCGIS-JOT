@@ -159,7 +159,7 @@
             <div class="row text-left">
               <div class="col-md-12">
                 <button *ngFor="let mc of selectedOffer.occuProf.competences" type="button" class="btn btn-pill"
-                  [ngClass]="mc.uri? 'btn-primary' : 'btn-secondary' ">
+                  [ngClass]="mc.uri? 'btn-primary text-white' : 'btn-secondary' ">
                   <a *ngIf="mc.uri" href="{{mc.uri}}" target="_blank">{{ mc.preferredLabel }}</a>
                   <span *ngIf="!mc.uri">{{ mc.preferredLabel }} </span>
                 </button>
