@@ -108,7 +108,7 @@
               <div class="col-md-8">
                 <button *ngFor="let mk of selectedOffer.occuProf.knowledge" type="button" class="btn btn-pill"
                   [ngClass]="'bok-' + ( mk | slice:1:3 )">
-                  <a href="http://bok.eo4geo.eu/{{ mk | slice:1:mk.indexOf(']') }}" target="_blank">{{ mk }}</a>
+                  <a href="https://ucgis-bok.web.app/{{ mk | slice:1:mk.indexOf(']') }}" target="_blank">{{ mk }}</a>
                 </button>
               </div>
               <div class="col-md-4">
